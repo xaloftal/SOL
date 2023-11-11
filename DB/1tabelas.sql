@@ -10,6 +10,13 @@
 	
 --atributos 
 
+create table forma_farmaceutica(
+	id_forma_farmaceutica	int  primary key,
+	descricao_forma 	varchar(60)
+)
+
+
+
 create table especialidade(
 	id_especialidade	serial		primary key,
 	nome_esp		varchar(60)
@@ -18,8 +25,14 @@ create table especialidade(
 
 create table medicamento(
 	id_medicamento	serial		primary key,
-	nome_med		varchar(60)
+	nome_med		varchar(60),
+	id_forma_farmaceutica int,
+	
+	constraint form_farm_fk foreign key (id_forma_farmaceutica)
+		references forma_farmaceutica(id_forma_farmaceutica)
 )
+
+
 
 
 create table exame(
@@ -83,9 +96,6 @@ create table administrativo(
 	
 	constraint fk_adm_login foreign key (email_a) references login(email)
 )
-
-
-
 
 -- reclamacao
 

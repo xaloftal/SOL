@@ -2,34 +2,60 @@
 --	CREATE Crud
 --
 
+--Insercao de formas farmaceuticas
+
+
+
 --Insercao de medicacao
-create or replace procedure inserir_medicamento(nom varchar(60))
+create or replace procedure inserir_medicamento(_nom varchar(60), _form varchar(60))
 as $$
 declare med int;
+		form int;
 begin
 	--ver se já existe o medicamento
 	select count(*) into med
 	from medicamento md
-	where lower(md.nome_med) like lower(nom);
+	where lower(md.nome_med) like lower(_nom);
 	
 	if (med > 0)
 	then
-		raise notice 'Medicamento já existe';
+		raise notice 'Medicamento nao existe';
+		return;
+	end if;
+	
+	
+	-- ver se existe forma farmaceutica e encontrar id
+	select ff.id_forma_farmaceutica into form
+	from forma_farmaceutica ff
+	where upper(ff.descricao_forma) like upper(_form);
+	
+	if (form is null)
+	then 
+		raise notice 'Forma farmaceutica nao existente';
 		return;
 	end if;
 	
 	--inserir medicamento na tabela
-	insert into medicamento(nome_med) values (nom);
+	insert into medicamento(nome_med, id_forma_farmaceutica ) values (_nom, _form);
 	
 end; $$ Language PLPGSQL
 
+--teste
+call inserir_medicamento()
+
 
 --Insercao de exames
-create or replace procedure inserir_exame(nom varchar(60))
+create or replace procedure inserir_exame(_nom varchar(60))
 as $$
 declare exa int;
 begin
+	-- verificar se exame já existe
+	select count(*) into exa
+	from exame e
+	where upper(e.)
 	
+	--inserir exame na tabela
+	insert into exame(nome_)
 	
 end; $$ Language PLPGSQL
 
