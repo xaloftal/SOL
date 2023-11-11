@@ -16,8 +16,8 @@ create table especialidade(
 )
 
 
-create table medicacao(
-	id_medicacao	serial		primary key,
+create table medicamento(
+	id_medicamento	serial		primary key,
 	nome_med		varchar(60)
 )
 
@@ -27,7 +27,26 @@ create table exame(
 	nome_exame	varchar(60)
 )
 
+
+create table prescricao(
+	id_prescricao	serial	primary key
+)
+
+
+
+-- login
+create table login(
+	email		varchar(60)		unique,
+	password	varchar(60),
+	
+	primary key (email, password)	
+)
+
+
 -- utilizadores
+
+
+
 create table utente(
 	id_utente	serial			not null		primary key,
 	nome_u		varchar(60)		not null,
@@ -38,7 +57,7 @@ create table utente(
 	constraint fk_utente_login foreign key (email_u) references login(email)
 )
 
-drop table medico
+
 create table medico(
 	id_medico	serial			not null		primary key,
 	nome_m		varchar(60)		not null,
@@ -67,21 +86,15 @@ create table administrativo(
 	constraint fk_adm_login foreign key (email_a) references login(email)
 )
 
--- login
-create table login(
-	email		varchar(60)		unique,
-	password	varchar(60),
-	
-	primary key (email, password)	
-)
 
 
 
 -- reclamacao
-drop table reclamacao
+
 create table reclamacao(
 	id_reclamacao	serial		not null		primary key,
 	descricao_rec	varchar(60) not null,
+	data_recl		timestamp,
 	
 	--relacoes
 	id_gestor	int,
@@ -95,10 +108,11 @@ create table reclamacao(
 
 
 -- consultas
-drop table formulario
+
 create table formulario(
 	id_formulario 	serial		not null		primary key,
 	descricao_form  varchar(60) not null,
+	data_form		timestamp,
 	
 	--relacao
 	id_especialidade	int,
@@ -111,11 +125,11 @@ create table formulario(
 	constraint fk_form_med foreign key (id_medico) references medico(id_medico)
 )
 
-drop table consulta
+
 create table consulta(
 	id_consulta		serial 		not null		primary key,
 	observacoes 	varchar(300),
-	horario			timestamp,
+	horario			timestamp,	
 	
 	--relacao
 	medico_cons	int,
@@ -140,7 +154,7 @@ create table formulario_consulta(
 
 
 --tem origem
-drop table consulta_consulta
+
 create table consulta_consulta(
 	consulta_origem int,
 	id_consulta		int,
@@ -150,15 +164,16 @@ create table consulta_consulta(
 	constraint consori_fk foreign key (consulta_origem) references consulta(id_consulta)
 )
 
+
 --prescreve
-drop table consulta_medicacao
-create table consulta_medicacao(
+
+create table consulta_prescricao(
 	id_consulta 	int,
-	id_medicacao	int,
+	id_medicamento	int,
 	
-	constraint pk_cons_medic primary key(id_medicacao, id_consulta),
+	constraint pk_cons_medic primary key(id_medicamento, id_consulta),
 	constraint con_fk foreign key (id_consulta) references consulta(id_consulta),
-	constraint medicacao_fk foreign key (id_medicacao) references medicacao(id_medicacao)
+	constraint medicamento_fk foreign key (id_medicamento) references medicamento(id_medicamento)
 )
 
 --passa
