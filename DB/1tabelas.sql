@@ -29,9 +29,9 @@ create table exame(
 
 
 create table prescricao(
-	id_prescricao	serial	primary key
+	id_prescricao	serial	primary key,
+	validade		timestamp
 )
-
 
 
 -- login
@@ -44,8 +44,6 @@ create table login(
 
 
 -- utilizadores
-
-
 
 create table utente(
 	id_utente	serial			not null		primary key,
@@ -93,7 +91,7 @@ create table administrativo(
 
 create table reclamacao(
 	id_reclamacao	serial		not null		primary key,
-	descricao_rec	varchar(60) not null,
+	descricao_rec	varchar(500) not null,
 	data_recl		timestamp,
 	
 	--relacoes
@@ -111,7 +109,7 @@ create table reclamacao(
 
 create table formulario(
 	id_formulario 	serial		not null		primary key,
-	descricao_form  varchar(60) not null,
+	descricao_form  varchar(500) not null,
 	data_form		timestamp,
 	
 	--relacao
@@ -177,22 +175,33 @@ create table consulta_prescricao(
 )
 
 --passa
-create table consulta_exame(
-	id_consulta		int,
-	id_exame		int,
+create table formulario_prescricao(
+	id_formulario   int,
+	id_prescricao	int,
 	
-	constraint pk_cons_exa primary key (id_consulta, id_exame),
-	constraint fk_cons foreign key(id_consulta) references consulta(id_consulta),
-	constraint fk_exa foreign key (id_exame) references exame(id_exame)
-
+	constraint pk_form_pres primary key (id_formulario, id_prescricao),
+	constraint form_fk foreign key (id_formulario) references formulario(id_formulario),
+	constraint pres_fk foreign key (id_prescricao) references prescricao(id_prescricao)
 )
 
---receita
-create table formulario_exame(
-	id_formulario	int,
+--examina
+create table prescricao_exame(
+	id_prescricao 	int,
 	id_exame		int,
+	descricao_pres_exame	varchar(500),
 	
-	constraint pk_form_exa primary key (id_formulario, id_exame),
-	constraint fk_form foreign key(id_formulario) references formulario(id_formulario),
-	constraint fk_exa foreign key (id_exame) references exame(id_exame)
+	constraint pk_pres_exa primary key (id_prescricao, id_exame),
+	constraint exa_fk foreign key (id_exame) references exame(id_exame),
+	constraint pres_fk foreign key (id_prescricao) references prescricao(id_prescricao)	
+)
+
+--medica
+create table prescricao_medicamento(
+	id_medicamento 	int,
+	id_prescricao	int,
+	descricao_pres_med	varchar(500),
+	
+	constraint pk_pres_med primary key (id_medicamento, id_prescricao),
+	constraint med_fk foreign key (id_medicamento) references medicamento(id_medicamento),
+	constraint pres_fk foreign key (id_prescricao) references prescricao(id_prescricao)
 )

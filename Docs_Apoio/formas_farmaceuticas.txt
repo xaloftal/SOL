@@ -1,0 +1,320 @@
+    REF_FORMA_FARM:901 - Adesivo cutâneo
+    REF_FORMA_FARM:956 - Adesivo transdérmico
+    REF_FORMA_FARM:082 - Aditivo para banho
+    REF_FORMA_FARM:310 - Anel vaginal
+    REF_FORMA_FARM:029 - Cápsula
+    REF_FORMA_FARM:301 - Cápsula + Pó e solvente para solução injetável
+    REF_FORMA_FARM:302 - Cápsula + Supositório
+    REF_FORMA_FARM:035 - Cápsula de libertação modificada
+    REF_FORMA_FARM:033 - Cápsula de libertação prolongada
+    REF_FORMA_FARM:031 - Cápsula gastrorresistente
+    REF_FORMA_FARM:030 - Cápsula mole
+    REF_FORMA_FARM:036 - Cápsula mole de libertação modificada
+    REF_FORMA_FARM:034 - Cápsula mole de libertação prolongada
+    REF_FORMA_FARM:032 - Cápsula mole gastrorresistente
+    REF_FORMA_FARM:287 - Cápsula mole para mastigar
+    REF_FORMA_FARM:168 - Cápsula mole vaginal
+    REF_FORMA_FARM:201 - Cápsula para inalação por vaporização
+    REF_FORMA_FARM:187 - Cápsula retal
+    REF_FORMA_FARM:167 - Cápsula vaginal
+    REF_FORMA_FARM:018 - Chá medicinal
+    REF_FORMA_FARM:166 - Chá medicinal instantâneo
+    REF_FORMA_FARM:088 - Champô
+    REF_FORMA_FARM:264 - Cola para tecidos
+    REF_FORMA_FARM:128 - Colírio de libertação prolongada
+    REF_FORMA_FARM:900 - Colírio, comprimido e solvente para solução
+    REF_FORMA_FARM:320 - Colírio, emulsão
+    REF_FORMA_FARM:125 - Colírio, pó e solvente para solução
+    REF_FORMA_FARM:123 - Colírio, solução
+    REF_FORMA_FARM:837 - Colírio, solução em recipiente unidose
+    REF_FORMA_FARM:124 - Colírio, suspensão
+    REF_FORMA_FARM:271 - Comprimido
+    REF_FORMA_FARM:303 - Comprimido + Supositório
+    REF_FORMA_FARM:304 - Comprimido + Suspensão Oral
+    REF_FORMA_FARM:073 - Comprimido bucal
+    REF_FORMA_FARM:072 - Comprimido bucal mucoadesivo
+    REF_FORMA_FARM:044 - Comprimido de libertação modificada
+    REF_FORMA_FARM:043 - Comprimido de libertação prolongada
+    REF_FORMA_FARM:313 - Comprimido de libertação prolongada revestido por película
+    REF_FORMA_FARM:017 - Comprimido dispersível
+    REF_FORMA_FARM:327 - Comprimido dispersível ou para mastigar
+    REF_FORMA_FARM:957 - Comprimido e cápsula mole
+    REF_FORMA_FARM:040 - Comprimido efervescente
+    REF_FORMA_FARM:042 - Comprimido gastrorresistente
+    REF_FORMA_FARM:946 - Comprimido gastrorresistente de libertação prolongada
+    REF_FORMA_FARM:037 - Comprimido orodispersível
+    REF_FORMA_FARM:517 - Comprimido para chupar
+    REF_FORMA_FARM:045 - Comprimido para mastigar
+    REF_FORMA_FARM:185 - Comprimido para suspensão retal
+    REF_FORMA_FARM:038 - Comprimido revestido
+    REF_FORMA_FARM:527 - Comprimido revestido + Comprimido
+    REF_FORMA_FARM:305 - Comprimido revestido + Supositório
+    REF_FORMA_FARM:039 - Comprimido revestido por película
+    REF_FORMA_FARM:016 - Comprimido solúvel
+    REF_FORMA_FARM:071 - Comprimido sublingual
+    REF_FORMA_FARM:169 - Comprimido vaginal
+    REF_FORMA_FARM:333 - Concentrado e solvente para concentrado para solução para perfusão
+    REF_FORMA_FARM:336 - Concentrado e solvente para solução injetável
+    REF_FORMA_FARM:531 - Concentrado e solvente para solução para perfusão
+    REF_FORMA_FARM:998 - Concentrado para dispersão injetável
+    REF_FORMA_FARM:934 - Concentrado para dispersão para perfusão
+    REF_FORMA_FARM:093 - Concentrado para solução cutânea
+    REF_FORMA_FARM:214 - Concentrado para solução injetável
+    REF_FORMA_FARM:342 - Concentrado para solução injetável ou para perfusão
+    REF_FORMA_FARM:343 - Concentrado para solução oral
+    REF_FORMA_FARM:054 - Concentrado para solução para gargarejar
+    REF_FORMA_FARM:959 - Concentrado para solução para irrigação intraocular
+    REF_FORMA_FARM:218 - Concentrado para solução para perfusão
+    REF_FORMA_FARM:347 - Concentrado para suspensão para perfusão
+    REF_FORMA_FARM:257 - Conjunto para preparações radiofarmacêuticas
+    REF_FORMA_FARM:566 - Conjunto para preparações radiofarmacêuticas para perfusão
+    REF_FORMA_FARM:083 - Creme
+    REF_FORMA_FARM:174 - Creme retal
+    REF_FORMA_FARM:158 - Creme vaginal
+    REF_FORMA_FARM:306 - Creme vaginal + Óvulo
+    REF_FORMA_FARM:348 - Dispersão injetável
+    REF_FORMA_FARM:954 - Dispersão para perfusão
+    REF_FORMA_FARM:526 - Dispositivo de libertação intrauterino
+    REF_FORMA_FARM:519 - Emplastro medicamentoso
+    REF_FORMA_FARM:295 - Emplastro para prova de provocação
+    REF_FORMA_FARM:552 - Emplastro para teste cutâneo
+    REF_FORMA_FARM:095 - Emulsão cutânea
+    REF_FORMA_FARM:913 - Emulsão e suspensão para emulsão injetável
+    REF_FORMA_FARM:209 - Emulsão injetável
+    REF_FORMA_FARM:532 - Emulsão injetável ou para perfusão
+    REF_FORMA_FARM:970 - Emulsão injetável ou para perfusão em seringa pré-cheia
+    REF_FORMA_FARM:006 - Emulsão oral
+    REF_FORMA_FARM:216 - Emulsão para perfusão
+    REF_FORMA_FARM:141 - Emulsão para pulverização auricular
+    REF_FORMA_FARM:518 - Equivalente de tecido vivo
+    REF_FORMA_FARM:087 - Espuma cutânea
+    REF_FORMA_FARM:177 - Espuma retal
+    REF_FORMA_FARM:161 - Espuma vaginal
+    REF_FORMA_FARM:350 - Gás e veículo para dispersão injetável ou para perfusão
+    REF_FORMA_FARM:296 - Gás medicinal comprimido
+    REF_FORMA_FARM:297 - Gás medicinal criogénico
+    REF_FORMA_FARM:298 - Gás medicinal liquefeito
+    REF_FORMA_FARM:206 - Gás para inalação
+    REF_FORMA_FARM:084 - Gel
+    REF_FORMA_FARM:065 - Gel bucal
+    REF_FORMA_FARM:075 - Gel dental
+    REF_FORMA_FARM:237 - Gel endocervical
+    REF_FORMA_FARM:068 - Gel gengival
+    REF_FORMA_FARM:321 - Gel intestinal
+    REF_FORMA_FARM:997 - Gel intrauterino
+    REF_FORMA_FARM:147 - Gel nasal
+    REF_FORMA_FARM:121 - Gel oftálmico
+    REF_FORMA_FARM:1001 - Gel oftálmico em recipiente unidose
+    REF_FORMA_FARM:019 - Gel oral
+    REF_FORMA_FARM:555 - Gel periodontal
+    REF_FORMA_FARM:175 - Gel retal
+    REF_FORMA_FARM:231 - Gel uretral
+    REF_FORMA_FARM:159 - Gel vaginal
+    REF_FORMA_FARM:256 - Gerador de radionuclidos
+    REF_FORMA_FARM:533 - Glóbulos
+    REF_FORMA_FARM:046 - Goma oral
+    REF_FORMA_FARM:067 - Goma para mascar medicamentosa
+    REF_FORMA_FARM:352 - Gotas auriculares ou colírio, solução
+    REF_FORMA_FARM:135 - Gotas auriculares, solução
+    REF_FORMA_FARM:975 - Gotas auriculares, solução em recipiente unidose
+    REF_FORMA_FARM:136 - Gotas auriculares, suspensão
+    REF_FORMA_FARM:149 - Gotas nasais, solução
+    REF_FORMA_FARM:150 - Gotas nasais, suspensão
+    REF_FORMA_FARM:003 - Gotas orais, emulsão
+    REF_FORMA_FARM:001 - Gotas orais, solução
+    REF_FORMA_FARM:002 - Gotas orais, suspensão
+    REF_FORMA_FARM:023 - Granulado
+    REF_FORMA_FARM:027 - Granulado de libertação modificada
+    REF_FORMA_FARM:026 - Granulado de libertação prolongada
+    REF_FORMA_FARM:355 - Granulado de libertação prolongada para suspensão oral
+    REF_FORMA_FARM:542 - Granulado e veículo para suspensão oral
+    REF_FORMA_FARM:024 - Granulado efervescente
+    REF_FORMA_FARM:973 - Granulado em cápsulas para abrir
+    REF_FORMA_FARM:980 - Granulado em saqueta
+    REF_FORMA_FARM:025 - Granulado gastrorresistente
+    REF_FORMA_FARM:948 - Granulado gastrorresistente de libertação prolongada
+    REF_FORMA_FARM:324 - Granulado gastrorresistente para suspensão oral
+    REF_FORMA_FARM:952 - Granulado orodispersível
+    REF_FORMA_FARM:009 - Granulado para solução oral
+    REF_FORMA_FARM:968 - Granulado para solução oral em saqueta
+    REF_FORMA_FARM:288 - Granulado para solução oral ou retal
+    REF_FORMA_FARM:010 - Granulado para suspensão oral
+    REF_FORMA_FARM:979 - Granulado para suspensão oral em saqueta
+    REF_FORMA_FARM:947 - Granulado revestido em saqueta
+    REF_FORMA_FARM:047 - Grânulos
+    REF_FORMA_FARM:221 - Implante
+    REF_FORMA_FARM:223 - Implante em cadeia
+    REF_FORMA_FARM:962 - Implante em seringa pré-cheia
+    REF_FORMA_FARM:923 - Implante intravítreo em aplicador
+    REF_FORMA_FARM:309 - Implante, pó para suspensão
+    REF_FORMA_FARM:274 - Inserto dental
+    REF_FORMA_FARM:131 - Inserto oftálmico
+    REF_FORMA_FARM:102 - Lápis cutâneo
+    REF_FORMA_FARM:232 - Lápis uretral
+    REF_FORMA_FARM:992 - Larva medicinal
+    REF_FORMA_FARM:041 - Liofilizado oral
+    REF_FORMA_FARM:558 - Liofilizado para solução para perfusão
+    REF_FORMA_FARM:275 - Líquido cutâneo
+    REF_FORMA_FARM:267 - Líquido oral
+    REF_FORMA_FARM:205 - Líquido para inalação por vaporização
+    REF_FORMA_FARM:229 - Líquido para irrigação vesical
+    REF_FORMA_FARM:951 - Matriz para Implantação
+    REF_FORMA_FARM:953 - Matriz selante
+    REF_FORMA_FARM:283 - Óvulo
+    REF_FORMA_FARM:066 - Pasta bucal
+    REF_FORMA_FARM:086 - Pasta cutânea
+    REF_FORMA_FARM:081 - Pasta dentífrica
+    REF_FORMA_FARM:069 - Pasta gengival
+    REF_FORMA_FARM:020 - Pasta oral
+    REF_FORMA_FARM:074 - Pastilha
+    REF_FORMA_FARM:312 - Pastilha mole
+    REF_FORMA_FARM:928 - Película bucal
+    REF_FORMA_FARM:930 - Película orodispersível
+    REF_FORMA_FARM:1002 - Película sublingual
+    REF_FORMA_FARM:103 - Penso impregnado
+    REF_FORMA_FARM:096 - Pó cutâneo
+    REF_FORMA_FARM:929 - Pó e solução para solução injetável
+    REF_FORMA_FARM:265 - Pó e solvente para cola para tecidos
+    REF_FORMA_FARM:536 - Pó e solvente para concentrado para solução para perfusão
+    REF_FORMA_FARM:238 - Pó e solvente para gel endocervical
+    REF_FORMA_FARM:546 - Pó e solvente para solução cutânea
+    REF_FORMA_FARM:955 - Pó e solvente para solução injectável ou para perfusão ou para solução oral
+    REF_FORMA_FARM:212 - Pó e solvente para solução injetável
+    REF_FORMA_FARM:920 - Pó e solvente para solução injetável em seringa pré-cheia
+    REF_FORMA_FARM:549 - Pó e solvente para solução injetável ou para perfusão
+    REF_FORMA_FARM:011 - Pó e solvente para solução oral
+    REF_FORMA_FARM:925 - Pó e solvente para solução para inalação por nebulização
+    REF_FORMA_FARM:219 - Pó e solvente para solução para perfusão
+    REF_FORMA_FARM:551 - Pó e solvente para solução para uso intravesical
+    REF_FORMA_FARM:841 - Pó e suspensão para suspensão injetável
+    REF_FORMA_FARM:539 - Pó e veículo para dispersão injetável
+    REF_FORMA_FARM:213 - Pó e veículo para suspensão injetável
+    REF_FORMA_FARM:365 - Pó e veículo para suspensão injetável de libertação prolongada
+    REF_FORMA_FARM:994 - Pó e veículo para suspensão injetável de libertação prolongada em seringa pré-cheia
+    REF_FORMA_FARM:965 - Pó e veículo para suspensão injetável em seringa pré-cheia
+    REF_FORMA_FARM:012 - Pó e veículo para suspensão oral
+    REF_FORMA_FARM:927 - Pó e veículo para suspensão para uso intravesical
+    REF_FORMA_FARM:022 - Pó efervescente
+    REF_FORMA_FARM:995 - Pó efervescente e pó para suspensão oral
+    REF_FORMA_FARM:152 - Pó nasal
+    REF_FORMA_FARM:021 - Pó oral
+    REF_FORMA_FARM:999 - Pó oral em cápsulas para abrir
+    REF_FORMA_FARM:971 - Pó oral em saqueta
+    REF_FORMA_FARM:279 - Pó para cola para tecidos
+    REF_FORMA_FARM:964 - Pó para concentrado e solução para solução para perfusão
+    REF_FORMA_FARM:562 - Pó para concentrado para solução injetável ou para perfusão
+    REF_FORMA_FARM:565 - Pó para concentrado para solução para perfusão
+    REF_FORMA_FARM:985 - Pó para dispersão para perfusão
+    REF_FORMA_FARM:197 - Pó para inalação
+    REF_FORMA_FARM:199 - Pó para inalação em recipiente unidose
+    REF_FORMA_FARM:198 - Pó para inalação, cápsula
+    REF_FORMA_FARM:230 - Pó para líquido para irrigação vesical
+    REF_FORMA_FARM:091 - Pó para pulverização cutânea
+    REF_FORMA_FARM:210 - Pó para solução injetável
+    REF_FORMA_FARM:537 - Pó para solução injetável ou para perfusão
+    REF_FORMA_FARM:978 - Pó para solução injetável ou para perfusão ou para solução oral
+    REF_FORMA_FARM:530 - Pó para solução injetável ou para solução para inalação por nebulização
+    REF_FORMA_FARM:967 - Pó para solução intravesical ou para solução injetável ou para perfusão
+    REF_FORMA_FARM:007 - Pó para solução oral
+    REF_FORMA_FARM:950 - Pó para solução oral em saqueta
+    REF_FORMA_FARM:277 - Pó para solução ou para suspensão injetável
+    REF_FORMA_FARM:192 - Pó para solução para inalação por nebulização
+    REF_FORMA_FARM:217 - Pó para solução para perfusão
+    REF_FORMA_FARM:182 - Pó para solução retal
+    REF_FORMA_FARM:541 - Pó para solução vaginal
+    REF_FORMA_FARM:211 - Pó para suspensão injetável
+    REF_FORMA_FARM:008 - Pó para suspensão oral
+    REF_FORMA_FARM:317 - Pó para suspensão oral ou retal
+    REF_FORMA_FARM:966 - Pó para suspensão oral ou retal em saqueta
+    REF_FORMA_FARM:918 - Pó para suspensão para implantação
+    REF_FORMA_FARM:919 - Pó para suspensão para perfusão
+    REF_FORMA_FARM:183 - Pó para suspensão retal
+    REF_FORMA_FARM:545 - Pó periodontal
+    REF_FORMA_FARM:1003 - Pó, dispersão e veículo para concentrado para dispersão para perfusão
+    REF_FORMA_FARM:961 - Pó, solvente e matriz para matriz para implantação
+    REF_FORMA_FARM:085 - Pomada
+    REF_FORMA_FARM:148 - Pomada nasal
+    REF_FORMA_FARM:122 - Pomada oftálmica
+    REF_FORMA_FARM:176 - Pomada retal
+    REF_FORMA_FARM:308 - Pomada retal + Supositório
+    REF_FORMA_FARM:160 - Pomada vaginal
+    REF_FORMA_FARM:255 - Precursor radiofarmacêutico
+    REF_FORMA_FARM:061 - Preparação para pulverização sublingual
+    REF_FORMA_FARM:525 - Sistema de libertação vaginal
+    REF_FORMA_FARM:963 - Sistema transdérmico
+    REF_FORMA_FARM:098 - Sistema transdérmico
+    REF_FORMA_FARM:314 - Sistema transdérmico por iontoforese
+    REF_FORMA_FARM:057 - Solução bucal
+    REF_FORMA_FARM:092 - Solução cutânea
+    REF_FORMA_FARM:1004 - Solução de libertação prolongada para feridas
+    REF_FORMA_FARM:078 - Solução dental
+    REF_FORMA_FARM:1011 - Solução e emulsão para emulsão injetável
+    REF_FORMA_FARM:258 - Solução gastroentérica
+    REF_FORMA_FARM:207 - Solução injetável
+    REF_FORMA_FARM:981 - Solução injetável de libertação prolongada
+    REF_FORMA_FARM:907 - Solução injetável em caneta pré-cheia
+    REF_FORMA_FARM:906 - Solução injetável em cartucho
+    REF_FORMA_FARM:1007 - Solução injetável em cartucho para dispensador de dose
+    REF_FORMA_FARM:986 - Solução injetável em injetor pré-cheio
+    REF_FORMA_FARM:835 - Solução injetável em seringa pré-cheia
+    REF_FORMA_FARM:833 - Solução injetável ou concentrado para solução para perfusão
+    REF_FORMA_FARM:548 - Solução injetável ou para perfusão
+    REF_FORMA_FARM:982 - Solução injetável ou para perfusão em seringa pré-cheia
+    REF_FORMA_FARM:553 - Solução injetável para uso intraocular
+    REF_FORMA_FARM:228 - Solução intravesical
+    REF_FORMA_FARM:004 - Solução oral
+    REF_FORMA_FARM:311 - Solução oral + Pó para solução oral
+    REF_FORMA_FARM:984 - Solução oral em recipiente unidose
+    REF_FORMA_FARM:960 - Solução oral em saqueta
+    REF_FORMA_FARM:976 - Solução para cardioplegia ou conservação de órgãos
+    REF_FORMA_FARM:261 - Solução para conservação de órgãos
+    REF_FORMA_FARM:224 - Solução para diálise peritoneal
+    REF_FORMA_FARM:053 - Solução para gargarejar
+    REF_FORMA_FARM:226 - Solução para hemodiálise
+    REF_FORMA_FARM:381 - Solução para hemodiálise ou hemofiltração
+    REF_FORMA_FARM:286 - Solução para hemodiálise, hemodiafiltração e hemofiltração
+    REF_FORMA_FARM:225 - Solução para hemofiltração
+    REF_FORMA_FARM:382 - Solução para inalação
+    REF_FORMA_FARM:189 - Solução para inalação por nebulização
+    REF_FORMA_FARM:202 - Solução para inalação por vaporização
+    REF_FORMA_FARM:262 - Solução para irrigação
+    REF_FORMA_FARM:062 - Solução para lavagem da boca
+    REF_FORMA_FARM:156 - Solução para lavagem nasal
+    REF_FORMA_FARM:129 - Solução para lavagem oftálmica
+    REF_FORMA_FARM:515 - Solução para modificação de fração sanguínea
+    REF_FORMA_FARM:215 - Solução para perfusão
+    REF_FORMA_FARM:917 - Solução para perfusão e para solução oral
+    REF_FORMA_FARM:1000 - Solução para perfusão em cartucho
+    REF_FORMA_FARM:949 - Solução para perfusão em seringa pré-cheia
+    REF_FORMA_FARM:932 - Solução para perfusão em sistema de administração
+    REF_FORMA_FARM:383 - Solução para precursor radiofarmacêutico
+    REF_FORMA_FARM:139 - Solução para pulverização auricular
+    REF_FORMA_FARM:060 - Solução para pulverização bucal
+    REF_FORMA_FARM:089 - Solução para pulverização cutânea
+    REF_FORMA_FARM:153 - Solução para pulverização nasal
+    REF_FORMA_FARM:974 - Solução para pulverização nasal em recipiente unidose
+    REF_FORMA_FARM:544 - Solução para pulverização nasal ou bucal
+    REF_FORMA_FARM:972 - Solução para pulverização transdérmica
+    REF_FORMA_FARM:561 - Solução para teste cutâneo em picada
+    REF_FORMA_FARM:194 - Solução pressurizada para inalação
+    REF_FORMA_FARM:178 - Solução retal
+    REF_FORMA_FARM:162 - Solução vaginal
+    REF_FORMA_FARM:834 - Soluções para cola para tecidos
+    REF_FORMA_FARM:220 - Solvente/Veículo para uso parentérico
+    REF_FORMA_FARM:996 - Substância de origem vegetal para inalação por vaporização
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,12 +3,23 @@
 --
 
 --Insercao de medicacao
-create or replace procedure inserir_medicacao(nom varchar(60))
+create or replace procedure inserir_medicamento(nom varchar(60))
 as $$
+declare med int;
 begin
 	--ver se já existe o medicamento
+	select count(*) into med
+	from medicamento md
+	where lower(md.nome_med) like lower(nom);
+	
+	if (med > 0)
+	then
+		raise notice 'Medicamento já existe';
+		return;
+	end if;
 	
 	--inserir medicamento na tabela
+	insert into medicamento(nome_med) values (nom);
 	
 end; $$ Language PLPGSQL
 
@@ -16,7 +27,9 @@ end; $$ Language PLPGSQL
 --Insercao de exames
 create or replace procedure inserir_exame(nom varchar(60))
 as $$
+declare exa int;
 begin
+	
 	
 end; $$ Language PLPGSQL
 
