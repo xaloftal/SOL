@@ -28,8 +28,7 @@ create table medicamento(
 	nome_med		varchar(60),
 	id_forma_farmaceutica int,
 	
-	constraint form_farm_fk foreign key (id_forma_farmaceutica)
-		references forma_farmaceutica(id_forma_farmaceutica)
+	constraint form_farm_fk foreign key (id_forma_farmaceutica) references forma_farmaceutica(id_forma_farmaceutica)
 )
 
 
@@ -61,12 +60,13 @@ create table login(
 create table utente(
 	id_utente	serial			not null		primary key,
 	nome_u		varchar(60)		not null,
-	nif_u		int,
+	nif_u		int				unique,
 	email_u		varchar(60)		unique,
-	tele_u		int,
+	tele_u		int				unique,
+	dat_nasc	date,
 	
 	constraint fk_utente_login foreign key (email_u) references login(email)
-)
+);
 
 
 create table medico(
@@ -79,7 +79,8 @@ create table medico(
 	
 	constraint fk_medico_login foreign key (email_m) references login(email),
 	constraint fk_medico_esp foreign key (id_especialidade) references especialidade(id_especialidade)
-)
+);
+
 
 create table gestor(
 	id_gestor	serial			not null		primary key,
@@ -87,7 +88,8 @@ create table gestor(
 	email_g		varchar(60)		not null,
 	
 	constraint fk_gestor_login foreign key (email_g) references login(email)
-)
+);
+
 
 create table administrativo(
 	id_adm		serial			not null		primary key,
@@ -95,7 +97,7 @@ create table administrativo(
 	email_a		varchar(60)		not null,
 	
 	constraint fk_adm_login foreign key (email_a) references login(email)
-)
+);
 
 -- reclamacao
 
@@ -112,7 +114,7 @@ create table reclamacao(
 	constraint fk_gestor_resposta_rec foreign key (id_gestor) references gestor(id_gestor),
 	constraint fk_adm_resposta_rec foreign key (id_adm) references administrativo(id_adm),
 	constraint fk_utente_rec foreign key (id_utente) references utente(id_utente)	
-)
+);
 
 
 -- consultas
@@ -131,7 +133,7 @@ create table formulario(
 	constraint fk_form_esp foreign key (id_especialidade) references especialidade(id_especialidade),
 	constraint fk_form_uten foreign key (id_utente) references utente(id_utente),
 	constraint fk_form_med foreign key (id_medico) references medico(id_medico)
-)
+);
 
 
 create table consulta(
@@ -143,7 +145,7 @@ create table consulta(
 	medico_cons	int,
 	
 	constraint fk_cons_med foreign key (medico_cons) references medico(id_medico)
-)
+);
 
 
 	--
@@ -158,7 +160,7 @@ create table formulario_consulta(
 	constraint pk_form_cons primary key (id_consulta, id_formulario),
 	constraint fk_con foreign key (id_consulta) references consulta(id_consulta),
 	constraint fk_form foreign key (id_formulario) references formulario(id_formulario)
-)
+);
 
 
 --tem origem
@@ -170,7 +172,7 @@ create table consulta_consulta(
 	constraint pk_cons_cons primary key(consulta_origem, id_consulta),
 	constraint con_fk foreign key (id_consulta) references consulta(id_consulta),
 	constraint consori_fk foreign key (consulta_origem) references consulta(id_consulta)
-)
+);
 
 
 --prescreve
@@ -182,7 +184,7 @@ create table consulta_prescricao(
 	constraint pk_cons_medic primary key(id_medicamento, id_consulta),
 	constraint con_fk foreign key (id_consulta) references consulta(id_consulta),
 	constraint medicamento_fk foreign key (id_medicamento) references medicamento(id_medicamento)
-)
+);
 
 --passa
 create table formulario_prescricao(
@@ -192,7 +194,7 @@ create table formulario_prescricao(
 	constraint pk_form_pres primary key (id_formulario, id_prescricao),
 	constraint form_fk foreign key (id_formulario) references formulario(id_formulario),
 	constraint pres_fk foreign key (id_prescricao) references prescricao(id_prescricao)
-)
+);
 
 --examina
 create table prescricao_exame(
@@ -203,7 +205,7 @@ create table prescricao_exame(
 	constraint pk_pres_exa primary key (id_prescricao, id_exame),
 	constraint exa_fk foreign key (id_exame) references exame(id_exame),
 	constraint pres_fk foreign key (id_prescricao) references prescricao(id_prescricao)	
-)
+);
 
 --medica
 create table prescricao_medicamento(
@@ -214,4 +216,4 @@ create table prescricao_medicamento(
 	constraint pk_pres_med primary key (id_medicamento, id_prescricao),
 	constraint med_fk foreign key (id_medicamento) references medicamento(id_medicamento),
 	constraint pres_fk foreign key (id_prescricao) references prescricao(id_prescricao)
-)
+);
