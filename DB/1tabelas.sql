@@ -46,6 +46,7 @@ create table prescricao(
 )
 
 
+
 -- login
 create table login(
 	email		varchar(60)		unique,
@@ -81,7 +82,7 @@ create table medico(
 	constraint fk_medico_esp foreign key (id_especialidade) references especialidade(id_especialidade)
 );
 
-
+-- não vai ser implementado nesta versão
 create table gestor(
 	id_gestor	serial			not null		primary key,
 	nome_g		varchar(60)		not null,
@@ -99,12 +100,15 @@ create table administrativo(
 	constraint fk_adm_login foreign key (email_a) references login(email)
 );
 
+
+
 -- reclamacao
 
 create table reclamacao(
 	id_reclamacao	serial		not null		primary key,
 	descricao_rec	varchar(500) not null,
 	data_recl		timestamp,
+	resposta_recl	varchar(500),
 	
 	--relacoes
 	id_gestor	int,
@@ -115,7 +119,6 @@ create table reclamacao(
 	constraint fk_adm_resposta_rec foreign key (id_adm) references administrativo(id_adm),
 	constraint fk_utente_rec foreign key (id_utente) references utente(id_utente)	
 );
-
 
 -- consultas
 
