@@ -213,6 +213,8 @@ select * from utente u
 inner join login l on l.email = u.email_u
 
 
+
+
 --sign up de administrador
 create or replace procedure signup_adm(_nom varchar(60), _ema varchar(60), _pass varchar(60))
 as $$
@@ -243,3 +245,15 @@ end; $$ Language PLPGSQL
 --teste
 call criar_reclamacao(1, 'Resposta muito demorada.', '2023-11-14 10:44:00'::timestamp)
 select * from reclamacao inner join utente using (id_utente)
+
+
+
+
+create or replace procedure inserir_prescricao()
+as $$
+begin
+
+end; Language PLPGSQL
+
+
+

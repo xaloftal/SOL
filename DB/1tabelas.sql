@@ -12,38 +12,41 @@
 
 create table forma_farmaceutica(
 	id_forma_farmaceutica	int  primary key,
-	descricao_forma 	varchar(60)
-)
-
+	descricao_forma 	varchar(60),
+	estado_ff		estado
+);
 
 
 create table especialidade(
 	id_especialidade	serial		primary key,
-	nome_esp		varchar(60)
-)
+	nome_esp		varchar(60),
+	estado_e	estado
+);
 
 
 create table medicamento(
 	id_medicamento	serial		primary key,
 	nome_med		varchar(60),
 	id_forma_farmaceutica int,
+	estado_m		estado, --enum
 	
 	constraint form_farm_fk foreign key (id_forma_farmaceutica) references forma_farmaceutica(id_forma_farmaceutica)
-)
-
+);
 
 
 
 create table exame(
 	id_exame	serial		primary key,
-	nome_exame	varchar(60)
-)
+	nome_exame	varchar(60),
+	estado_e	estado
+);
 
 
 create table prescricao(
 	id_prescricao	serial	primary key,
-	validade		timestamp
-)
+	validade		timestamp,
+	estado_p		estado
+);
 
 
 
@@ -51,9 +54,11 @@ create table prescricao(
 create table login(
 	email		varchar(60)		unique,
 	password	varchar(60),
+	estado_l	estado,
 	
 	primary key (email, password)	
 )
+
 
 
 -- utilizadores
@@ -109,6 +114,7 @@ create table reclamacao(
 	descricao_rec	varchar(500) not null,
 	data_recl		timestamp,
 	resposta_recl	varchar(500),
+	estado_r		estado,
 	
 	--relacoes
 	id_gestor	int,
@@ -120,12 +126,14 @@ create table reclamacao(
 	constraint fk_utente_rec foreign key (id_utente) references utente(id_utente)	
 );
 
+
 -- consultas
 
 create table formulario(
 	id_formulario 	serial		not null		primary key,
 	descricao_form  varchar(500) not null,
 	data_form		timestamp,
+	estado_f		estado,
 	
 	--relacao
 	id_especialidade	int,
@@ -139,16 +147,19 @@ create table formulario(
 );
 
 
+
 create table consulta(
 	id_consulta		serial 		not null		primary key,
 	observacoes 	varchar(300),
-	horario			timestamp,	
+	horario			timestamp,
+	estado_c		estado,
 	
 	--relacao
 	medico_cons	int,
 	
 	constraint fk_cons_med foreign key (medico_cons) references medico(id_medico)
 );
+
 
 
 	--
