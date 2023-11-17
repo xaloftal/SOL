@@ -256,9 +256,26 @@ begin
 end; $$ Language PLPGSQL
 
 
-
-create or replace procedure inserir_prescricao()
+--criar a prescricao
+create or replace procedure inserir_prescricao(_val timestamp, out id_pres int)
 as $$
 begin
-	
-end; Language PLPGSQL
+	insert into prescricao (validade, estado_p) values (_val, 'Existente') returning id_prescricao into id_pres;	
+end; $$ Language PLPGSQL
+
+
+--inserir medicamentos na prescricao
+create or replace procedure inserir_medicamento_prescricao(_descricao varchar(500), _med int, _pres int)
+as $$
+begin
+	insert into prescricao_medicamento(id_medicamento, id_prescricao, descricao_pres_med) values (_med, _pres, _descricao);
+end; $$ Language PLPGSQL
+
+--inserir exames na prescricao
+create or replace procedure inserir_exame_prescricao(_desc varchar(500), _exa int, _pres int)
+as $$
+begin
+	insert into prescricao_exame(id_exame, id_prescricao, descricao_pres_exa) values (_exa, _pres, _desc);
+end; $$ Language PLPGSQL
+
+
