@@ -20,7 +20,7 @@ begin
 	
 	--inserir em login
 	
-	insert into login(email, password) values (_ema , _pass);
+	insert into login(email, password, estado_l) values (_ema , _pass, 'Existente');
 end; $$ Language PLPGSQL
 
 
@@ -42,7 +42,7 @@ begin
 	
 	--inserir na tabela
 	
-	insert into especialidade (nome_esp) values (_nom);
+	insert into especialidade (nome_esp, estado_e) values (_nom, 'Existente');
 	
 end; $$ Language PLPGSQL
 
@@ -81,7 +81,7 @@ begin
 	end if;
 	
 	--inserir forma na tabela
-	insert into forma_farmaceutica(id_forma_farmaceutica, descricao_forma) values (_cod, _nom);
+	insert into forma_farmaceutica(id_forma_farmaceutica, descricao_forma, estado_ff) values (_cod, _nom, 'Existente');
 	
 end; $$ Language PLPGSQL
 
@@ -121,7 +121,7 @@ begin
 	
 	
 	--inserir medicamento na tabela
-	insert into medicamento(nome_med, id_forma_farmaceutica ) values (_nom, form);
+	insert into medicamento(nome_med, id_forma_farmaceutica, estado_m ) values (_nom, form, 'Existente');
 	
 end; $$ Language PLPGSQL
 
@@ -151,7 +151,7 @@ begin
 	end if;
 	
 	--inserir exame na tabela
-	insert into exame(nome_exame) values (_nom);
+	insert into exame(nome_exame, estado_e) values (_nom, 'Existente');
 	
 end; $$ Language PLPGSQL
 
@@ -239,7 +239,7 @@ create or replace procedure criar_reclamacao(_utente int, _desc varchar(500), _d
 as $$
 begin
 	--inserir na tabela
-	insert into reclamacao (id_utente, descricao_rec, data_recl) values (_utente, _desc, _dat);
+	insert into reclamacao (id_utente, descricao_rec, data_recl, estado_r) values (_utente, _desc, _dat, 'Submetido');
 end; $$ Language PLPGSQL
 
 --teste
@@ -247,13 +247,18 @@ call criar_reclamacao(1, 'Resposta muito demorada.', '2023-11-14 10:44:00'::time
 select * from reclamacao inner join utente using (id_utente)
 
 
+--inserir formulario
+create or replace procedure criar_formulario(_desc varchar(500), _dat timestamp)
+as $$
+begin
+	--inserir da tabela
+	insert into formulario(descricao_form, data_form, estado_f) values (_desc, _dat, 'Submetido');
+end; $$ Language PLPGSQL
+
 
 
 create or replace procedure inserir_prescricao()
 as $$
 begin
-
+	
 end; Language PLPGSQL
-
-
-
