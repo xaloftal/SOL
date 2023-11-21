@@ -1,0 +1,102 @@
+901 - Adesivo cutâneo
+956 - Adesivo transdérmico
+082 - Aditivo para banho
+310 - Anel vaginal
+029 - Cápsula
+302 - Cápsula + Supositório
+035 - Cápsula de libertação modificada
+033 - Cápsula de libertação prolongada
+031 - Cápsula gastrorresistente
+030 - Cápsula mole
+036 - Cápsula mole de libertação modificada
+034 - Cápsula mole de libertação prolongada
+032 - Cápsula mole gastrorresistente
+287 - Cápsula mole para mastigar
+168 - Cápsula mole vaginal
+187 - Cápsula retal
+167 - Cápsula vaginal
+018 - Chá medicinal
+166 - Chá medicinal instantâneo
+088 - Champô
+264 - Cola para tecidos
+271 - Comprimido
+303 - Comprimido + Supositório
+304 - Comprimido + Suspensão Oral
+073 - Comprimido bucal
+072 - Comprimido bucal mucoadesivo
+044 - Comprimido de libertação modificada
+043 - Comprimido de libertação prolongada
+313 - Comprimido de libertação prolongada revestido por película
+017 - Comprimido dispersível
+327 - Comprimido dispersível ou para mastigar
+957 - Comprimido e cápsula mole
+040 - Comprimido efervescente
+042 - Comprimido gastrorresistente
+946 - Comprimido gastrorresistente de libertação prolongada
+037 - Comprimido orodispersível
+517 - Comprimido para chupar
+045 - Comprimido para mastigar
+185 - Comprimido para suspensão retal
+038 - Comprimido revestido
+527 - Comprimido revestido + Comprimido
+305 - Comprimido revestido + Supositório
+039 - Comprimido revestido por película
+016 - Comprimido solúvel
+071 - Comprimido sublingual
+169 - Comprimido vaginal
+336 - Concentrado e solvente para solução injetável
+531 - Concentrado e solvente para solução para perfusão
+998 - Concentrado para dispersão injetável
+934 - Concentrado para dispersão para perfusão
+093 - Concentrado para solução cutânea
+214 - Concentrado para solução injetável
+342 - Concentrado para solução injetável ou para perfusão
+343 - Concentrado para solução oral
+054 - Concentrado para solução para gargarejar
+959 - Concentrado para solução para irrigação intraocular
+218 - Concentrado para solução para perfusão
+347 - Concentrado para suspensão para perfusão
+257 - Conjunto para preparações radiofarmacêuticas
+566 - Conjunto para preparações radiofarmacêuticas para perfusão
+083 - Creme
+174 - Creme retal
+158 - Creme vaginal
+306 - Creme vaginal + Óvulo
+084 - Gel
+147 - Gel nasal
+046 - Goma oral
+149 - Gotas nasais, solução
+221 - Implante
+020 - Pasta oral
+074 - Pastilha
+312 - Pastilha mole
+152 - Pó nasal
+085 - Pomada
+148 - Pomada nasal
+122 - Pomada oftálmica
+176 - Pomada retal
+308 - Pomada retal + Supositório
+160 - Pomada vaginal
+057 - Solução bucal
+092 - Solução cutânea
+1004 - Solução de libertação prolongada para feridas
+207 - Solução injetável
+004 - Solução oral
+382 - Solução para inalação
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
