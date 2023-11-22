@@ -24,6 +24,9 @@ begin
 end; $$ Language PLPGSQL
 
 
+
+
+
 --Inserir especialidades
 create or replace procedure inserir_especialidade(_nom varchar(60))
 as $$
@@ -50,6 +53,8 @@ end; $$ Language PLPGSQL
 
 call inserir_especialidade('Cardiologia');
 select * from especialidade
+
+
 
 
 --Insercao de formas farmaceuticas
@@ -88,6 +93,8 @@ end; $$ Language PLPGSQL
 --teste 
 call inserir_forma_farmaceutica(004, 'Solução oral');
 select * from forma_farmaceutica
+
+
 
 
 --Insercao de medicacao
@@ -234,6 +241,8 @@ select * from administrativo a inner join login l on l.email = a.email_a
 
 
 
+
+
 --inserir reclamação
 create or replace procedure criar_reclamacao(_utente int, _desc varchar(500), _dat timestamp)
 as $$
@@ -247,21 +256,53 @@ call criar_reclamacao(1, 'Resposta muito demorada.', '2023-11-14 10:44:00'::time
 select * from reclamacao inner join utente using (id_utente)
 
 
+
+
+
 --inserir formulario
-create or replace procedure criar_formulario(_desc varchar(500), _dat timestamp)
+create or replace procedure criar_formulario(_utente int, _desc varchar(500), _dat timestamp, _esp varchar(60), out id_form int)
 as $$
+declare esp int;
 begin
-	--inserir da tabela
-	insert into formulario(descricao_form, data_form, estado_f) values (_desc, _dat, 'Submetido');
+	--encontrar especialidade
+	select id_especialidade into esp
+	from especialidade
+	where lower(_esp) = lower(especialidade.nome_esp);
+	
+	--inserir na tabela
+	insert into formulario(id_utente, descricao_form, data_form, estado_f, id_especialidade) 
+	values (_utente, _desc, _dat, 'Submetido', esp )
+	returning id_formulario into id_form;
+	
 end; $$ Language PLPGSQL
 
 
---criar a prescricao
-create or replace procedure inserir_prescricao(_val timestamp, out id_pres int)
+
+
+--criar a prescricao 
+create or replace procedure inserir_prescricao(_form int, _cons int, _val timestamp, out id_pres int)
 as $$
 begin
-	insert into prescricao (validade, estado_p) values (_val, 'Existente') returning id_prescricao into id_pres;	
+	--criar a prescricao
+	insert into prescricao (validade, estado_p) values (_val, 'Existente') returning id_prescricao into id_pres;
+	
+	--criar a relacao 
+	--se for de formulario
+	if (_form is not null)
+	then
+		insert into formulario_prescricao (id_prescricao, id_formulario) values (id_pres, _form);
+	-- se for de consulta
+	elsif (_cons is not null)
+	then
+		insert into consulta_prescricao(id_prescricao, id_consulta) values (id_pres, _cons);
+	--se não for associado com nada
+	else
+		raise notice 'Não associado com formulario ou consulta';
+	end if;
+	
 end; $$ Language PLPGSQL
+
+
 
 
 --inserir medicamentos na prescricao
@@ -271,6 +312,9 @@ begin
 	insert into prescricao_medicamento(id_medicamento, id_prescricao, descricao_pres_med) values (_med, _pres, _descricao);
 end; $$ Language PLPGSQL
 
+
+
+
 --inserir exames na prescricao
 create or replace procedure inserir_exame_prescricao(_desc varchar(500), _exa int, _pres int)
 as $$
@@ -279,3 +323,94 @@ begin
 end; $$ Language PLPGSQL
 
 
+
+
+
+
+--consulta por formulario
+create or replace procedure criar_consulta_form(_med int, _horari timestamp, _form int, _observ varchar(300))
+as $$
+declare 
+	form_cons int;
+	horar int;
+	id_cons int;
+begin
+	--verificar se existe consulta vindo do formulario
+	if (_form is not null)
+	then
+		select count(*) into form_cons
+		from formulario_consulta fc
+		where fc.id_formulario = _form;	
+		
+		if (form_cons > 0)
+		then
+			raise notice 'Formulario com consulta já marcada';
+			return;
+		end if;
+	end if;	
+	
+	--verificar se existe consulta com o medico no mesmo horario
+	select count(*) into horar
+	from consulta c 
+	where c.horario = horari and mc.medico_cons = _med;	
+	
+	if (horar > 0)
+	then
+		raise notice 'medico não disponivel no horario';
+		return;
+	end if;
+	
+	--inserir
+	insert into consulta (horario, observacoes, medico_cons, estado_c) 
+	values (_horari, _observ, _med, 'Agendado')
+	returning id_consulta into id_cons;
+	
+	insert into formulario_consulta (id_formulario, id_consulta) values (_form, id_cons);
+	
+	
+	--guardar o medico que viu o formulario
+	update formulario set id_medico = _med, estado_f = 'Respondido' where id_formulario = id_form ;
+		
+end; $$ Language PLPGSQL
+
+
+
+
+--criar uma consulta por uma consulta
+create or replace procedure criar_consulta_cons (_med int, _cons int, _hora timestamp, _obser varchar(300))
+as $$
+declare ccons int;
+		cmedhor int;
+		id_cons int;
+begin
+	--verificar se consulta já gerou outra consulta
+	select count(*) into ccons
+	from consulta_consulta cc
+	where cc.consulta_origem = _cons;
+	
+	if (ccons > 0)
+	then
+		raise notice 'Consulta já originou uma consulta';
+	end if;
+	
+	
+	--verificar se médico está disponivel no horário
+	select count(*) into cmedhor
+	from consulta c
+	where c.id_medico = _med and c.horario = _hora;
+	
+	if (cmedhor > 0)
+	then	
+		raise notice 'Medico ja tem consulta marcada no horario';
+	end if;
+	
+	--inserir nas tabelas	
+	--criar nova consulta
+	insert into consulta (horario, observacoes, medico_cons, estado_c) 
+	values (_horari, _observ, _med, 'Agendado')
+	returning id_consulta into id_cons;
+	
+	--criar a relacao 
+	insert into consulta_consulta (consulta_origem, id_consulta) values (_cons, id_cons);	
+	
+end; $$ Language PLPGSQL
