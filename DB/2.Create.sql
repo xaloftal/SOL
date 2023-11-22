@@ -5,24 +5,34 @@
 -- inserir um login
 create or replace procedure inserir_login(_ema varchar(60), _pass varchar(60))
 as $$
-declare ema int;
+declare _log estado;
 begin
 	--verificar se existe email
-	select count(*) into ema
+	select estado_l into _log
 	from login l
 	where lower(l.email) like lower(_ema);
 	
-	if (ema > 0)
+	if (_log = 'Existente')
 	then
 		raise notice 'Email já registado';
 		return;
+		
+	elsif (_log = 'Inativo')
+	then
+		raise notice 'Conta inativa';
+		return;
+		
+	elsif (_log is null)
+	then 
+		--inserir em login
+		insert into login(email, password, estado_l) values (_ema , _pass, 'Existente');		
 	end if;
-	
-	--inserir em login
-	
-	insert into login(email, password, estado_l) values (_ema , _pass, 'Existente');
+
 end; $$ Language PLPGSQL
 
+select * from login
+
+call inserir_login('josemarques@med.sol.com', '123asd')
 
 
 
@@ -30,22 +40,26 @@ end; $$ Language PLPGSQL
 --Inserir especialidades
 create or replace procedure inserir_especialidade(_nom varchar(60))
 as $$
-declare c_esp int;
+declare c_esp estado;
 begin
 	-- ver se já existe na tabela
-	select count(*) into c_esp
+	select estado_e into c_esp
 	from especialidade e
 	where upper(e.nome_esp) like upper(_nom);
 	
-	if (c_esp > 0)
+	if (c_esp = 'Existente')
 	then
 		raise notice 'Especialidade já inserida';
 		return;
+	elsif (c_esp = 'Inativo')
+	then
+		raise notice 'Especialidade inativa, a ser ativada';
+		update especialidade set estado_e = 'Existente' where upper(nome_esp) like upper(_nom);
+	elsif (c_esp is null)
+	then
+		--inserir na tabela
+		insert into especialidade (nome_esp, estado_e) values (_nom, 'Existente');
 	end if;
-	
-	--inserir na tabela
-	
-	insert into especialidade (nome_esp, estado_e) values (_nom, 'Existente');
 	
 end; $$ Language PLPGSQL
 
@@ -53,6 +67,7 @@ end; $$ Language PLPGSQL
 
 call inserir_especialidade('Cardiologia');
 select * from especialidade
+update especialidade set estado_e = 'Inativo' where id_especialidade = 1
 
 
 
@@ -61,28 +76,30 @@ select * from especialidade
 create or replace procedure inserir_forma_farmaceutica(_cod int, _nom varchar(60))
 as $$
 declare c_cod int;
+		ecod estado;
 		c_nom int;
 begin
 	-- ver se já existe forma farmaceutica com o codigo
-	select count(*) into c_cod
+	select count(*), estado_ff into c_cod, ecod
 	from forma_farmaceutica ff
 	where ff.id_forma_farmaceutica = _cod;
 	
-	if (c_cod > 0)
+	if (c_cod > 0 and ecod = 'Existente')
 	then
 		raise notice 'Codigo de forma farmaceutica ja utilizado';
 		return;
 	end if;
 	
 	-- ver se já existe forma pelo nome
-	select count(*) into c_nom
+	select count(*), estado_ff into c_nom, ecod
 	from forma_farmaceutica ff
 	where upper(ff.descricao_forma) like upper(_nom);
 	
-	if (c_nom > 0)
+	if (c_nom > 0 and ecod = 'Existente')
 	then
 		raise notice 'Forma farmaceutica ja existe';
 		return;
+	elsif (c_nom >0 and ecod = 'Inativo')
 	end if;
 	
 	--inserir forma na tabela
@@ -107,7 +124,7 @@ begin
 	-- ver se existe forma farmaceutica e encontrar id
 	select ff.id_forma_farmaceutica into form
 	from forma_farmaceutica ff
-	where upper(ff.descricao_forma) like upper(_form);
+	where upper(ff.descricao_forma) like upper(_form) and ff.estado_ff = 'Existente';
 	
 	if (form is null)
 	then 
@@ -144,22 +161,30 @@ inner join forma_farmaceutica using (id_forma_farmaceutica)
 --Insercao de exames
 create or replace procedure inserir_exame(_nom varchar(60))
 as $$
-declare exa int;
+declare exa estado;
 begin
 	-- verificar se exame já existe
-	select count(*) into exa
+	select estado_e into exa 
 	from exame e
 	where upper(e.nome_exame) like upper(_nom);
 	
-	if (exa > 0)
+	if (exa = 'Existente')
 	then 
 		raise notice 'Exame já existe';
 		return;
-	end if;
-	
+		
+	--se for inativo, volta-se a ativar
+	elsif (exa = 'Inativo')
+	then 
+		update exame set estado_e = 'Existente' where upper(e.nome_exame) like upper(_nom);
+		raise notice 'Alterou-se o estado';
+		
 	--inserir exame na tabela
-	insert into exame(nome_exame, estado_e) values (_nom, 'Existente');
-	
+	elsif (exa is null)
+	then 
+		insert into exame(nome_exame, estado_e) values (_nom, 'Existente');
+	end if;
+		
 end; $$ Language PLPGSQL
 
 --teste
