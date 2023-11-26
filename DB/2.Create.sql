@@ -77,14 +77,15 @@ create or replace procedure inserir_forma_farmaceutica(_cod int, _nom varchar(60
 as $$
 declare c_cod int;
 		ecod estado;
+		c_des varchar(60);
 		c_nom int;
 begin
 	-- ver se já existe forma farmaceutica com o codigo
-	select count(*), estado_ff into c_cod, ecod
+	select count(*) , estado_ff, descricao_forma into c_cod, ecod, c_des
 	from forma_farmaceutica ff
 	where ff.id_forma_farmaceutica = _cod;
 	
-	if (c_cod > 0 and ecod = 'Existente')
+	if (c_cod > 0)
 	then
 		raise notice 'Codigo de forma farmaceutica ja utilizado';
 		return;
@@ -99,17 +100,25 @@ begin
 	then
 		raise notice 'Forma farmaceutica ja existe';
 		return;
-	elsif (c_nom >0 and ecod = 'Inativo')
-	end if;
+		
+	--se já existe mas não esta ativo
+	elsif (c_nom > 0 and ecod = 'Inativo'and c_cod > 0)
+	then
+		raise notice 'Forma farmaceutica inativa, a ativar..';
+		update forma_farmaceutica set estado_ff = 'Existente' where id_forma_farmaceutica = _cod and descricao_forma = _nom;
 	
-	--inserir forma na tabela
-	insert into forma_farmaceutica(id_forma_farmaceutica, descricao_forma, estado_ff) values (_cod, _nom, 'Existente');
+	elsif (c_nom = 0 and c_cod = 0)
+	then 
+		insert into forma_farmaceutica(id_forma_farmaceutica, descricao_forma, estado_ff) values (_cod, _nom, 'Existente');
+	end if;	
 	
 end; $$ Language PLPGSQL
 
 --teste 
 call inserir_forma_farmaceutica(004, 'Solução oral');
 select * from forma_farmaceutica
+
+update forma_farmaceutica set estado_ff = 'Inativo' where id_forma_farmaceutica = 4
 
 
 
