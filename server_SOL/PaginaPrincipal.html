@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <title>Página Principal - Saúde On-Line</title>
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
+  <link rel="stylesheet" href="CSS/style.css" media="screen">
+  <link rel="stylesheet" href="CSS/styleSections.css" media="screen">
+  <link rel="stylesheet" href="CSS/modal.css" media="screen">
+  <link rel="stylesheet" href="CSS/footer.css" media="screen">
+  <link rel="stylesheet" href="CSS/bootstrap.min.css" media="screen">
+  <script class="u-script" type="text/javascript" src="JavaScript/jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/style.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/modal.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="API/apis.js" defer=""></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  
+  <script type="application/ld+json">
+    
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": ""
+    }
+
+  </script>
+
+</head>
+
+<body class="u-body u-xl-mode" data-lang="en">
+
+  <!--Cabeçalho-->
+
+  <header class="u-clearfix u-header u-header" id="sec-a283">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <nav class="u-align-left u-menu u-menu-hamburger u-offcanvas u-menu-1 u-enable-responsive" data-responsive-from="XL">
+        <div class="menu-collapse">
+          <a class="u-button-style u-nav-link" href="#" style="padding: 4px 0px; font-size: calc(1em + 8px);">
+            <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 302 302"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5c50"></use></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg-5c50" x="0px" y="0px" viewBox="0 0 302 302" style="enable-background:new 0 0 302 302; fill: cornflowerblue;" xml:space="preserve" class="u-svg-content"><g><rect y="36" width="302" height="30"></rect><rect y="236" width="302" height="30"></rect><rect y="136" width="302" height="30"></rect>
+            </g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+          </a>
+        </div>
+
+        <!--Menu Hamburguer aberto e fechado-->
+
+        <div class="u-nav-container">
+          <ul class="u-nav u-unstyled u-nav-1">
+            <li class="u-nav-item">
+              <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base active" href="PaginaPrincipal.html" style="padding: 10px 20px;">Página principal</a>
+            </li>
+            <li class="u-nav-item">
+              <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="LoginMedico.html" style="padding: 10px 20px;">Entrar como Médico</a>
+            </li>
+            <li class="u-nav-item">
+              <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="LoginUtente.html" style="padding: 10px 20px;">Entrar como Doente</a>
+            </li>
+          </ul>
+        </div>
+        <div class="u-nav-container-collapse">
+          <div class="u-align-center u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+            <div class="u-inner-container-layout u-sidenav-overflow">
+              <div class="u-menu-close"></div>
+              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                <li class="u-nav-item">
+                  <a class="u-button-style u-nav-link" href="PaginaPrincipal.html">Página principal</a>
+                </li>
+                <li class="u-nav-item">
+                  <a class="u-button-style u-nav-link" href="LoginMedico.html">Entrar como Médico</a>
+                </li>
+                <li class="u-nav-item">
+                  <a class="u-button-style u-nav-link" href="LoginUtente.html">Entrar como Utente</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+        </div>
+    </div>
+  </header>
+
+  <!--Segunda Secção com opções de registo do médico e registo do utente-->
+
+  <section class="u-clearfix u-container-align-left u-image u-section-1" data-image-width="1500" data-image-height="1000">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-container-style u-group u-radius-50 u-shape-round u-white u-group-1">
+        <div class="u-container-layout u-valign-middle u-container-layout-1">
+          <h6 class="u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-1"> Cuidados de Clínica Geral</h6>
+          <h1 class="u-custom-font u-font-ubuntu u-text u-text-default u-text-2">Saúde On-Line</h1>
+          <h4 class="u-custom-font u-font-ubuntu u-text u-text-default u-text-3">Mantenha a sua saúde na linha</h4>
+          <div class="buttons">
+            <a href="RegistoMedico.html" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1" style="align-items: center;">Registe-se como Médico</a>
+            <a href="RegistoDoente.html" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Registe-se como Utente</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Terceira Secção-->
+
+  <section class="u-clearfix u-container-align-center u-palette-1-base u-section-2">
+    <div class="u-div-section">
+      <h2 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-1"> Um site de confiança para cuidar da sua saúde!</h2>
+    </div>
+  </section>
+
+  <!--Quarta secção onde é explicado como o site funciona-->
+
+  <section class="u-align-center u-clearfix u-section-3">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+          <div class="u-layout-row">
+            <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-1">
+              <div class="u-container-layout u-container-layout-1">
+                <h2 class="u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xs u-custom-font u-font-ubuntu u-text u-text-default u-text-2">Como é que funciona?<br></h2>
+                <p class="u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xs u-custom-font u-heading-font u-text u-text-3">Tire as suas dúvidas sobre saúde com os melhores médicos e especialistas.</p>
+                <div class="u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xs u-border-1 u-border-grey-25 u-line u-line-horizontal u-line-1"></div>
+                <div class="u-expanded-width u-list u-list-1">
+                  <div class="u-repeater u-repeater-1">
+                    <div class="u-container-layout u-similar-container u-container-layout-2">
+                      <!--icone-->
+                      <span class="u-icon u-icon-circle u-palette-1-base u-text-white u-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 256 512" class="center-icons"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M160 64c0-11.8-6.5-22.6-16.9-28.2s-23-5-32.8 1.6l-96 64C-.5 111.2-4.4 131 5.4 145.8s29.7 18.7 44.4 8.9L96 123.8V416H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96 96c17.7 0 32-14.3 32-32s-14.3-32-32-32H160V64z"/></svg>
+                        <svg class="u-svg-content" viewBox="0 0 512.001 512.001" id="svg-8b66">
+                          <g><path d="m468.077 350.068c-4.301-7.08-13.527-9.334-20.607-5.033l-109.784 66.686c-10.115-29.471-38.085-50.721-70.944-50.721h-90c-24.813 0-45-20.187-45-45s20.187-45 44.994-45l34.608.015c2.714 0 5.38-.735 7.713-2.132l18.6-11.139 25.7 42.771c4.281 7.124 13.537 9.399 20.627 5.105.473-.284 5.494-3.301 13.075-7.857l23.013 38.3c4.273 7.113 13.503 9.388 20.583 5.132l51.43-30.902c7.101-4.267 9.398-13.481 5.132-20.583l-23.013-38.3c7.678-4.613 12.596-7.568 12.596-7.568 7.101-4.267 9.398-13.482 5.132-20.583-.358-.597-108.257-180.2-108.651-180.773-4.49-6.536-13.292-8.448-20.089-4.363l-12.858 7.726-23.177-38.573c-4.264-7.096-13.483-9.399-20.583-5.132l-51.431 30.902c-7.097 4.264-9.398 13.483-5.132 20.583l23.177 38.573-12.857 7.726c-7.101 4.267-9.398 13.482-5.132 20.583l31.275 52.051-14.038 8.489c-72.455 2.274-130.694 61.938-130.694 134.952 0 74.439 60.561 135 135 135h15v31h-45c-8.284 0-15 6.716-15 15s6.716 15 15 15h240c8.284 0 15-6.716 15-15s-6.716-15-15-15h-45v-37.642l121.303-73.683c7.08-4.303 9.333-13.529 5.032-20.61zm-104.301-57.763-25.715 15.451-15.287-25.443c8.42-5.059 17.315-10.404 25.715-15.451zm-180.324-241.27 25.716-15.451 15.451 25.715-25.715 15.451zm5.187 66.882 77.145-46.354 92.706 154.29c-42.494 25.533-65.081 39.106-77.14 46.362l-17.957-29.884 6.469-3.874c23.758-14.228 31.336-45.046 16.885-68.669-14.249-23.291-44.848-30.742-68.209-16.617l-6.395 3.867zm-116.897 198.084c0-57.907 47.098-105.019 104.988-105.019 2.736 0 5.42-.749 7.762-2.164 5.24-3.169 44.284-26.779 49.571-29.976 9.282-5.611 21.436-2.65 27.094 6.6 5.73 9.364 2.75 21.612-6.707 27.276l-47.245 28.295-30.463-.013c-41.355 0-75 33.645-75 75s33.645 75 75 75h30.041c-6.565 8.725-11.274 18.922-13.531 30h-16.509c-57.899.001-105.001-47.101-105.001-104.999zm150 166v-46c0-24.813 20.187-45 45-45s45 20.187 45 45v46z"></path>
+                            <circle cx="266.742" cy="436.001" r="15"></circle>
+                          </g>
+                        </svg>
+                      </span>
+                      
+                      <p class="u-text u-text-5">Preencha o formulário que depois será avaliado por um médico.</p>
+                    </div>
+                    <div class="u-container-style u-list-item u-repeater-item">
+                      <div class="u-container-layout u-similar-container u-container-layout-2">
+                        <!--icone-->
+                        <span class="u-icon u-icon-circle u-palette-1-base u-text-white u-icon-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 320 512" class="center-icons"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M142.9 96c-21.5 0-42.2 8.5-57.4 23.8L54.6 150.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L40.2 74.5C67.5 47.3 104.4 32 142.9 32C223 32 288 97 288 177.1c0 38.5-15.3 75.4-42.5 102.6L109.3 416H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9L200.2 234.5c15.2-15.2 23.8-35.9 23.8-57.4c0-44.8-36.3-81.1-81.1-81.1z"/></svg>
+                          <svg class="u-svg-content" viewBox="0 0 512.001 512.001" id="svg-8b66">
+                            <g><path d="m468.077 350.068c-4.301-7.08-13.527-9.334-20.607-5.033l-109.784 66.686c-10.115-29.471-38.085-50.721-70.944-50.721h-90c-24.813 0-45-20.187-45-45s20.187-45 44.994-45l34.608.015c2.714 0 5.38-.735 7.713-2.132l18.6-11.139 25.7 42.771c4.281 7.124 13.537 9.399 20.627 5.105.473-.284 5.494-3.301 13.075-7.857l23.013 38.3c4.273 7.113 13.503 9.388 20.583 5.132l51.43-30.902c7.101-4.267 9.398-13.481 5.132-20.583l-23.013-38.3c7.678-4.613 12.596-7.568 12.596-7.568 7.101-4.267 9.398-13.482 5.132-20.583-.358-.597-108.257-180.2-108.651-180.773-4.49-6.536-13.292-8.448-20.089-4.363l-12.858 7.726-23.177-38.573c-4.264-7.096-13.483-9.399-20.583-5.132l-51.431 30.902c-7.097 4.264-9.398 13.483-5.132 20.583l23.177 38.573-12.857 7.726c-7.101 4.267-9.398 13.482-5.132 20.583l31.275 52.051-14.038 8.489c-72.455 2.274-130.694 61.938-130.694 134.952 0 74.439 60.561 135 135 135h15v31h-45c-8.284 0-15 6.716-15 15s6.716 15 15 15h240c8.284 0 15-6.716 15-15s-6.716-15-15-15h-45v-37.642l121.303-73.683c7.08-4.303 9.333-13.529 5.032-20.61zm-104.301-57.763-25.715 15.451-15.287-25.443c8.42-5.059 17.315-10.404 25.715-15.451zm-180.324-241.27 25.716-15.451 15.451 25.715-25.715 15.451zm5.187 66.882 77.145-46.354 92.706 154.29c-42.494 25.533-65.081 39.106-77.14 46.362l-17.957-29.884 6.469-3.874c23.758-14.228 31.336-45.046 16.885-68.669-14.249-23.291-44.848-30.742-68.209-16.617l-6.395 3.867zm-116.897 198.084c0-57.907 47.098-105.019 104.988-105.019 2.736 0 5.42-.749 7.762-2.164 5.24-3.169 44.284-26.779 49.571-29.976 9.282-5.611 21.436-2.65 27.094 6.6 5.73 9.364 2.75 21.612-6.707 27.276l-47.245 28.295-30.463-.013c-41.355 0-75 33.645-75 75s33.645 75 75 75h30.041c-6.565 8.725-11.274 18.922-13.531 30h-16.509c-57.899.001-105.001-47.101-105.001-104.999zm150 166v-46c0-24.813 20.187-45 45-45s45 20.187 45 45v46z"></path>
+                              <circle cx="266.742" cy="436.001" r="15"></circle>
+                            </g>
+                          </svg>
+                        </span>
+                        <p class="u-text u-text-5">Vai ser capaz de as suas consultas e as que já foram realizadas.</p>
+                      </div>
+                    </div>
+                    <div class="u-container-style u-list-item u-repeater-item">
+                      <div class="u-container-layout u-similar-container u-container-layout-3">
+                        <!--icone-->
+                        <span class="u-icon u-icon-circle u-palette-1-base u-text-white u-icon-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 320 512" class="center-icons"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M0 64C0 46.3 14.3 32 32 32H272c13.2 0 25 8.1 29.8 20.4s1.5 26.3-8.2 35.2L162.3 208H184c75.1 0 136 60.9 136 136s-60.9 136-136 136H105.4C63 480 24.2 456 5.3 418.1l-1.9-3.8c-7.9-15.8-1.5-35 14.3-42.9s35-1.5 42.9 14.3l1.9 3.8c8.1 16.3 24.8 26.5 42.9 26.5H184c39.8 0 72-32.2 72-72s-32.2-72-72-72H80c-13.2 0-25-8.1-29.8-20.4s-1.5-26.3 8.2-35.2L189.7 96H32C14.3 96 0 81.7 0 64z"/></svg>
+                          <svg class="u-svg-content" viewBox="0 0 512 512" id="svg-a274">
+                            <g><path d="m360 200v40h40v-240h-40v40h-280c-44.112 0-80 35.888-80 80s35.888 80 80 80zm0-40h-60c-21.724 0-43.459-26.747-64.479-52.613-7.558-9.301-15.189-18.691-23.158-27.387h147.637zm-320-40c0-22.056 17.944-40 40-40h60c21.724 0 43.459 26.747 64.479 52.613 7.558 9.301 15.189 18.691 23.158 27.387h-147.637c-22.056 0-40-17.944-40-40z"></path>
+                              <path d="m392 352v20c0 11.028-8.972 20-20 20s-20-8.972-20-20v-20h-200v160h360v-160zm80 120h-280v-80h123.427c8.255 23.281 30.498 40 56.573 40s48.318-16.719 56.573-40h43.427z"></path>
+                              <path d="m308.889 287.056c-10.014-20.027-28.796-31.056-52.889-31.056-10.755 0-14.488-4.146-16.722-8.201-2.559-4.646-3.235-10.263-3.28-12.036l.002.237h-40c0 2.458.343 15.407 7.111 28.944 10.014 20.027 28.796 31.056 52.889 31.056 10.755 0 14.488 4.146 16.722 8.201 2.559 4.646 3.235 10.263 3.28 12.036l-.002-.237h40c0-2.458-.343-15.407-7.111-28.944z"></path>
+                              <circle cx="376" cy="296" r="20"></circle>
+                            </g>
+                          </svg>
+                        </span>
+                        <p class="u-text u-text-6">Também vai ser capaz de verificar as suas prescrições e exames.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="u-container-style u-image u-image-round u-layout-cell u-left-cell u-radius-50 u-size-30 u-image-1" data-image-width="1500" data-image-height="1000">
+              <div class="u-container-layout u-valign-middle u-container-layout-4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Quinta secção onde é dito o número de médicos, utentes, formulários e consultas marcadas, realizadas ou não-->
+
+  <section class="u-clearfix u-valign-middle-md u-section-4">
+    <div class="u-expanded-width u-palette-1-base u-shape u-shape-rectangle u-shape-1"></div>
+    <div class="u-list u-list-1">
+      <div class="u-repeater u-repeater-1">
+        <div class="u-container-align-center u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-white u-list-item-1">
+          <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-1">
+            <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-1" data-id="medicosCount"></h3>
+            <h5 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-grey-40 u-text-2">Médicos</h5>
+          </div>
+        </div>
+
+        <div class="u-container-align-center u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-white u-list-item-2">
+          <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-2">
+            <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-3" data-id="pacientesCount"></h3>
+            <h5 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-grey-40 u-text-4">Utentes</h5>
+          </div>
+        </div>
+
+        <div class="u-container-align-center u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-white u-list-item-3">
+          <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-3">
+            <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-5" data-id="formulariosCount"></h3>
+            <h5 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-grey-40 u-text-6">Formulários</h5>
+          </div>
+        </div>
+
+        <div class="u-container-align-center u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-white u-list-item-4">
+          <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-4">
+            <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-7" data-id="consultasCount"></h3>
+            <h5 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-grey-40 u-text-8">Consultas</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Sexta secção onde é dito as especialidades disponíveis-->
+
+  <section class="u-clearfix u-section-6">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-expanded-width u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+          <div class="u-container-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-1">
+              <img class="u-image u-image-round u-radius-50 u-image-1" src="CSS/images/Dermatologia.jpg" alt="Dermatologia" data-image-width="1619" data-image-height="1080">
+              <div class="u-container-align-center u-container-style u-expanded-width u-group u-white u-group-1">
+                <div class="u-container-layout u-container-layout-2">
+                  <h4 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-1">Dermatologia</h4>
+                  <p class="u-align-center u-text u-text-default u-text-2">Especialidade médico-cirúrgica dedicada ao estudo, diagnóstico e tratamento das doenças de pele, cabelo, unhas e mucosas.</p>
+                  <br>
+
+                  <!--Este botão abre um modal com os médicos da especialidade "Dermatologia"-->
+
+                  <div style="align-items: center;">
+                    <button class="myBtn u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-1" id="myBtn">Ver médicos</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-container-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-3">
+              <img class="u-image u-image-round u-radius-50 u-image-2" src="CSS/images/Psiquiatria.jpg" alt="" data-image-width="150" data-image-height="100">
+              <div class="u-container-align-center u-container-style u-expanded-width u-group u-white u-group-2">
+                <div class="u-container-layout u-container-layout-4">
+                  <h5 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-3">Psiquiatria</h5>
+                  <p class="u-align-center u-text u-text-default u-text-4">Especialidade médica que se dedica à prevenção, diagnóstico e tratamento de perturbações mentais, emocionais ou comportamentais.</p>
+                  <br>
+
+                  <!--Este botão abre um modal com os médicos da especialidade "Psiquiatria"-->
+
+                  <div style="align-items: center;">
+                    <button class="myBtn u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-1" id="myBtn">Ver médicos</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-container-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-3" style="border:none;">
+              <img class="u-image u-image-round u-radius-50 u-image-3" src="CSS/images/Cardiologia.jpg" alt="" data-image-width="1348" data-image-height="1000">
+              <div class="u-container-align-center u-container-style u-expanded-width u-group u-white u-group-3">
+                <div class="u-container-layout u-container-layout-6">
+                  <h5 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-5">Cardiologia</h5>
+                  <p class="u-align-center u-text u-text-default u-text-6">Especialidade médica que se ocupa do diagnóstico e tratamento das doenças que afetam o coração e o sistema cardiovascular.</p>
+                  <br>
+
+                  <!--Este botão abre um modal com os médicos da especialidade "Cardiologia"-->
+
+                  <div style="align-items: center;">
+                    <button class="myBtn u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-1" id="myBtn">Ver médicos</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-container-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-7">
+              <img class="u-image u-image-round u-radius-50 u-image-4" src="CSS/images/Otorrinolaringologista.jpg" alt="" data-image-width="150" data-image-height="90">
+              <div class="u-container-align-center u-container-style u-expanded-width u-group u-white u-group-4">
+                <div class="u-container-layout u-container-layout-8">
+                  <h5 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-7">Otorrinolaringologia</h5>
+                  <p class="u-align-center u-text u-text-default u-text-8">Especialidade que se dedica ao diagnóstico e tratamento clínico e cirúrgico das doenças do ouvido, nariz, seios perinasais, faringe, laringe e da cirurgia da cabeça e pescoço.</p>
+                  <br>
+
+                  <!--Este botão abre um modal com os médicos da especialidade "Otorrinolaringologia"-->
+
+                  <div style="align-items: center;">
+                    <button class="myBtn u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-1" id="myBtn">Ver médicos</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-container-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-9">
+              <img class="u-image u-image-round u-radius-50 u-image-5" src="CSS/images/Ortopedia.jpg" alt="" data-image-width="150" data-image-height="102">
+              <div class="u-container-align-center u-container-style u-expanded-width u-group u-white u-group-5">
+                <div class="u-container-layout u-container-layout-10">
+                  <h5 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-9">Ortopedia</h5>
+                  <p class="u-align-center u-text u-text-default u-text-10">Especialidade que trata clínica e cirurgicamente as doenças do aparelho locomotor, tais como lesões ósseas, articulares, dos tendões, musculares e dos nervos periféricos.</p>
+                  <br>
+
+                  <!--Este botão abre um modal com os médicos da especialidade "Ortopedia"-->
+
+                  <div style="align-items: center;">
+                    <button class="myBtn u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-1" id="myBtn">Ver médicos</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-container-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-11">
+              <img class="u-image u-image-round u-radius-50 u-image-6" src="CSS/images/Neurologia.jpeg" alt="" data-image-width="150" data-image-height="85">
+              <div class="u-container-align-center u-container-style u-expanded-width u-group u-white u-group-6">
+                <div class="u-container-layout u-container-layout-12">
+                  <h5 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-11">Neurologia</h5>
+                  <p class="u-align-center u-text u-text-default u-text-12">Especialidade médica que previne, avalia e trata as doenças do sistema nervoso, quer do sistema nervoso central, quer do sistema nervoso periférico.</p>
+                  <br>
+
+                  <!--Este botão abre um modal com os médicos da especialidade "Neurologia"-->
+
+                  <div style="align-items: center;">
+                    <button class="myBtn u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-grey-40 u-text-1" id="myBtn">Ver médicos</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Sétima secção onde são apresentados testemúnios de utentes que já utilizaram este site-->
+
+  <section class="u-clearfix u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-section-9">
+    <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-xl u-sheet-1">
+      <div class="u-expanded-width-lg u-expanded-width-xl u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+
+          <!--Caixa do testemúnio 1-->
+
+          <div class="u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-white u-list-item-1">
+            <div class="u-container-layout u-similar-container u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-valign-middle-xl u-container-layout-1">
+              <span class="u-icon u-text-grey-10 u-icon-1">
+                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 95.333 95.332">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-baf0"></use>
+                </svg>
+                <svg class="u-svg-content" viewBox="0 0 95.333 95.332" x="0px" y="0px" id="svg-baf0" style="enable-background:new 0 0 95.333 95.332;">
+                  <g>
+                    <g>
+                      <path d="M30.512,43.939c-2.348-0.676-4.696-1.019-6.98-1.019c-3.527,0-6.47,0.806-8.752,1.793    c2.2-8.054,7.485-21.951,18.013-23.516c0.975-0.145,1.774-0.85,2.04-1.799l2.301-8.23c0.194-0.696,0.079-1.441-0.318-2.045    s-1.035-1.007-1.75-1.105c-0.777-0.106-1.569-0.16-2.354-0.16c-12.637,0-25.152,13.19-30.433,32.076    c-3.1,11.08-4.009,27.738,3.627,38.223c4.273,5.867,10.507,9,18.529,9.313c0.033,0.001,0.065,0.002,0.098,0.002    c9.898,0,18.675-6.666,21.345-16.209c1.595-5.705,0.874-11.688-2.032-16.851C40.971,49.307,36.236,45.586,30.512,43.939z"></path>
+                      <path d="M92.471,54.413c-2.875-5.106-7.61-8.827-13.334-10.474c-2.348-0.676-4.696-1.019-6.979-1.019    c-3.527,0-6.471,0.806-8.753,1.793c2.2-8.054,7.485-21.951,18.014-23.516c0.975-0.145,1.773-0.85,2.04-1.799l2.301-8.23    c0.194-0.696,0.079-1.441-0.318-2.045c-0.396-0.604-1.034-1.007-1.75-1.105c-0.776-0.106-1.568-0.16-2.354-0.16    c-12.637,0-25.152,13.19-30.434,32.076c-3.099,11.08-4.008,27.738,3.629,38.225c4.272,5.866,10.507,9,18.528,9.312    c0.033,0.001,0.065,0.002,0.099,0.002c9.897,0,18.675-6.666,21.345-16.209C96.098,65.559,95.376,59.575,92.471,54.413z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <div class="u-container-style u-group u-group-1">
+                <div class="u-container-layout u-container-layout-2">
+                  <p class="u-align-left u-text u-text-1">Estava realmente preocupada com alguns sintomas que estava a enfrentar há semanas e decidi experimentar a "Saúde On-line". Fiquei impressionada com a rapidez com que recebi uma resposta de um médico experiente e agora estou no caminho certo para uma solução.</p>
+                  <h5 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-2"> - Maria Gonçalves</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Caixa do testemúnio 2-->
+
+          <div class="u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-white u-list-item-3">
+            <div class="u-container-layout u-similar-container u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-valign-middle-xl u-container-layout-5">
+              <span class="u-icon u-text-grey-10 u-icon-3">
+                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 95.333 95.332" style="undefined">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-baf0"></use>
+                </svg>
+                <svg class="u-svg-content" viewBox="0 0 95.333 95.332" x="0px" y="0px" id="svg-baf0" style="enable-background:new 0 0 95.333 95.332;">
+                  <g>
+                    <g>
+                      <path d="M30.512,43.939c-2.348-0.676-4.696-1.019-6.98-1.019c-3.527,0-6.47,0.806-8.752,1.793    c2.2-8.054,7.485-21.951,18.013-23.516c0.975-0.145,1.774-0.85,2.04-1.799l2.301-8.23c0.194-0.696,0.079-1.441-0.318-2.045    s-1.035-1.007-1.75-1.105c-0.777-0.106-1.569-0.16-2.354-0.16c-12.637,0-25.152,13.19-30.433,32.076    c-3.1,11.08-4.009,27.738,3.627,38.223c4.273,5.867,10.507,9,18.529,9.313c0.033,0.001,0.065,0.002,0.098,0.002    c9.898,0,18.675-6.666,21.345-16.209c1.595-5.705,0.874-11.688-2.032-16.851C40.971,49.307,36.236,45.586,30.512,43.939z"></path>
+                      <path d="M92.471,54.413c-2.875-5.106-7.61-8.827-13.334-10.474c-2.348-0.676-4.696-1.019-6.979-1.019    c-3.527,0-6.471,0.806-8.753,1.793c2.2-8.054,7.485-21.951,18.014-23.516c0.975-0.145,1.773-0.85,2.04-1.799l2.301-8.23    c0.194-0.696,0.079-1.441-0.318-2.045c-0.396-0.604-1.034-1.007-1.75-1.105c-0.776-0.106-1.568-0.16-2.354-0.16    c-12.637,0-25.152,13.19-30.434,32.076c-3.099,11.08-4.008,27.738,3.629,38.225c4.272,5.866,10.507,9,18.528,9.312    c0.033,0.001,0.065,0.002,0.099,0.002c9.897,0,18.675-6.666,21.345-16.209C96.098,65.559,95.376,59.575,92.471,54.413z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <div class="u-container-style u-group u-group-3">
+                <div class="u-container-layout u-container-layout-6">
+                  <p class="u-align-left u-text u-text-5"> Finalmente, consegui marcar uma consulta com um especialista que entendia minha situação e ofereceu um plano de tratamento adequado. Não posso expressar minha gratidão o suficiente por essa plataforma!</p>
+                  <h5 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-6"> - Diogo Silva</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Caixa do testemúnio 3-->
+
+          <div class="u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-white u-list-item-4">
+            <div class="u-container-layout u-similar-container u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-valign-middle-xl u-container-layout-7">
+              <span class="u-icon u-text-grey-10 u-icon-4">
+                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 95.333 95.332" style="undefined">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-baf0"></use>
+                </svg>
+                <svg class="u-svg-content" viewBox="0 0 95.333 95.332" x="0px" y="0px" id="svg-baf0" style="enable-background:new 0 0 95.333 95.332;">
+                  <g>
+                    <g>
+                      <path d="M30.512,43.939c-2.348-0.676-4.696-1.019-6.98-1.019c-3.527,0-6.47,0.806-8.752,1.793    c2.2-8.054,7.485-21.951,18.013-23.516c0.975-0.145,1.774-0.85,2.04-1.799l2.301-8.23c0.194-0.696,0.079-1.441-0.318-2.045    s-1.035-1.007-1.75-1.105c-0.777-0.106-1.569-0.16-2.354-0.16c-12.637,0-25.152,13.19-30.433,32.076    c-3.1,11.08-4.009,27.738,3.627,38.223c4.273,5.867,10.507,9,18.529,9.313c0.033,0.001,0.065,0.002,0.098,0.002    c9.898,0,18.675-6.666,21.345-16.209c1.595-5.705,0.874-11.688-2.032-16.851C40.971,49.307,36.236,45.586,30.512,43.939z"></path>
+                      <path d="M92.471,54.413c-2.875-5.106-7.61-8.827-13.334-10.474c-2.348-0.676-4.696-1.019-6.979-1.019    c-3.527,0-6.471,0.806-8.753,1.793c2.2-8.054,7.485-21.951,18.014-23.516c0.975-0.145,1.773-0.85,2.04-1.799l2.301-8.23    c0.194-0.696,0.079-1.441-0.318-2.045c-0.396-0.604-1.034-1.007-1.75-1.105c-0.776-0.106-1.568-0.16-2.354-0.16    c-12.637,0-25.152,13.19-30.434,32.076c-3.099,11.08-4.008,27.738,3.629,38.225c4.272,5.866,10.507,9,18.528,9.312    c0.033,0.001,0.065,0.002,0.099,0.002c9.897,0,18.675-6.666,21.345-16.209C96.098,65.559,95.376,59.575,92.471,54.413z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <div class="u-container-style u-group u-group-4">
+                <div class="u-container-layout u-container-layout-8">
+                  <p class="u-align-left u-text u-text-7">Eu não tenho um médico de família e deparei-me com alguns problemas de saúde persistentes. Quando me deparei com este site, percebi que era a solução perfeita para mim. Agora, finalmente estou a receber o cuidado necessário e a minha saúde melhorou significativamente.</p>
+                  <h5 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-8">- Paula Barros</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Caixa do testemúnio 4-->
+
+          <div class="u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-white u-list-item-4">
+            <div class="u-container-layout u-similar-container u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-valign-middle-xl u-container-layout-7">
+              <span class="u-icon u-text-grey-10 u-icon-4">
+                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 95.333 95.332" style="undefined">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-baf0"></use>
+                </svg>
+                <svg class="u-svg-content" viewBox="0 0 95.333 95.332" x="0px" y="0px" id="svg-baf0" style="enable-background:new 0 0 95.333 95.332;">
+                  <g>
+                    <g>
+                      <path d="M30.512,43.939c-2.348-0.676-4.696-1.019-6.98-1.019c-3.527,0-6.47,0.806-8.752,1.793    c2.2-8.054,7.485-21.951,18.013-23.516c0.975-0.145,1.774-0.85,2.04-1.799l2.301-8.23c0.194-0.696,0.079-1.441-0.318-2.045    s-1.035-1.007-1.75-1.105c-0.777-0.106-1.569-0.16-2.354-0.16c-12.637,0-25.152,13.19-30.433,32.076    c-3.1,11.08-4.009,27.738,3.627,38.223c4.273,5.867,10.507,9,18.529,9.313c0.033,0.001,0.065,0.002,0.098,0.002    c9.898,0,18.675-6.666,21.345-16.209c1.595-5.705,0.874-11.688-2.032-16.851C40.971,49.307,36.236,45.586,30.512,43.939z"></path>
+                      <path d="M92.471,54.413c-2.875-5.106-7.61-8.827-13.334-10.474c-2.348-0.676-4.696-1.019-6.979-1.019    c-3.527,0-6.471,0.806-8.753,1.793c2.2-8.054,7.485-21.951,18.014-23.516c0.975-0.145,1.773-0.85,2.04-1.799l2.301-8.23    c0.194-0.696,0.079-1.441-0.318-2.045c-0.396-0.604-1.034-1.007-1.75-1.105c-0.776-0.106-1.568-0.16-2.354-0.16    c-12.637,0-25.152,13.19-30.434,32.076c-3.099,11.08-4.008,27.738,3.629,38.225c4.272,5.866,10.507,9,18.528,9.312    c0.033,0.001,0.065,0.002,0.099,0.002c9.897,0,18.675-6.666,21.345-16.209C96.098,65.559,95.376,59.575,92.471,54.413z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <div class="u-container-style u-group u-group-4">
+                <div class="u-container-layout u-container-layout-8">
+                  <p class="u-align-left u-text u-text-7">Depois de uma consulta médica frustrante, onde não senti que minhas preocupações foram levadas a sério, decidi experimentar esse site. Recebi um feedback rápido e, em pouco tempo, consegui marcar uma consulta com um médico atencioso e comprometido.</p>
+                  <h5 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-8">- Leandro Pereira</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Rodapé-->
+
+  <div class="footer-basic">
+    <footer>
+        <div class="social">
+          <p class="mb10">A conectar utentes e médicos para cuidados de saúde personalizados desde 2020</p>
+          <p><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" style="margin-right:1vh"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>Rua Afonso Albuquerque, Nº 9, Barcelos 4750-154</p>
+          <p><svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 512 512" style="margin-right:1vh"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>253467451</p>
+          <p>
+            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 512 512" style="margin-right:1vh"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
+            info@saudeonline.pt
+          </p>
+        </div>
+        <p class="copyright">Saúde On-Line © 2020</p>
+    </footer>
+  </div>
+
+  <!-- MODAIS DAS ESPECIALIDADES -->
+
+  <!--MODAL DERMATOLOGIA-->
+  <div id="myModalDermatologia" class="modal">
+  <!-- CONTEÚDO DO MODAL -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-3">Dermatologia</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Especialidade médico-cirúrgica dedicada ao estudo, diagnóstico e tratamento das doenças de pele, cabelo, unhas e mucosas.</p>
+        <hr>
+        <h6 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-8 u-color">Equipa Médica:</h6>
+        <div data-id="equipaMedicaDermatologia"></div>
+      </div>
+    </div>
+  </div>
+
+  <!--MODAL PSIQUIATRIA-->
+  <div id="myModalPsiquiatria" class="modal">
+  <!-- CONTEÚDO DO MODAL -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-3">Psiquiatria</h3>
+      <span class="close">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p>Especialidade médica que se dedica à prevenção, diagnóstico e tratamento de perturbações mentais, emocionais ou comportamentais.</p>
+      <hr>
+      <h6 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-8" style="color: rgb(69, 95, 224);">Equipa Médica:</h6>
+      <div data-id="equipaMedicaPsiquiatria"></div>
+    </div>
+  </div>
+</div>
+
+  <!--MODAL CARDIOLOGIA-->
+  <div id="myModalCardiologia" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-3">Cardiologia</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Especialidade médica que se ocupa do diagnóstico e tratamento das doenças que afetam o coração e o sistema cardiovascular.</p>
+        <hr>
+        <h6 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-8 u-color">Equipa Médica:</h6>
+        <div data-id="equipaMedicaCardiologia"></div>
+      </div>
+    </div>
+  </div>
+
+  <!--MODAL OTORRINOLARGINGOLOGIA-->
+  <div id="myModalOtorrinolaringologia" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-3">Otorrinolaringologia</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Especialidade que se dedica ao diagnóstico e tratamento clínico e cirúrgico das doenças do ouvido, nariz, seios perinasais, faringe, laringe e da cirurgia da cabeça e pescoço.</p>
+        <hr>
+        <h6 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-8 u-color">Equipa Médica:</h6>
+        <div data-id="equipaMedicaOtorrinolaringologia"></div>
+      </div>
+    </div>
+  </div>
+
+  <!--MODAL ORTOPEDIA-->
+  <div id="myModalOrtopedia" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-3">Ortopedia</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Especialidade que trata clínica e cirurgicamente as doenças do aparelho locomotor, tais como lesões ósseas, articulares, dos tendões, musculares e dos nervos periféricos.</p>
+        <hr>
+        <h6 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-8 u-color">Equipa Médica:</h6>
+        <div data-id="equipaMedicaOrtopedia"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="myModalNeurologia" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="u-align-center u-custom-font u-font-ubuntu u-text u-text-default u-text-3">Neurologia</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Especialidade médica que previne, avalia e trata as doenças do sistema nervoso, quer do sistema nervoso central, quer do sistema nervoso periférico.</p>
+        <hr>
+        <h6 class="u-align-left u-custom-font u-font-ubuntu u-text u-text-palette-1-base u-text-8 u-color">Equipa Médica:</h6>
+        <div data-id="equipaMedicaNeurologia"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  
+</body>
+</html>
