@@ -105,3 +105,67 @@ a:hover {
 html {
     scroll-behavior: smooth;
 }
+
+.img-logo {
+    width: 20%;
+    height: 20%;
+}
+
+/*small screens*/
+@media only screen and (max-width: 767px) {
+
+    .header-div {
+        padding-top: 20px;
+        width:auto;
+    }
+
+    .header-div-logo {
+        padding-left: 5%;
+    }
+
+    .header-div-content-select {
+        gap:20px
+    }
+
+    .header-button-div {
+        padding-right: 4%;
+    }
+
+    .header-button-div-two {
+        padding: 5px 15px;
+        margin-left: 5px;
+    }
+
+    /* Adjust the font size for smaller screens */
+    .online-span,
+    .saude-span,
+    .a-content-letter,
+    .header-button-content {
+        font-size: 0.7rem; /* Adjust the font size as needed */
+    }
+
+    /* Adjust the border thickness for smaller screens */
+    .header-line {
+        border: 0.1em #4D77FF solid;
+    }
+}
+
+/* Medium screens (768px to 991px) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .online-span,
+    .saude-span,
+    .a-content-letter,
+    .header-button-content {
+        font-size: 0.8rem; /* Adjust the font size as needed */
+    }
+
+    .header-button-div-two {
+        padding: 5px 16px;
+        margin-left: 30px;
+    }
+
+    .header-div-logo {
+        padding-left: 5%;
+    }
+
+}

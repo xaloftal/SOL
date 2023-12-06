@@ -1,5 +1,4 @@
  .u-section-1 {
-  background-image: url("images/doctor-looking-information-database.jpg");
   background-position: 50% 0%;
 }
 
@@ -9,7 +8,6 @@
 
 .u-section-1 .u-group-1 {
   width: 688px;
-  min-height: 371px;
   height: auto;
   box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.2);
   margin: 188px auto 60px 0;
@@ -48,7 +46,8 @@
 .buttons {
   margin: auto;
   display: inline-flex;
-}}
+  }
+}
 
 @media (max-width: 1199px) {
   .u-section-1 .u-sheet-1 {
@@ -329,7 +328,6 @@
 
 .u-section-3 .u-image-1 {
   min-height: 632px;
-  background-image: url("images/happy-doctor-holding-clipboard-with-patients.jpg");
   background-position: 16.72% 50%;
 }
 
