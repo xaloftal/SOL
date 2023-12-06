@@ -9,7 +9,7 @@ declare _log estado;
 begin
 	--verificar se existe email
 	select estado_l into _log
-	from login l
+	from utilizador l
 	where lower(l.email) like lower(_ema);
 	
 	if (_log = 'Existente')
@@ -25,15 +25,10 @@ begin
 	elsif (_log is null)
 	then 
 		--inserir em login
-		insert into login(email, password, estado_l) values (_ema , _pass, 'Existente');		
+		insert into utilizador(email, password, estado_l) values (_ema , _pass, 'Existente');		
 	end if;
 
 end; $$ Language PLPGSQL
-
-select * from login
-
-call inserir_login('josemarques@med.sol.com', '123asd')
-
 
 
 
@@ -62,13 +57,6 @@ begin
 	end if;
 	
 end; $$ Language PLPGSQL
-
---teste
-
-call inserir_especialidade('Cardiologia');
-select * from especialidade
-update especialidade set estado_e = 'Inativo' where id_especialidade = 1
-
 
 
 
@@ -114,13 +102,6 @@ begin
 	
 end; $$ Language PLPGSQL
 
---teste 
-call inserir_forma_farmaceutica(004, 'Solução oral');
-select * from forma_farmaceutica
-
-update forma_farmaceutica set estado_ff = 'Inativo' where id_forma_farmaceutica = 4
-
-
 
 
 --Insercao de medicacao
@@ -158,13 +139,6 @@ begin
 	
 end; $$ Language PLPGSQL
 
---teste
-call inserir_medicamento('Rantudil', 'Cápsula');
-call inserir_medicamento('Ziagen', 'Comprimido revestido por película');
-call inserir_medicamento('Ziagen', 'Solução oral')
-select * from medicamento 
-inner join forma_farmaceutica using (id_forma_farmaceutica)
-
 
 
 --Insercao de exames
@@ -196,9 +170,6 @@ begin
 		
 end; $$ Language PLPGSQL
 
---teste
-call inserir_exame ('Ecocardiograma')
-select * from exame
 
 
 
@@ -210,11 +181,11 @@ begin
 	--ir buscar o id da especialidade
 	select id_especialidade into esp
 	from especialidade e
-	where upper(e.nome_esp) like upper(_esp);
+	where upper(e.nome_esp) like upper(_esp) and e.estado_e = 'Existente';
 	
 	if (esp is null)
 	then 
-		raise notice 'Especialidade nao conhecida';
+		raise notice 'Especialidade nao conhecida ou inativa';
 		return;		
 	end if;
 	
@@ -227,9 +198,6 @@ begin
 	
 end; $$ Language PLPGSQL
 
---teste
-call signup_medico('José Marques', 'josemarques@med.sol.com', '123asd', 'Cardiologia' );
-select * from medico
 
 
 
@@ -248,11 +216,6 @@ begin
 	
 end; $$ Language PLPGSQL
 
---teste
-call signup_utente('Antónia Miranda', 'antoniamiranda@gmail.com', '456fgh', '271970888', '914850911', '1970-12-05' );
-select * from utente u
-inner join login l on l.email = u.email_u
-
 
 
 
@@ -269,25 +232,31 @@ begin
 	
 end; $$ Language PLPGSQL
 
---teste
-call signup_adm('Pedro Dinis', 'pedrodinis@adm.sol.com', '789jkl');
-select * from administrativo a inner join login l on l.email = a.email_a
-
-
 
 
 
 --inserir reclamação
 create or replace procedure criar_reclamacao(_utente int, _desc varchar(500), _dat timestamp)
 as $$
+declare rec int;
 begin
-	--inserir na tabela
-	insert into reclamacao (id_utente, descricao_rec, data_recl, estado_r) values (_utente, _desc, _dat, 'Submetido');
+	select count(*) into rec
+	from reclamacao r
+	where r.id_utente = _utente 
+		and upper(r.descricao_rec) like upper(_desc) 
+		and r.data_recl <= current_date - interval '1 month';
+	
+	if (rec is null)
+	then
+		--inserir na tabela
+		insert into reclamacao (id_utente, descricao_rec, data_recl, estado_r) values (_utente, _desc, _dat, 'Submetido');
+	elsif (rec > 0)
+	then 
+		raise notice 'reclamacao já feita no ultimo mes';
+	end if;
 end; $$ Language PLPGSQL
 
---teste
-call criar_reclamacao(1, 'Resposta muito demorada.', '2023-11-14 10:44:00'::timestamp)
-select * from reclamacao inner join utente using (id_utente)
+
 
 
 
@@ -300,8 +269,14 @@ declare esp int;
 begin
 	--encontrar especialidade
 	select id_especialidade into esp
-	from especialidade
-	where lower(_esp) = lower(especialidade.nome_esp);
+	from especialidade e
+	where lower(_esp) like lower(e.nome_esp)
+		  and e.estado_e = 'Existente';
+		  
+	if (esp is null)
+	then
+		raise notice 'Especialidade nao valida';
+	end if;
 	
 	--inserir na tabela
 	insert into formulario(id_utente, descricao_form, data_form, estado_f, id_especialidade) 
@@ -325,10 +300,12 @@ begin
 	if (_form is not null)
 	then
 		insert into formulario_prescricao (id_prescricao, id_formulario) values (id_pres, _form);
+		
 	-- se for de consulta
 	elsif (_cons is not null)
 	then
 		insert into consulta_prescricao(id_prescricao, id_consulta) values (id_pres, _cons);
+		
 	--se não for associado com nada
 	else
 		raise notice 'Não associado com formulario ou consulta';
@@ -336,6 +313,11 @@ begin
 	
 end; $$ Language PLPGSQL
 
+
+
+--
+-- procedimentos de ligacao
+--
 
 
 
@@ -355,8 +337,6 @@ as $$
 begin
 	insert into prescricao_exame(id_exame, id_prescricao, descricao_pres_exa) values (_exa, _pres, _desc);
 end; $$ Language PLPGSQL
-
-
 
 
 
