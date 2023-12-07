@@ -1,14 +1,15 @@
-var acc = document.getElementsByClassName("accordion");
-var i;
+function toggleAccordion(contentId, btnId) {
+  var content = document.getElementById(contentId);
+  var btn = document.getElementById(btnId);
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-  });
+  // Toggle the accordion content
+  content.classList.toggle("show");
+
+  // Toggle the button text
+  if (content.classList.contains("show")) {
+      btn.innerHTML = "Collapse Accordion";
+  } else {
+      btn.innerHTML = "Expand Accordion";
+  }
+
 }
