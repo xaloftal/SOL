@@ -4,16 +4,16 @@
 }
 
 .title-section {
-    font-size:3rem;
+    font-size:2.5rem;
     font-weight: 900;
     letter-spacing: 1.08px;
 }
 
 /* Consultation Card Styles */
 .consultation-card {
-    width: fit-content;
+    width: 73%;
     height: fit-content;
-    position: relative;
+    align-items: center;
     background: white;
     border-radius: 10px;
     overflow: hidden;
@@ -23,7 +23,7 @@
 }
 
 .consultation-info {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color:black;
     padding: 10px 20px 10px 20px;
 }
@@ -34,17 +34,17 @@
 
 .info-item-2 {
     color:gray;
-    margin-left: 100px;
+    margin-left: 10%;
 }
 
 .info-item-3 {
     color:gray;
-    margin-left: 100px;
+    margin-left: 10%;
 }
 
 .info-item-4 {
     color:gray;
-    margin-left: 100px;
+    margin-left: 10%;
 }
 
 .line {
@@ -62,10 +62,11 @@
     align-items: center; 
     display: inline-flex;
     margin-top: 5px;
-    margin-left: 50%;
+    margin-left:88%;
     border-color: #4D77FF;
     border: none;
     cursor: pointer;
+    
 }
 
 .btn-text {
