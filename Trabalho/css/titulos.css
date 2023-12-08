@@ -1,0 +1,59 @@
+h1{
+// Saúde 
+color: #121212;
+ font-size: 40px;
+ font-family: Manrope;
+ font-weight: 700;
+ letter-spacing: 1.20px;
+ word-wrap: break-word
+---
+}
+// On-Line
+color: #4D77FF;
+ font-size: 40px;
+ font-family: Manrope;
+ font-weight: 700;
+ letter-spacing: 1.20px;
+ word-wrap: break-word
+---
+// Registo
+color: black;
+ font-size: 32px;
+ font-family: Manrope;
+ font-weight: 500;
+ letter-spacing: 0.96px;
+ word-wrap: break-word
+---
+// Seguinte
+color: white;
+ font-size: 16px;
+ font-family: Manrope;
+ font-weight: 700;
+ line-height: 20px;
+ letter-spacing: 0.48px;
+ word-wrap: break-word
+---
+// Email
+color: black;
+ font-size: 16px;
+ font-family: Manrope;
+ font-weight: 500;
+ letter-spacing: 0.48px;
+ word-wrap: break-word
+---
+// Já tem conta? 
+color: black;
+ font-size: 16px;
+ font-family: Manrope;
+ font-weight: 500;
+ letter-spacing: 0.48px;
+ word-wrap: break-word
+---
+// Entre aqui
+color: #4D77FF;
+ font-size: 16px;
+ font-family: Manrope;
+ font-weight: 500;
+ text-decoration: underline;
+ letter-spacing: 0.48px;
+ word-wrap: break-word
