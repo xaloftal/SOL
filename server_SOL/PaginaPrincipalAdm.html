@@ -9,7 +9,7 @@
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
   <link rel="stylesheet" href="CSS/style.css" media="screen">
   <link rel="stylesheet" href="CSS/styleSections.css" media="screen">
-  <link rel="stylesheet" href="CSS/modal.css" media="screen">
+  <link rel="stylesheet" href="CSS/adm_modal.css" media="screen">
   <link rel="stylesheet" href="CSS/footer.css" media="screen">
   <link rel="stylesheet" href="CSS/bootstrap.min.css" media="screen">
   <link rel="stylesheet" href="CSS/header.css" media="screen">
@@ -18,8 +18,7 @@
   <script class="u-script" type="text/javascript" src="JavaScript/jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="JavaScript/style.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="JavaScript/modal.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="JavaScript/accordion.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="JavaScript/consulta.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/notification.js" defer=""></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -81,22 +80,16 @@
             <span><strong class="info-item-3">Utente:</strong> Tiago Pereira</span>
             <span><strong class="info-item-4">Data:</strong> 12/03/2024</span>   
         </div>
+        <div class="text-appointment">
+          <span class="text-appointment-1">Descrição:</span>
+          <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+        </div>
 
         <!-- Action Button -->
         <div class="consultation-booking">
-            <button class="accordionBtn action-btn btn-text" onclick="toggleAccordion('accordionContent1', 'accordionBtn1')">Validar</button>
-            <div class="accordion-content" id="accordionContent1">
-                <p class="appointment-letter appointment-title">Marcar consulta para:</p>
-                <div class="consultation-card consultation-card-date">
-                    <label for="appointmentDateTime" class="appointment-letter">Data:</label>
-                    <input type="date" id="appointmentDateTime" name="appointmentDateTime">
-                    <label for="appointmentDateTime" class="appointment-letter">Hora:</label>
-                    <input type="time" id="appointmentDateTime" name="appointmentDateTime">
-                </div>
-                <div class="line"></div>
-                <button class="action-btn btn-text" onclick="submitAppointment()">Marcar</button>
-            </div>
+          <button class="myBtn action-btn btn-text">Validar</button>
         </div>
+      </div>
     </div>
   </section>
 
@@ -162,5 +155,22 @@
     <div class="footer-copyright-letter">© 2023 Saúde On-Line </div>
   </div> 
 
+  <div id="myModalAppointment" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="modal-body">
+        <div class="consultation-card-date">
+            <label for="appointmentDateTime" class="appointment-letter">Data:</label>
+            <input type="date" id="appointmentDateTime" name="appointmentDateTime">
+            <label for="appointmentDateTime" class="appointment-letter">Hora:</label>
+            <input type="time" id="appointmentDateTime" name="appointmentDateTime">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="action-btn btn-text" onclick="submitAppointment()">Marcar</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
