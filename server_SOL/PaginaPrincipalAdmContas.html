@@ -9,7 +9,7 @@
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
   <link rel="stylesheet" href="CSS/style.css" media="screen">
   <link rel="stylesheet" href="CSS/styleSections.css" media="screen">
-  <link rel="stylesheet" href="CSS/modal.css" media="screen">
+  <link rel="stylesheet" href="CSS/adm_modal.css" media="screen">
   <link rel="stylesheet" href="CSS/footer.css" media="screen">
   <link rel="stylesheet" href="CSS/bootstrap.min.css" media="screen">
   <link rel="stylesheet" href="CSS/header.css" media="screen">
@@ -20,6 +20,7 @@
   <script class="u-script" type="text/javascript" src="JavaScript/modal.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="JavaScript/accordion.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="JavaScript/consulta.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/notification.js" defer=""></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -49,8 +50,8 @@
           </div>
         </div>
         <div class="header-div-content-select">
-          <div><a href="#section-1" class="a-content-letter">Consultas</a></div>
-          <div><a href="#section-2" class="a-content-letter">Reclamações</a></div>
+          <div><a href="PaginaPrincipalAdm.html" class="a-content-letter">Consultas</a></div>
+          <div><a href="PaginaPrincipalAdm.html" class="a-content-letter">Reclamações</a></div>
           <div><a href="" class="a-content-letter">Contas</a></div>
           <div><a href="#rodape" class="a-content-letter">Contactos</a></div>
         </div>
@@ -73,40 +74,47 @@
 
     <!-- Consultation Cards -->
     <!-- Card 1 -->
-    <div class="consultation-card">
+    <div class="account-card">
         <!-- Consultation Info -->
         <div class="consultation-info">
-            <span><strong class="info-item-1">Especialidade:</strong> Psiquiatria</span>
-            <span><strong class="info-item-2">Médico:</strong> Pedro Ferreira</span>
-            <span><strong class="info-item-3">Utente:</strong> Tiago Pereira</span>
-            <span><strong class="info-item-4">Data:</strong> 12/03/2024</span>   
+            <span><strong class="account-info-1">Nome:</strong> Pedro Ferreira</span>
+            <span><strong class="account-info-2">Especialidade:</strong> Psiquiatria</span>
+            <span><strong class="account-info-3">Email:</strong> pedro.ferr@med.sol.com</span>   
         </div>
 
         <div class="line"></div>
         <!-- Action Button -->
         <div class="consultation-booking">
-            <button class="accordionBtn action-btn btn-text" onclick="toggleAccordion('accordionContent1', 'accordionBtn1')">Validar</button>
-            <div class="accordion-content" id="accordionContent1">
-                <p class="appointment-letter appointment-title">Marcar consulta para:</p>
-                <div class="consultation-card consultation-card-date">
-                    <label for="appointmentDateTime" class="appointment-letter">Data:</label>
-                    <input type="date" id="appointmentDateTime" name="appointmentDateTime">
-                    <label for="appointmentDateTime" class="appointment-letter">Hora:</label>
-                    <input type="time" id="appointmentDateTime" name="appointmentDateTime">
-                </div>
-                <div class="line"></div>
-                <button class="action-btn btn-text" onclick="submitAppointment()">Marcar</button>
-            </div>
-        </div>
+          <button class="myBtn action-btn remove-btn btn-text remove-btn-2">Eliminar</button>
+        </div> 
+      </div>
     </div>
 
     <div class="title-section">
         <p>Utentes</p>
     </div>
 
+    <div class="account-card">
+      <!-- Consultation Info -->
+      <div class="consultation-info">
+          <span><strong class="account-info-4">Nome:</strong> Pedro Ferreira</span>
+          <span><strong class="account-info-5">Email:</strong> pedro.ferr@med.sol.com</span>   
+      </div>
+
+      <a  style="color:#4D77FF" class="more-details" id="accordionBtn1" onclick="toggleAccordion('accordionContent1', 'accordionBtn1')"><u>Mais detalhes</u></a>
+      <div class="accordion-content" id="accordionContent1">
+        <span><strong class="account-info-1">Data de nascimento:</strong> 18/02/2002</span>
+        <span><strong class="account-info-2">NIF:</strong> 276427832</span>   
+        <span><strong class="account-info-3">Telefone:</strong> 962784783</span>
+      </div>
+      <!-- Action Button -->
+      <div class="consultation-booking">
+        <div class="line"></div>
+        <button class="myBtn action-btn remove-btn btn-text remove-btn-2">Eliminar</button>
+      </div>
+  </div>
+
   </section>
-
-
 
    <!--Rodapé-->
 
@@ -130,6 +138,40 @@
   <div class="footer-copyright-div">
     <div class="footer-copyright-letter">© 2023 Saúde On-Line </div>
   </div> 
+
+  <div id="myModalVerification" class="modal modal-sure">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: white;">
+        <h4 style="justify-content: center; color:black">Tem a certeza?</h4>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Não poderá reverter o processo.</p>
+      </div>
+      <div class="modal-footer" style="background-color:white">
+        <button class="submit-btn remove-btn btn-text" onclick="submitElimination()">Sim</button>
+        <button class="submit-btn btn-text">Não</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="myModalVerification2" class="modal modal-sure">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: white;">
+        <h4 style="justify-content: center; color:black">Tem a certeza?</h4>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Não poderá reverter o processo.</p>
+      </div>
+      <div class="modal-footer" style="background-color:white">
+        <button class="submit-btn remove-btn btn-text verification-btn" onclick="submitElimination()">Sim</button>
+        <button class="submit-btn btn-text verification-btn">Não</button>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

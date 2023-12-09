@@ -1,5 +1,4 @@
 .section-1 {
-    padding-left: 50px;
     font-family: Ubuntu;
 }
 
@@ -7,22 +6,23 @@
     font-size:2.5rem;
     font-weight: 900;
     letter-spacing: 1.08px;
+    padding-left: 5vh;
 }
 
 /* Consultation Card Styles */
 .consultation-card {
-    width: 73%;
+    width: 70vw;
     height: fit-content;
-    align-items: center;
     background: white;
     border-radius: 10px;
     overflow: hidden;
     border: 1px #A3A3A3 solid;
     margin-bottom: 20px;
-    padding-bottom: 10px;
+    margin-left: 14%;
 }
 
-.consultation-info {
+.consultation-info,
+.complaint-info {
     font-size: 0.9rem;
     color:black;
     padding: 10px 20px 10px 20px;
@@ -34,39 +34,40 @@
 
 .info-item-2 {
     color:gray;
-    margin-left: 10%;
+    margin-left: 13%;
 }
 
 .info-item-3 {
     color:gray;
-    margin-left: 10%;
+    margin-left: 13%;
 }
 
 .info-item-4 {
     color:gray;
-    margin-left: 22%;
+    margin-left: 13%;
 }
 
 .line {
     width: 100%; 
     height: 100%; 
-    border: 2px #D9D9D9 solid;
+    border: 1px #D9D9D9 solid;
+    margin-top: 1%;
 }
 
 .action-btn {
-    width: 100px; 
-    height: 50px; 
+    width: 6vw; 
+    height: 7vh; 
     background: #4D77FF; 
     border-radius: 10px; 
     justify-content: center; 
     align-items: center; 
     display: inline-flex;
-    margin-top: 5px;
-    margin-left:88%;
+    margin-top: 1%;
     border-color: #4D77FF;
     border: none;
     cursor: pointer;
-    
+    margin-left: 62vw;
+    margin-bottom: 1%;
 }
 
 .btn-text {
@@ -81,7 +82,17 @@
 }
 
 .submit-btn {
-    padding-top:20px;
+    width: 6vw; 
+    height: 7vh; 
+    font-size: 0.8rem;
+    background: #4D77FF; 
+    border-radius: 10px; 
+    justify-content: center; 
+    align-items: center; 
+    display: inline-flex;
+    border-color: #4D77FF;
+    border: none;
+    cursor: pointer;
 }
 
 
@@ -92,6 +103,9 @@
 
 .accordion-content {
     display: none;
+    font-size: 0.9rem;
+    color:black;
+    padding: 10px 20px 10px 20px;
 }
 
 .accordion-content.show {
@@ -101,12 +115,19 @@
 .appointment-letter,
 .complaint-letter {   
     color:gray;
+    font-weight: 700;
     
 }
 
 .appointment-title,
 .complaint-letter {   
     margin-left: 2%;
+}
+
+.appointment-date-box,
+.appointment-time-box {
+    border-radius: 5px;
+    border: 1px #A3A3A3 solid
 }
 
 .consultation-card-date {
@@ -120,7 +141,8 @@ button:focus{
     outline: none;
 }
 
-button:hover{
+.action-btn:hover,
+.submit-btn:hover{
     background-color: #4d77ffab;
 }
 
@@ -143,7 +165,7 @@ button:hover{
 }
 
 .complaint-card {
-    width: 70%;
+    width: 70vw;
     height: fit-content;
     position: relative;
     background: white;
@@ -151,7 +173,7 @@ button:hover{
     overflow: hidden;
     border: 1px #A3A3A3 solid;
     margin-bottom: 20px;
-    padding-bottom: 10px;
+    margin-left: 11%;
 }
 
 .text-complaint {
@@ -176,8 +198,8 @@ button:hover{
     line-height: 20px; 
     letter-spacing: 0.42px; 
     word-wrap: break-word;
-    padding-left: 1.9%;
-    padding-right: 1.3%;
+    padding-left: 1.7%;
+    padding-right: 2%;
 }
 
 .text-complaint-1,
@@ -191,8 +213,13 @@ button:hover{
 }
 
 .complaint-info-item-2 {
-    padding-left: 70%;
+    padding-left: 51vw;
     color:gray;
+}
+
+.consultation-answer-modal-card {
+    margin-left: 2%;
+    padding-right: 2%;
 }
 
 .complaint-answer-box {
@@ -200,6 +227,57 @@ button:hover{
     margin-bottom: 2%;
 }
 
+.account-info-1{
+    color:gray;
+}
 
+.account-info-2{
+    color:gray;
+    padding-left: 11vw;
+}
+
+.account-info-3{
+    color:gray;
+    padding-left: 11vw;
+}
+
+.remove-btn {
+    background-color:darkred;
+}
+
+.remove-btn-2 {
+    margin-left: 53vw;
+}
+
+.remove-btn:hover {
+    background-color:rgba(139, 0, 0, 0.637);
+}
+
+.account-card {
+    width: 60vw;
+    height: fit-content;
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px #A3A3A3 solid;
+    margin-bottom: 20px;
+    margin-left: 20%;
+}
+
+a.more-details {
+    padding-left: 2%; 
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.account-info-4{
+    color:gray;
+}
+
+.account-info-5{
+    color:gray;
+    padding-left: 34vw;
+}
 
 

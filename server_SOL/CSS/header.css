@@ -16,8 +16,9 @@
 }
 
 .header-div {
-    width: 100%; 
-    padding-top: 30px; 
+    width: 215vh; 
+    padding-top: 2vh;
+    padding-bottom: 1vh;
     flex-direction: column; 
     justify-content: flex-end; 
     align-items: center; 
@@ -72,7 +73,7 @@ a:hover {
     align-items: center; 
     gap: 20px; 
     display: flex;
-    padding-right: 5%;
+    padding-right: 6vw;
 }
 
 .header-button-div-two {
@@ -169,3 +170,4 @@ html {
     }
 
 }
+

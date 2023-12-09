@@ -50,7 +50,7 @@
         <div class="header-div-content-select">
           <div><a href="#section-1" class="a-content-letter">Consultas</a></div>
           <div><a href="#section-2" class="a-content-letter">Reclamações</a></div>
-          <div><a href="" class="a-content-letter">Contas</a></div>
+          <div><a href="PaginaPrincipalAdmContas.html" class="a-content-letter">Contas</a></div>
           <div><a href="#rodape" class="a-content-letter">Contactos</a></div>
         </div>
         <div class="header-button-div">
@@ -84,7 +84,7 @@
           <span class="text-appointment-1">Descrição:</span>
           <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
         </div>
-
+        <div class="line"></div>
         <!-- Action Button -->
         <div class="consultation-booking">
           <button class="myBtn action-btn btn-text">Validar</button>
@@ -110,7 +110,6 @@
             <span><strong class="complaint-info-item-2">Data:</strong> 12/03/2024</span>   
         </div>
 
-        <div class="line"></div>
         <!-- Action Button -->
         <div class="text-complaint">
             <span class="text-complaint-1">Descrição:</span>
@@ -119,15 +118,10 @@
 
         <div class="line"></div>
 
-        <div class="complaint">
-            <button class="accordionBtn action-btn btn-text" onclick="toggleAccordion('accordionContent2', 'accordionBtn2')">Responder</button>
-            <div class="accordion-content" id="accordionContent2">
-                <p class="complaint-letter">Escreva aqui a sua resposta:</p>
-                <textarea id="complaintAnswer" name="complaintAnswer" rows="10" cols="50" class="complaint-answer-box"></textarea>
-                <div class="line"></div>
-                <button class="action-btn btn-text">Submeter</button>
-            </div>
+        <div class="consultation-booking">
+          <button class="myBtn action-btn btn-text">Responder</button>
         </div>
+      </div>
     </div>
   </section>
 
@@ -158,17 +152,39 @@
   <div id="myModalAppointment" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <div class="modal-header">
+        <h3>Marcar consulta</h3>
+        <span class="close">&times;</span>
+      </div>
       <div class="modal-body">
         <div class="consultation-card-date">
             <label for="appointmentDateTime" class="appointment-letter">Data:</label>
-            <input type="date" id="appointmentDateTime" name="appointmentDateTime">
-            <label for="appointmentDateTime" class="appointment-letter">Hora:</label>
-            <input type="time" id="appointmentDateTime" name="appointmentDateTime">
+            <input type="date" id="appointmentDateTime" name="appointmentDateTime" class="appointment-date-box">
+            <label for="appointmentDateTime" class="appointment-letter" style="padding-left: 15vh;">Hora:</label>
+            <input type="time" id="appointmentDateTime" name="appointmentDateTime" class="appointment-time-box">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="action-btn btn-text" onclick="submitAppointment()">Marcar</button>
+        <button class="submit-btn btn-text" onclick="submitAppointment()">Marcar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="myModalComplaint" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Responder a reclamação</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="consultation-answer-modal-card">
+          <p class="complaint-letter">Escreva aqui a sua resposta:</p>
+          <textarea id="complaintAnswer" name="complaintAnswer" rows="10" cols="50" class="complaint-answer-box"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="submit-btn btn-text" onclick="submitComplaint()">Submeter</button>
       </div>
     </div>
   </div>
