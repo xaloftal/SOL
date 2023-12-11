@@ -5,7 +5,7 @@ module.exports = {
 
     },
     Read: (req, res) => {
-        client.query('SELECT * FROM utente WHERE id_utente = $1', [req.query.id, req.query.cheila], (error, results) => {
+        client.query('SELECT * FROM utente WHERE id_utente = $1', [req.query.id], (error, results) => {
             if (error) {
                 throw error
             }

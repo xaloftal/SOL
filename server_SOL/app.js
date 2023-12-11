@@ -12,13 +12,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(require('./routes/testRoute'));
-app.use(require('./routes/distritoRoute'));
-app.use(require('./routes/concelhoRoute'));
-app.use(require('./routes/especialidadeRoute'));
-app.use(require('./routes/prescricaoRoute'));
-app.use(require('./routes/exameRoute'));
-app.use(require('./routes/formularioRoute'));
-app.use(require('./routes/miscRoute'));
 
 app.use('/www', express.static('www'))
 
