@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(require('./routes/testRoute'));
+app.use(require('./routes/reclamacaoRoute'))
 
 app.use('/www', express.static('www'))
 

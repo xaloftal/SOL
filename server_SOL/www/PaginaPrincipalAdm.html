@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <meta name="description" content="">
-  <title>Página Principal - Saúde On-Line</title>
+  <title>Página do Administrativo - Saúde On-Line</title>
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
   <link rel="stylesheet" href="CSS/style.css" media="screen">
@@ -31,6 +31,32 @@
       "name": ""
     }
 
+  </script>
+
+  <script type="text/javascript">
+    window.onload = () => {
+        $.ajax({
+            url: "http://localhost:3050/reclamacao",
+            type: "GET",
+            crossDomain: false,
+            dataType: "json",
+            headers: {
+                "accept": "application/json",
+                "Access-Control-Allow-Origin":"*"
+            },
+            'Access-Control-Allow-OSrigin': '*'
+        })
+        .then((response) => {
+
+          let container = document.querySelector('[data-id="reclamacaoContainer"]');
+          response.forEach(reclamacao => {
+            container.innerHTML += '<div class="complaint-info"><span><strong class="complaint-info-item-1">Utente:</strong>' + reclamacao.id_utente + '</span><span><strong class="complaint-info-item-2">Data:</strong>' + reclamacao.data.recl + '</span></div><div class="text-complaint"><span class="text-complaint-1">Descrição:</span><span>' + reclamacao.descricao_rec + '</span></div><div class="line"></div><div class="consultation-booking"><button class="myBtn action-btn btn-text">Responder</button></div></div>';
+          })
+        })
+        .catch((error) => {
+            console.error(error)
+        });
+      }
   </script>
 
 </head>
@@ -103,25 +129,7 @@
     
     <!-- Consultation Cards -->
     <!-- Card 1 -->
-    <div class="complaint-card">
-        <!-- Consultation Info -->
-        <div class="complaint-info">
-            <span><strong class="complaint-info-item-1">Utente:</strong> Psiquiatria</span>
-            <span><strong class="complaint-info-item-2">Data:</strong> 12/03/2024</span>   
-        </div>
-
-        <!-- Action Button -->
-        <div class="text-complaint">
-            <span class="text-complaint-1">Descrição:</span>
-            <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
-        </div>
-
-        <div class="line"></div>
-
-        <div class="consultation-booking">
-          <button class="myBtn action-btn btn-text">Responder</button>
-        </div>
-      </div>
+    <div class="complaint-card" data-id="reclamacaoContainer">
     </div>
   </section>
 
