@@ -342,7 +342,8 @@ end; $$ Language PLPGSQL
 
 
 --consulta por formulario
-create or replace procedure criar_consulta_form(_med int, _horari timestamp, _form int, _observ varchar(300))
+
+create or replace procedure criar_consulta_form(_med int, _ute int, _horari timestamp, _form int, _observ varchar(300))
 as $$
 declare 
 	form_cons int;
@@ -375,8 +376,8 @@ begin
 	end if;
 	
 	--inserir
-	insert into consulta (horario, observacoes, medico_cons, estado_c) 
-	values (_horari, _observ, _med, 'Agendado')
+	insert into consulta (horario, observacoes, id_medico, estado_c, id_utente) 
+	values (_horari, _observ, _med, 'Agendado', _ute)
 	returning id_consulta into id_cons;
 	
 	insert into formulario_consulta (id_formulario, id_consulta) values (_form, id_cons);
@@ -391,7 +392,7 @@ end; $$ Language PLPGSQL
 
 
 --criar uma consulta por uma consulta
-create or replace procedure criar_consulta_cons (_med int, _cons int, _hora timestamp, _obser varchar(300))
+create or replace procedure criar_consulta_cons (_med int, _ute int, _cons int, _hora timestamp, _obser varchar(300))
 as $$
 declare ccons int;
 		cmedhor int;
@@ -420,8 +421,8 @@ begin
 	
 	--inserir nas tabelas	
 	--criar nova consulta
-	insert into consulta (horario, observacoes, medico_cons, estado_c) 
-	values (_horari, _observ, _med, 'Agendado')
+	insert into consulta (horario, observacoes, id_medico, estado_c, id_utente) 
+	values (_horari, _observ, _med, 'Agendado', _ute)
 	returning id_consulta into id_cons;
 	
 	--criar a relacao 

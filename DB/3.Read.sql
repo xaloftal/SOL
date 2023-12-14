@@ -40,22 +40,21 @@ as
 create or replace view prescricoes_formularios
 as
 	select p.id_prescricao, p.validade validade_prescricao, --info prescricao
-		m.id_medicamento, m.nome_m medicamento, pm.descricao_pres_med descricao_medicamento, ff.descricao_forma forma_farmaceutica, -- medicamentos
+		m.id_medicamento, m.nome_med medicamento, pm.descricao_pres_med descricao_medicamento, ff.descricao_forma forma_farmaceutica, -- medicamentos
 		e.id_exame, e.nome_exame exame, pe.descricao_pres_exame descricao_exame, -- exames
-		-- info do medioco
-		-- info utente
-		-- estados
-	select *
+		mdf.id_medico, mdf.nome_m nome_medico, mdf.email_m email_medico, -- info do medioco
+		u.id_utente, u.nome_u nome_utente, u.nif_u nif_utente, u.email_u email_utente, u.dat_nasc data_nascimento,  -- info utente
+		p.estado_p estado_prescricao, e.estado_e estado_exame, m.estado_m estado_medicamento, ff.estado_ff estado_forma, f.estado_f estado_formulario -- estados
 	from prescricao p
-		left join prescricao_exame pe using (id_prescricao)
-		inner join exame e using (id_exame)
-		left join prescricao_medicamento pm using (id_prescricao)
-		inner join medicamento m using (id_medicamento)
-		inner join forma_farmaceutica ff using (id_forma_farmaceutica)		
-		left join formulario_prescricao fp using (id_prescricao)
-		inner join formulario f using (id_formulario)
-		inner join medico mdf on f.id_medico = mdf.id_medico
-		inner join utente u using (id_utente)
+	left join prescricao_exame pe using (id_prescricao)
+	inner join exame e using (id_exame)
+	left join prescricao_medicamento pm using (id_prescricao)
+	inner join medicamento m using (id_medicamento)
+	inner join forma_farmaceutica ff using (id_forma_farmaceutica)		
+	left join formulario_prescricao fp using (id_prescricao)
+	inner join formulario f using (id_formulario)
+	inner join medico mdf on f.id_medico = mdf.id_medico
+	inner join utente u using (id_utente)
 
 
 

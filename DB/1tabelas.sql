@@ -147,7 +147,6 @@ create table formulario(
 );
 
 
-
 create table consulta(
 	id_consulta		serial 		not null		primary key,
 	observacoes 	varchar(300),
@@ -156,8 +155,10 @@ create table consulta(
 	
 	--relacao
 	id_medico		int,
+	id_utente 		int,
 	
-	constraint fk_cons_med foreign key (id_medico) references medico(id_medico)
+	constraint fk_cons_med foreign key (id_medico) references medico(id_medico),
+	constraint fk_cons_ute foreign key (id_utente) references utente(id_utente)
 );
 
 
