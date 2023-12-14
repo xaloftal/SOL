@@ -1,0 +1,141 @@
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: white;
+}
+
+.main-img {
+    width: 756px;
+    height: 701px;
+    position: absolute;
+    left: 684px;
+    top: 0;
+}
+
+.logo {
+    width: 367px;
+    height: 51px;
+    position: absolute;
+    left: 152px;
+    top: 76px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    color: #121212;
+    font-size: 40px;
+    font-family: Manrope;
+    font-weight: 700;
+    letter-spacing: 1.20px;
+}
+
+.accent-color {
+    color: #4D77FF;
+}
+
+.register-text {
+    width: 127px;
+    height: 42px;
+    left: 306px;
+    top: 145px;
+    position: absolute;
+    color: black;
+    font-size: 32px;
+    font-family: Manrope;
+    font-weight: 500;
+    letter-spacing: 0.96px;
+}
+
+.vertical-line {
+    width: 699px;
+    height: 0px;
+    left: 684px;
+    top: 0;
+    position: absolute;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+    background: #D9D9D9;
+    border: 4px #4D77FF solid;
+}
+
+.create-account {
+    width: 376px;
+    height: 43px;
+    left: 176px;
+    top: 562px;
+    position: absolute;
+    background: #4D77FF;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-account-text {
+    color: white;
+    font-size: 16px;
+    font-family: Manrope;
+    font-weight: 700;
+    letter-spacing: 0.48px;
+}
+
+.input-container {
+    height: 64px;
+    position: relative;
+    font-size: 16px;
+    font-family: Manrope;
+    font-weight: 500;
+    letter-spacing: 0.48px;
+    border: 1px #C4C4C4 solid;
+}
+
+.input-label {
+    background: white;
+    border-radius: 6px;
+    padding: 10px;  
+}
+
+.input-campo {
+    background: white;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+
+
+.campos-entrada{
+    width: 376px;
+    height: 43px;
+    position: relative;
+    top: 250px;
+    place-items: center;
+    display: absolute;
+    left: 200px;
+}
+
+.input[type="text"],
+.input[type="password"] {
+    
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    position: fixed;
+    padding: 376px;
+}
+
+.have-account {
+    left: 269px;
+    top: 525px;
+    position: absolute;
+    font-size: 16px;
+    font-family: Manrope;
+    font-weight: 500;
+    letter-spacing: 0.48px;
+}
+
+.accent-color {
+    color: #4D77FF;
+    text-decoration: underline;
+}
