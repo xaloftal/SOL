@@ -109,13 +109,13 @@
     width: 376px;
     height: 43px;
     position: relative;
-    top: 300px;
+    top: 250px;
     place-items: center;
     display: absolute;
     left: 200px;
 }
 
-.input[type="email"],
+.input[type="text"],
 .input[type="password"] {
     
     box-sizing: border-box;

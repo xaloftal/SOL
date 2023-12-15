@@ -7,8 +7,6 @@
   <title>Página do Administrativo - Saúde On-Line</title>
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
-  <link rel="stylesheet" href="CSS/style.css" media="screen">
-  <link rel="stylesheet" href="CSS/styleSections.css" media="screen">
   <link rel="stylesheet" href="CSS/adm_modal.css" media="screen">
   <link rel="stylesheet" href="CSS/footer.css" media="screen">
   <link rel="stylesheet" href="CSS/bootstrap.min.css" media="screen">
@@ -47,10 +45,11 @@
             'Access-Control-Allow-OSrigin': '*'
         })
         .then((response) => {
-
+          
           let container = document.querySelector('[data-id="reclamacaoContainer"]');
           response.forEach(reclamacao => {
-            container.innerHTML += '<div class="complaint-info"><span><strong class="complaint-info-item-1">Utente:</strong>' + reclamacao.id_utente + '</span><span><strong class="complaint-info-item-2">Data:</strong>' + reclamacao.data.recl + '</span></div><div class="text-complaint"><span class="text-complaint-1">Descrição:</span><span>' + reclamacao.descricao_rec + '</span></div><div class="line"></div><div class="consultation-booking"><button class="myBtn action-btn btn-text">Responder</button></div></div>';
+            console.log(reclamacao);
+            container.innerHTML += '<div class="complaint-info"><span><strong class="complaint-info-item-1">Utente: </strong>' + reclamacao.id_utente + '</span><span><strong class="complaint-info-item-2">Data: </strong>' + reclamacao.data_recl_format + '</span></div><div class="text-complaint"><span class="text-complaint-1">Descrição: </span><span>' + reclamacao.descricao_rec + '</span></div><div class="line"></div><div class="consultation-booking"><button class="myBtn action-btn btn-text">Responder</button></div></div>';
           })
         })
         .catch((error) => {
