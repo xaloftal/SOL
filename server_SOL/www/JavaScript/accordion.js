@@ -6,3 +6,5 @@ function toggleAccordion(contentId, btnId) {
   content.classList.toggle("show");
 
 }
+
+

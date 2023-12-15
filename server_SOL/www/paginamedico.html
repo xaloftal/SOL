@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <meta name="description" content="">
-  <title>Página do Administrativo - Saúde On-Line</title>
+  <title>Página do Médico - Saúde On-Line</title>
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
   <link rel="stylesheet" href="CSS/adm_modal.css" media="screen">
@@ -18,18 +18,19 @@
   <script class="u-script" type="text/javascript" src="JavaScript/style.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="JavaScript/modal.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="JavaScript/notification.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/addMedication.js" defer=""></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   
-  <script type="application/ld+json">
+  <script>
+    function checkAccordion() {
+      var opcao1 = document.getElementsByName("opcao1")
+      if (opcao1.checked && opcao1.value == 'Sim') {
+        content.classList.toggle("show");
+  }
+}
     
-    {
-      "@context": "http://schema.org",
-      "@type": "Organization",
-      "name": ""
-    }
-
   </script>
 <body>
 
@@ -59,7 +60,7 @@
     </div>
   </header>
 
-  <div class="bem-vindo-div">Bem-vindo</div>
+  <div class="bem-vindo-div">Bem-vindo!</div>
 
   <section class="section-1" id="section-1">
 
@@ -76,13 +77,77 @@
         <div class="line"></div>
         <!-- Action Button -->
         <div class="form-validation">
-          <a class="ignore-btn">Ignorar</button>
+          <a class="ignore-btn">Ignorar</a>
           <button class="myBtn validation-btn validation-btn-txt">Validar</button>
         </div>
       </div>
     </div>
   </section>
 
-
+  <div id="myModalFormResponse" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Responder a formulário</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-obv-modal-card">
+          <p class="complaint-letter">Escreva aqui as suas observações</p>
+          <textarea id="complaintAnswer" name="complaintAnswer" rows="10" cols="50" class="complaint-answer-box"></textarea>
+        </div>
+        <div class="form-prescription-modal-card">
+          <p class="complaint-letter">Deseja prescrever?</p>
+          <div class="form-radio-input">
+            <input type="radio" id="sim" name="opcao1" value="sim"/>
+            <label for="sim">Sim</label>
+            <input type="radio" id="nao" name="opcao1" value="nao"/>
+            <label for="nao">Não</label>
+          </div>
+        </div>
+        <div class="form-prescription-modal-card">
+          <p class="complaint-letter">Medicação?</p>
+          <div class="form-radio-input">
+            <input type="radio" id="sim" name="opcao2" value="sim"/>
+            <label for="sim">Sim</label>
+            <input type="radio" id="nao" name="opcao2" value="nao"/>
+            <label for="nao">Não</label>
+          </div>
+        </div>
+        <div id="medication-container">
+          <div class="medication-card">
+            <label class="complaint-letter">Nome</label>
+            <input type="text" placeholder=""/>
+            <br>
+            <label class="complaint-letter">Indicações</label>
+            <input type="text" placeholder="" size="30"/>
+          </div>
+        </div>
+        <button class="plus-btn" onclick="addMedicationCard()">+</button>
+        <div class="form-prescription-modal-card">
+          <p class="complaint-letter">Exame?</p>
+          <div class="form-radio-input">
+            <button></button>
+            <label for="sim">Sim</label>
+            <input type="radio" id="nao" name="opcao3" value="nao"/>
+            <label for="nao">Não</label>
+          </div>
+        </div>
+        <div class="form-prescription-modal-card">
+          <p class="complaint-letter">Consulta?</p>
+          <div class="form-radio-input">
+            <input type="radio" id="sim" name="opcao4" value="sim"/>
+            <label for="sim">Sim</label>
+            <input type="radio" id="nao" name="opcao4" value="nao"/>
+            <label for="nao">Não</label>
+          </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button class="submit-btn btn-text" onclick="submitComplaint()">Submeter</button>
+      </div>
+    </div>
+  </div>
 
 </body> 
