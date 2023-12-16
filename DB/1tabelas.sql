@@ -134,6 +134,7 @@ create table formulario(
 	descricao_form  varchar(500) not null,
 	data_form		timestamp,
 	estado_f		estado,
+	observacoes_med varchar(500),
 	
 	--relacao
 	id_especialidade	int,

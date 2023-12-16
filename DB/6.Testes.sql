@@ -43,3 +43,12 @@ select * from administrativo a inner join login l on l.email = a.email_a
 
 call criar_reclamacao(1, 'Resposta muito demorada.', '2023-11-14 10:44:00'::timestamp)
 select * from reclamacao inner join utente using (id_utente)
+
+
+
+
+--teste
+select * from administrativo
+call resposta_recla_adm(1, 1, 'Pedimos desculpa pelo inconveniente. O sistema encontra-se em manutenção')
+select u.nome_u nome_utente,  r.descricao_rec descricao_reclamacao, r.resposta_recl resposta, a.nome_a nome_administrativo 
+from reclamacao r inner join administrativo a using (id_adm) inner join utente u using (id_utente);
