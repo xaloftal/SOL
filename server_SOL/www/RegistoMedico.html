@@ -4,7 +4,35 @@
     <meta charset="UTF-8">
     <title>Registo - Saúde On-Line</title>
     <link rel="stylesheet" href="CSS/registoMedico.css">
-    
+    <script type="text/javascript">
+        doRegister = () => {
+
+            let firstname = document.querySelector('[data-id="firstname"]').value;
+            let lastname = document.querySelector('[data-id="lastname"]').value;
+            let email = document.querySelector('[data-id="email"]').value;
+            let password = document.querySelector('[data-id="password"]').value;
+            let especialidade = document.querySelector('[data-id="especialidadeChooser"]').value;
+
+            $.ajax({
+                url: "http://localhost:3050/misc/RegistoMedico?email=" + email + "&password=" + password + "&nome=" + encodeURI(firstname + " " + lastname) + "&especialidade=" + especialidade,
+                type: "POST",
+                crossDomain: false,
+                dataType: "json",
+                headers: { 
+                    "accept": "application/json",
+                    "Access-Control-Allow-Origin":"*"
+                },
+                'Access-Control-Allow-OSrigin': '*'
+            })
+            .then((response) => {
+                window.location = 'LoginMedico.html'
+            })
+            .catch((error) => {
+                alert('Erro ao registar')
+            });
+
+        }
+      </script>
 </head>
 <body>
 

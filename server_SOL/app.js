@@ -11,11 +11,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(require('./routes/testRoute'));
 app.use(require('./routes/reclamacaoRoute'));
 app.use(require('./routes/loginRoute'));
 app.use(require('./routes/formularioRoute'));
 app.use(require('./routes/especialidadeRoute'));
+app.use(require('./routes/registoRoute'));
 
 app.use('/www', express.static('www'))
 

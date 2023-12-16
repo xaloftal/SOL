@@ -5,7 +5,8 @@ const router = express.Router();
 const formularioService = require('../services/formularioService');
 
 router.post('/formulario', formularioService.Create);
-router.get('/formulario', formularioService.Read);
-router.put('/formulario', formularioService.Update);
+router.get('/formulario', formularioService.GetFormulariosNaoRespondidos);
+router.get('/formulario', formularioService.GetFormulariosNaoRespondidos);
+router.put('/formulario', formularioService.IgnorarFormulario);
 
 module.exports = router;
