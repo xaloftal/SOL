@@ -11,12 +11,12 @@ module.exports = {
         });
     },
     Read: (req, res) => {
-            client.query('SELECT r.*, to_char(r.data_recl, \'dd/mm/yyyy HH24:MI:SS\') data_recl_format FROM reclamacao r', (error, results) => {
-                if (error) {
-                    throw error
-                }
-                res.send(results.rows)
-            });
+        client.query('SELECT r.*, to_char(r.data_recl, \'dd/mm/yyyy HH24:MI:SS\') data_recl_format FROM reclamacao r', (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.send(results.rows)
+        });
     },
     Update: (req, res) => {
        

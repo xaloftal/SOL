@@ -1,41 +1,25 @@
 const client = require('../Database/database');
+const currentDate = new Date().toDateString(); // Use toISOString to get a string in the format 'YYYY-MM-DDTHH:mm:ss.sssZ'
 
 module.exports = {
     Create: (req, res) => {
-        client.query('call criar_formulario($1, $2, $3)', [req.query.id_doente, req.query.especialidade, req.query.descricao], (error, results) => {
+        client.query('call criar_formulario($1, $2, $3, $4, $5)', [req.query.id_utente, req.query.descricao, currentDate, req.query.esp, res.id_form], (error, results) => {
             if (error) {
                 throw error
             }
-
             res.send(results.rows)
         });
     },
     Read: (req, res) => {
-        if(req.query.id) {
-            client.query('SELECT * FROM ver_formulario WHERE id_formulario = $1', [req.query.id], (error, results) => {
-                if (error) {
-                    throw error
-                }
-                res.send(results.rows)
-            });
-        } else if (req.query.id_doente) {
-            client.query('select * from ver_formulario vf where vf.id_doente = $1;', [req.query.id_doente], (error, results) => {
-                if (error) {
-                    throw error
-                }
-                res.send(results.rows)
-            });
-        } else {
-            client.query('SELECT * FROM ver_formulario', (error, results) => {
-                if (error) {
-                    throw error
-                }
-                res.send(results.rows)
-            });
-        }
+        client.query("SELECT * FROM formularios where estado_formulario = 'Submetido'", (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.send(results.rows)
+        });
     },
     Update: (req, res) => {
-        client.query('call atualiza_formulario($1, $2, $3)', [req.query.id, req.query.id_medico, req.query.descricao], (error, results) => {
+      client.query('call ignorar_formulario($1, $2)', [req.query.id_form, req.query.id_med], (error, results) => {
             if (error) {
                 throw error
             }
@@ -43,11 +27,6 @@ module.exports = {
         });
     },
     Delete: (req, res) => {
-        client.query('call eliminar_formulario($1)', [req.query.id], (error, results) => {
-            if (error) {
-                throw error
-            }
-            res.send(results.rows)
-        });
+        
     }
 }

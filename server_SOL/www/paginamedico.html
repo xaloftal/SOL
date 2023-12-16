@@ -32,6 +32,55 @@
 }
     
   </script>
+
+<script type="text/javascript">
+  window.onload = () => {
+
+      $.ajax({
+          url: "http://localhost:3050/formulario",
+          type: "GET",
+          crossDomain: false,
+          dataType: "json",
+          headers: {
+              "accept": "application/json",
+              "Access-Control-Allow-Origin":"*"
+          },
+          'Access-Control-Allow-OSrigin': '*'
+      })
+      .then((response) => {
+
+        let container = document.querySelector('[data-id="formularioContainer"]');
+        response.forEach(form => {
+          container.innerHTML += '<div class="form-card"><div class="form-info"><span><strong class="form-info-item-1">Utente:</strong>' + form.utente + '</span><span><strong class="form-info-item-2">Data:</strong>' + form.data_formulario + '</span></div><div class="text-form"><span class="text-form-1">Descrição:</span><span>' + form.descricao_formulario + '</span></div><div class="line"></div><div class="form-validation"><a class="ignore-btn">Ignorar</a><button class="myBtn validation-btn validation-btn-txt">Validar</button></div></div></div>';
+        })
+      })
+      .catch((error) => {
+          console.error(error)
+      });
+
+      $.ajax({
+          url: "http://localhost:3050/formulario",
+          type: "GET",
+          crossDomain: false,
+          dataType: "json",
+          headers: {
+              "accept": "application/json",
+              "Access-Control-Allow-Origin":"*"
+          },
+          'Access-Control-Allow-OSrigin': '*'
+      })
+      .then((response) => {
+
+        let container = document.querySelector('[data-id="formulariosRespondidosContainer"]');
+        response.forEach(form => {
+          container.innerHTML += '<div class="form-card"><div class="form-info"><span><strong class="form-info-item-1">Utente:</strong> Tiago Pereira</span><span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span></div><div class="text-form"><span class="text-form-1">Descrição:</span><span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div><div class="line"></div><div class="text-form"><span class="text-form-1">Observações:</span><span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div><a  style="color:#4D77FF" class="more-details" id="accordionBtn2" onclick="toggleAccordion('accordionContent2', 'accordionBtn2')"><u>Mais detalhes</u></a><div class="accordion-content" id="accordionContent2"><p><strong class="form-info-details">Medicamento:</strong></p><p><strong class="form-info-details">Descrição:</strong> 276427832</p><div class="line"></div>   <div class="exam-div"><p><strong class="form-info-details">Exame:</strong> 962784783</p><p><strong class="form-info-details">Descrição:</strong> 962784783</p></div><div class="line"></div>   <div class="appointment-div"><p><strong class="form-info-details">Consulta solicitada.</strong></p></div></div></div>';
+        })
+      })
+      .catch((error) => {
+          console.error(error)
+      });
+  }
+</script>
 <body>
 
   <header>
@@ -62,27 +111,8 @@
 
   <div class="bem-vindo-div">Bem-vindo!</div>
 
-  <section class="section-1" id="section-1">
-
-    <div class="form-card">
-
-        <div class="form-info">
-            <span><strong class="form-info-item-1">Utente:</strong> Tiago Pereira</span>
-            <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
-        </div>
-        <div class="text-form">
-          <span class="text-form-1">Descrição:</span>
-          <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
-        </div>
-        <div class="line"></div>
-        <!-- Action Button -->
-        <div class="form-validation">
-          <a class="ignore-btn">Ignorar</a>
-          <button class="myBtn validation-btn validation-btn-txt">Validar</button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="section-1" id="section-1" data-id="formularioContainer">
+ 
 
   <div id="myModalFormResponse" class="modal">
     <!-- Modal content -->
@@ -112,7 +142,7 @@
           <div class="form-radio-input">
             <input type="radio" id="sim" name="opcao2" value="sim"/>
             <label for="sim">Sim</label>
-            <input type="radio" id="nao" name="opcao2" value="nao"/>
+            <input type="radio" id="nao"pm name="opcao2" value="nao"/>
             <label for="nao">Não</label>
           </div>
         </div>
@@ -154,14 +184,14 @@
       </div>
     </div>
   </div>
-
+ </section>
   <section class="section-2" id="section2">
     <div>
         <h2>Formulários</h2>
     </div>
   </section>
 
-  <section class="section-3">
+  <section class="section-3" data-id="formulariosRespondidosContainer">
     
     <div class="form-card">
 
