@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <title>Registo - Saúde On-Line</title>
     <link rel="stylesheet" href="CSS/registoMedico.css">
+    <script class="u-script" type="text/javascript" src="JavaScript/jquery.js" defer=""></script>
     <script type="text/javascript">
         doRegister = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
 
-            let firstname = document.querySelector('[data-id="firstname"]').value;
-            let lastname = document.querySelector('[data-id="lastname"]').value;
-            let email = document.querySelector('[data-id="email"]').value;
+            let name = document.querySelector('[data-id="name"]').value;
             let password = document.querySelector('[data-id="password"]').value;
             let especialidade = document.querySelector('[data-id="especialidadeChooser"]').value;
 
             $.ajax({
-                url: "http://localhost:3050/misc/RegistoMedico?email=" + email + "&password=" + password + "&nome=" + encodeURI(firstname + " " + lastname) + "&especialidade=" + especialidade,
+                url: "http://localhost:3050/misc/RegistoMedico?nome=" + name + "&email=" + email + "&password=" + password + "&especialidade=" + especialidade,
                 type: "POST",
                 crossDomain: false,
                 dataType: "json",
@@ -25,19 +26,19 @@
                 'Access-Control-Allow-OSrigin': '*'
             })
             .then((response) => {
-                window.location = 'LoginMedico.html'
+                window.location = '/www/paginalogin.html'
             })
             .catch((error) => {
                 alert('Erro ao registar')
             });
 
         }
-      </script>
+    </script>
 </head>
 <body>
 
     <div class="container">
-        <img src="C:\Users\Utilizador\Desktop\Trabalho\imagens\1.jpg" class="main-img" />
+        <img src="imagens/imagem_login.jpeg" class="main-img" />
         
         <div class="logo">
             <div style="width: 20%; height: 100%; position: relative">
@@ -55,7 +56,7 @@
         <div class="vertical-line"></div>
         
         <div class="create-account">
-            <div class="create-account-text">Criar conta</div>
+            <button class="create-account-text" onclick="doRegister()">Criar conta</button>
         </div>
 
         <div class="campos-entrada">
@@ -63,18 +64,24 @@
         
             <label class="input-label">Nome</label>
             <br>
-            <input class="input-campo" type="text" size="43px" placeholder="" />
+            <input class="input-campo" type="text" size="43px" placeholder="" data-id="name"/>
         
         <br><br>
 
-        <label class="input-label">Especialidade</label>
-        <br>
-        <input class="input-campo" type="text" size="43px" placeholder="" />
+        <label for="especialidade" class="input-label">Especialidade</label>
+            <select id="especialidade" name="especialidade" data-id="especialidadeChooser">
+                <option value="Psiquiatria">Psiquiatria</option>
+                <option value="Cardiologia">Cardiologia</option>
+                <option value="Neurologia">Neurologia</option>
+                <option value="Ortopedia">Ortopedia</option>
+                <option value="Otorrinolaringologista">Otorrinolaringologista</option>
+                <option value="Dermatologia">Dermatologia</option>
+            </select>
     
     <br><br>
             <label class="input-label">Palavra-Passe</label>
             <br>
-            <input class="input-campo" type="password" size="43px" placeholder="" />
+            <input class="input-campo" type="password" size="43px" placeholder="" data-id="password"/>
         </div>
         
         

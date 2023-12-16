@@ -4,6 +4,35 @@
     <meta charset="UTF-8">
     <title>Registo - Saúde On-Line</title>
     <link rel="stylesheet" href="CSS/registoAdm.css">
+    <script class="u-script" type="text/javascript" src="JavaScript/jquery.js" defer=""></script>
+    <script type="text/javascript">
+        doRegister = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
+
+            let name = document.querySelector('[data-id="name"]').value;
+            let password = document.querySelector('[data-id="password"]').value;
+
+            $.ajax({
+                url: "http://localhost:3050/misc/RegistoAdm?nome=" + name + "&email=" + email + "&password=" + password,
+                type: "POST",
+                crossDomain: false,
+                dataType: "json",
+                headers: { 
+                    "accept": "application/json",
+                    "Access-Control-Allow-Origin":"*"
+                },
+                'Access-Control-Allow-OSrigin': '*'
+            })
+            .then((response) => {
+                window.location = 'paginalogin.html'
+            })
+            .catch((error) => {
+                alert('Erro ao registar')
+            });
+
+        }
+    </script>
 </head>
 <body>
 
@@ -26,7 +55,7 @@
         <div class="vertical-line"></div>
         
         <div class="create-account">
-            <div class="create-account-text">Criar conta</div>
+            <button class="create-account-text" onclick="doRegister()">Criar conta</button>
         </div>
 
         <div class="campos-entrada">
@@ -34,7 +63,7 @@
         
             <label class="input-label">Nome</label>
             <br>
-            <input class="input-campo" type="text" size="43px" placeholder="" />
+            <input class="input-campo" type="text" size="43px" placeholder="" data-id="name"/>
         
         <br><br>
         

@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="CSS/paginaLogin.css">
+    <script class="u-script" type="text/javascript" src="JavaScript/jquery.js" defer=""></script>
 </head>
 
 <script type="text/javascript">
     doLogin = () => {
         let email = document.querySelector('[data-id="email"]').value;
         let password = document.querySelector('[data-id="password"]').value;
-
-        let emailMatch = email.match('\@[a-zA-Z]*');
 
         $.ajax({
             url: "http://localhost:3050/login/DoLogin?email=" + encodeURI(email) + "&password=" + encodeURI(password),
@@ -25,28 +24,29 @@
             'Access-Control-Allow-Origin': '*'
         })
         .then((response) => {
-            if(response.length > 0) {
-                console.log("sucesso");
+            if(response.length > 0 && response[0].estado_l != 'Inativo') {
                 console.log(response[0]);
+
+                const emailMatch = email.match('\@[a-zA-Z]*');
                 localStorage.setItem("userSession", JSON.stringify(response[0]));
                 if(emailMatch) {
                     switch (emailMatch[0].toLowerCase()) {
                         case '@med': {
-                            $(location).prop('href', '/paginamedico.html');
+                            $(location).prop('href', '/www/paginamedico.html');
                             break;
                         }
                         case '@adm': {
-                            $(location).prop('href', '/PaginaPrincipalAdm.html');
+                            $(location).prop('href', '/www/PaginaPrincipalAdm.html');
                             break;
                         }
                         default: {
-                            $(location).prop('href', '/PaginaUtente.html');
+                            $(location).prop('href', '/www/PaginaUtente.html');
                             break;
                         }
                     }
                 }
             } else {
-                alert("Login Incorreto!");
+                alert("Login Incorreto ou Inativo!");
                 document.querySelector('[data-id="email"]').value = '';
                 document.querySelector('[data-id="password"]').value = '';
             }

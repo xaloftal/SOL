@@ -16,6 +16,7 @@ app.use(require('./routes/loginRoute'));
 app.use(require('./routes/formularioRoute'));
 app.use(require('./routes/especialidadeRoute'));
 app.use(require('./routes/registoRoute'));
+app.use(require('./routes/contaRoute'));
 
 app.use('/www', express.static('www'))
 

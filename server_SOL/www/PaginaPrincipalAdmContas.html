@@ -35,6 +35,33 @@
 
   </script>
 
+  <script type="text/javascript">
+    window.onload = () => {
+        $.ajax({
+            url: "http://localhost:3050/contas",
+            type: "GET",
+            crossDomain: false,
+            dataType: "json",
+            headers: {
+                "accept": "application/json",
+                "Access-Control-Allow-Origin":"*"
+            },
+            'Access-Control-Allow-OSrigin': '*'
+        })
+        .then((response) => {
+          
+          let container = document.querySelector('[data-id="contaMedicoContainer"]');
+          response.forEach(contaMedico => {
+            console.log(contaMedico);
+            container.innerHTML += '';
+          })
+        })
+        .catch((error) => {
+            console.error(error)
+        });
+      }
+  </script>
+
 </head>
 
 <body class="u-body u-xl-mode" data-lang="en">

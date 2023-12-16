@@ -13,16 +13,15 @@
             if(emailMatch) {
                 switch (emailMatch[0].toLowerCase()) {
                     case '@med': {
-                        //redirect med
-                        window.location.href = '/www/medicoespecialista.html';
+                        window.location.href = '/www/RegistoMedico.html?email=' + encodeURI(email);
                         break;
                     }
                     case '@adm': {
-                        //redirect adm
+                        window.location.href = '/www/RegistoAdm.html?email='  + encodeURI(email);
                         break;
                     }
                     default: {
-                        //redirect utente
+                        window.location.href = '/www/RegistoUtente.html?email='  + encodeURI(email);
                         break;
                     }
                 }
@@ -53,7 +52,7 @@
             <div class="vertical-line"></div>
             
             <div class="create-account">
-                <div class="create-account-text">Criar conta</div>
+                <button class="create-account-text" onclick="btnRegistoClick()">Criar conta</button>
             </div>
     
             <div class="campos-entrada">
@@ -61,7 +60,7 @@
             
                 <label class="input-label">Email</label>
                 <br>
-                <input class="input-campo" type="email" size="43px" placeholder="" />
+                <input class="input-campo" type="email" size="43px" placeholder=""/>
             
             
                 
