@@ -26,9 +26,78 @@ begin
 
 end; $$ Language PLPGSQL
 
---teste
-select * from administrativo
-call resposta_recla_adm(1, 1, 'Pedimos desculpa pelo inconveniente. O sistema encontra-se em manutenção')
 
-select u.nome_u nome_utente,  r.descricao_rec descricao_reclamacao, r.resposta_recl resposta, a.nome_a nome_administrativo 
-from reclamacao r inner join administrativo a using (id_adm) inner join utente u using (id_utente);
+-- pedir consulta por formulario (med)
+
+create or replace procedure pedido_consulta(_med int, _form int, _cons int, _observ varchar(300))
+as $$
+declare form_cons int;
+		cons_cons int;
+begin
+	-- se vier de formulario (_cons null)
+	if (_form is not null)
+	then
+		select count(*) into form_cons
+		from formulario_consulta fc
+		where fc.id_formulario = _form;	
+		
+		if (form_cons > 0)
+		then
+			raise notice 'Formulario com consulta já marcada';
+			return;
+		end if;
+		
+		update formulario
+		set id_medico = _med,
+			observacoes_med = _observ
+		where id_formulario = _form;
+		
+	-- se vier de consulta (_form null)
+	elsif (_cons is not null)
+	then
+		select count(*) into cons_cons
+		from consulta_consulta cc
+		where cc.consulta_origem = _cons;
+		
+		if (cons_cons > 0)
+		then 	
+			raise notice 'Consulta com consulta ja marcada';
+			return;
+		end if;
+		
+		
+		
+	
+	end if;	
+	
+	
+	
+		
+end; $$ Language PLPGSQL
+
+
+create or replace procedure pedido_consulta_cons(_med int, _cons int, _observ varchar(300))
+as $$
+declare form_cons int;
+begin
+	--verificar se existe consulta vindo do formulario
+	if (_form is not null)
+	then
+		select count(*) into form_cons
+		from formulario_consulta fc
+		where fc.id_formulario = _form;	
+		
+		if (form_cons > 0)
+		then
+			raise notice 'Formulario com consulta já marcada';
+			return;
+		end if;
+	end if;	
+	
+	
+	update formulario
+	set id_medico = _med,
+		observacoes_med = _observ
+	where id_formulario = _form;
+		
+end; $$ Language PLPGSQL

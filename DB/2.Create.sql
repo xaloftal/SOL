@@ -341,29 +341,14 @@ end; $$ Language PLPGSQL
 
 
 
---consulta por formulario
+--consulta por formulario (adm)
 
-create or replace procedure criar_consulta_form(_med int, _ute int, _horari timestamp, _form int, _observ varchar(300))
+create or replace procedure criar_consulta_form(_med int, _ute int, _horari timestamp, _form int, _observ varchar(300), out id_cons int)
 as $$
 declare 
-	form_cons int;
 	horar int;
-	id_cons int;
 begin
-	--verificar se existe consulta vindo do formulario
-	if (_form is not null)
-	then
-		select count(*) into form_cons
-		from formulario_consulta fc
-		where fc.id_formulario = _form;	
-		
-		if (form_cons > 0)
-		then
-			raise notice 'Formulario com consulta já marcada';
-			return;
-		end if;
-	end if;	
-	
+
 	--verificar se existe consulta com o medico no mesmo horario
 	select count(*) into horar
 	from consulta c 
@@ -376,15 +361,17 @@ begin
 	end if;
 	
 	--inserir
-	insert into consulta (horario, observacoes, id_medico, estado_c, id_utente) 
-	values (_horari, _observ, _med, 'Agendado', _ute)
+	insert into consulta (horario, id_medico, estado_c, id_utente) 
+	values (_horari, _med, 'Agendado', _ute)
 	returning id_consulta into id_cons;
 	
-	insert into formulario_consulta (id_formulario, id_consulta) values (_form, id_cons);
+	insert into formulario_consulta (id_formulario, id_consulta) values (_form, id_cons);	
 	
 	
-	--guardar o medico que viu o formulario
-	update formulario set id_medico = _med, estado_f = 'Respondido' where id_formulario = id_form ;
+	--guardar o estado do formulario
+	update formulario 
+	set estado_f = 'Respondido' 
+	where id_formulario = id_form ;
 		
 end; $$ Language PLPGSQL
 
@@ -392,22 +379,12 @@ end; $$ Language PLPGSQL
 
 
 --criar uma consulta por uma consulta
-create or replace procedure criar_consulta_cons (_med int, _ute int, _cons int, _hora timestamp, _obser varchar(300))
+
+create or replace procedure criar_consulta_cons (_med int, _ute int, _cons int, _hora timestamp, _obser varchar(300), out id_cons int)
 as $$
 declare ccons int;
 		cmedhor int;
-		id_cons int;
-begin
-	--verificar se consulta já gerou outra consulta
-	select count(*) into ccons
-	from consulta_consulta cc
-	where cc.consulta_origem = _cons;
-	
-	if (ccons > 0)
-	then
-		raise notice 'Consulta já originou uma consulta';
-	end if;
-	
+begin	
 	
 	--verificar se médico está disponivel no horário
 	select count(*) into cmedhor
