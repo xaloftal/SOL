@@ -4,7 +4,6 @@
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -14,6 +13,7 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-right: 10vh;
     padding-left: 10vh;
+    padding-top: 3%;
   }
 
   /* The Close Button */
@@ -30,7 +30,6 @@
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -40,6 +39,7 @@
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   padding-right: 70vh;
   padding-left: 70vh;
+  padding-top: 3%;
   }
 
   .modal-sure {
@@ -97,6 +97,8 @@
 /* Modal Body */
 .modal-body {
   padding: 2px 16px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
 }
 
 /* Modal Footer */

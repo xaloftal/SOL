@@ -5,10 +5,10 @@ function addMedicationCard() {
 
     // HTML content for the medication card
     newMedicationCard.innerHTML = `
-      <label class="complaint-letter">Nome</label>
+      <label class="form-answer-letter">Nome</label>
       <input type="text" placeholder=""/>
       <br>
-      <label class="complaint-letter">Indicações</label>
+      <label class="form-answer-letter">Indicações</label>
       <input type="text" placeholder="" size="30"/>
     `;
 

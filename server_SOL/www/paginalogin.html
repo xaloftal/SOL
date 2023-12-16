@@ -4,12 +4,68 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="CSS/paginaLogin.css">
-    
 </head>
+
+<script type="text/javascript">
+    doLogin = () => {
+        let email = document.querySelector('[data-id="email"]').value;
+        let password = document.querySelector('[data-id="password"]').value;
+
+        let emailMatch = email.match('\@[a-zA-Z]*');
+
+        $.ajax({
+            url: "http://localhost:3050/login/DoLogin?email=" + encodeURI(email) + "&password=" + encodeURI(password),
+            type: "GET",
+            crossDomain: false,
+            dataType: "json",
+            headers: {
+                "accept": "application/json",
+                "Access-Control-Allow-Origin":"*"
+            },
+            'Access-Control-Allow-Origin': '*'
+        })
+        .then((response) => {
+            if(response.length > 0) {
+                console.log("sucesso");
+                console.log(response[0]);
+                localStorage.setItem("userSession", JSON.stringify(response[0]));
+                if(emailMatch) {
+                    switch (emailMatch[0].toLowerCase()) {
+                        case '@med': {
+                            //redirect med
+                            $(location).prop('href', '/paginamedico.html')
+                            break;
+                        }
+                        case '@adm': {
+                            $(location).prop('href', '/PaginaPrincipalAdm.html');
+                            break;
+                        }
+                        default: {
+                            
+                            break;
+                        }
+                    }
+                }
+            } else {
+                alert("Login Incorreto!");
+                document.querySelector('[data-id="email"]').value = '';
+                document.querySelector('[data-id="password"]').value = '';
+            }
+
+        })
+        .catch((error) => {
+            console.error(error)
+        });
+    }
+
+    document.onload = () => {
+    }
+</script>
+
 <body>
 
     <div class="container">
-        <img src="C:\Users\Utilizador\Desktop\Trabalho\imagens\1.jpg" class="main-img" />
+        <img src="imagens/imagem_login.jpeg" class="main-img" />
         
         <div class="logo">
             <div style="width: 20%; height: 100%; position: relative">
@@ -27,21 +83,20 @@
         <div class="vertical-line"></div>
         
         <div class="create-account">
-            <div class="create-account-text">Entrar</div>
+            <button class="create-account-text" onclick="doLogin()">Entrar</button>
         </div>
 
         <div class="campos-entrada">
         
-        
             <label class="input-label">Email</label>
             <br>
-            <input class="input-campo" type="email" size="43px" placeholder="" />
+            <input class="input-campo" type="email" size="43px" placeholder="" data-id="email" />
         
         <br><br>
         
             <label class="input-label">Palavra-Passe</label>
             <br>
-            <input class="input-campo" type="password" size="43px" placeholder="" />
+            <input class="input-campo" type="password" size="43px" placeholder="" data-id="password" />
         </div>
         
         
