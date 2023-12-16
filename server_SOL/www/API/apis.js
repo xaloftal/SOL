@@ -3,10 +3,10 @@ window.onload = () => {
     GetMedicosByEspecialidade();
 }
 
-GetDoentesFormConsultasMedicosCount = () => {
+GetUtentesFormConsultasMedicosCount = () => {
     
     $.ajax({
-        url: "http://localhost:3050/misc/GetDoentesFormConsultasMedicosCount",
+        url: "http://localhost:3050/misc/GetUtentesFormConsultasMedicosCount",
         type: "GET",
         crossDomain: false,
         dataType: "json",
@@ -49,29 +49,29 @@ GetMedicosByEspecialidade = () => {
         let neurologia = document.querySelector('[data-id="equipaMedicaNeurologia"]');
 
         response.forEach(med => {
-            switch (med.nom_especi) {
+            switch (med.nome_esp) {
                 case 'Dermatologia': {
-                    dermatologia.innerHTML += '<p class="u-text-medic">' + med.nom_med + ' - ' + med.email +'</p>'
+                    dermatologia.innerHTML += '<p class="u-text-medic">' + med.nome_m + ' - ' + med.email_m +'</p>'
                     break;
                 }
                 case 'Psiquiatria': {
-                    psiquiatria.innerHTML += '<p class="u-text-medic">' + med.nom_med + ' - ' + med.email +'</p>'
+                    psiquiatria.innerHTML += '<p class="u-text-medic">' + med.nome_m + ' - ' + med.email_m +'</p>'
                     break;
                 }
                 case 'Cardiologia': {
-                    cardiologia.innerHTML += '<p class="u-text-medic">' + med.nom_med + ' - ' + med.email +'</p>'
+                    cardiologia.innerHTML += '<p class="u-text-medic">' + med.nome_m + ' - ' + med.email_m +'</p>'
                     break;
                 }
                 case 'Otorrinolaringologia': {
-                    otorrinolaringologia.innerHTML += '<p class="u-text-medic">' + med.nom_med + ' - ' + med.email +'</p>'
+                    otorrinolaringologia.innerHTML += '<p class="u-text-medic">' + med.nome_m + ' - ' + med.email_m +'</p>'
                     break;
                 }
                 case 'Ortopedia': {
-                    ortopedia.innerHTML += '<p class="u-text-medic">' + med.nom_med + ' - ' + med.email +'</p>'
+                    ortopedia.innerHTML += '<p class="u-text-medic">' + med.nome_m + ' - ' + med.email_m +'</p>'
                     break;
                 }
                 case 'Neurologia': {
-                    neurologia.innerHTML += '<p class="u-text-medic">' + med.nom_med + ' - ' + med.email +'</p>'
+                    neurologia.innerHTML += '<p class="u-text-medic">' + med.nome_m + ' - ' + med.email_m +'</p>'
                     break;
                 }
             }

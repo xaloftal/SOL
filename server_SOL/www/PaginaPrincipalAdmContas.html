@@ -36,9 +36,11 @@
   </script>
 
   <script type="text/javascript">
+      
+
     window.onload = () => {
         $.ajax({
-            url: "http://localhost:3050/contas",
+            url: "http://localhost:3050/GetContasMedico",
             type: "GET",
             crossDomain: false,
             dataType: "json",
@@ -49,16 +51,70 @@
             'Access-Control-Allow-OSrigin': '*'
         })
         .then((response) => {
-          
-          let container = document.querySelector('[data-id="contaMedicoContainer"]');
+          let containerMedico = document.querySelector('[data-id="contaMedicoContainer"]');
           response.forEach(contaMedico => {
             console.log(contaMedico);
-            container.innerHTML += '';
+            containerMedico.innerHTML += '<div class="account-card"><div class="consultation-info"><span><strong class="account-info-1">Nome: </strong>' + contaMedico.nome_m + '</span><span><strong class="account-info-2">Especialidade: </strong>' + contaMedico.nome_esp + '</span><span><strong class="account-info-3">Email: </strong>' + contaMedico.email + '</span></div><div class="line"></div><div class="consultation-booking"><button class="myBtn action-btn remove-btn btn-text remove-btn-2" onclick="deleteAccount(\'' + contaMedico.email + '\')">Eliminar</button></div></div></div>';
+          })
+
+          updateModalBtns();
+        })
+        .catch((error) => {
+            console.error(error)
+        });
+
+        $.ajax({
+            url: "http://localhost:3050/GetContasUtente",
+            type: "GET",
+            crossDomain: false,
+            dataType: "json",
+            headers: {
+                "accept": "application/json",
+                "Access-Control-Allow-Origin":"*"
+            },
+            'Access-Control-Allow-OSrigin': '*'
+        })
+        .then((response) => {
+          let containerUtente = document.querySelector('[data-id="contaUtenteContainer"]');
+          response.forEach(contaUtente => {
+            console.log(contaUtente);
+            containerUtente.innerHTML += '<div class="account-card"><div class="consultation-info"><span><strong class="account-info-4">Nome: </strong>' + contaUtente.nome_u + '</span><span><strong class="account-info-5">Email: </strong>' + contaUtente.email + '</span></div><a style="color:#4D77FF" class="more-details" id="accordionBtn1" onclick="toggleAccordion(\'accordionContent1\', \'accordionBtn1\')"><u>Mais detalhes</u></a><div class="accordion-content" id="accordionContent1"><span><strong class="account-info-1">Data de nascimento: </strong>' + contaUtente.dat_nasc + '</span><span><strong class="account-info-2">NIF: </strong>' + contaUtente.nif_u + '</span><span><strong class="account-info-3">Telefone: </strong>' + contaUtente.tele_u + '</span></div><div class="consultation-booking"><div class="line"></div><button class="action-btn remove-btn btn-text remove-btn-2" onclick="deleteAccount(\'' + contaUtente.email_u + '\')">Eliminar</button></div></div>';
           })
         })
         .catch((error) => {
             console.error(error)
         });
+      }
+      
+      deleteAccount = (email) => {
+
+          $.ajax({
+              url: "http://localhost:3050/EliminarConta?email=" + email,
+              type: "PUT",
+              crossDomain: false,
+              dataType: "json",
+              headers: { 
+                  "accept": "application/json",
+                  "Access-Control-Allow-Origin":"*"
+              },
+              'Access-Control-Allow-OSrigin': '*'
+          })
+          .then((response) => {
+              alert('Conta eliminada com sucesso.')
+          })
+          .catch((error) => {
+              alert('Eliminação sem sucesso')
+          });
+
+      }
+     
+      // Define the toggleAccordion function in the global scope
+      function toggleAccordion(contentId, btnId) {
+          var content = document.getElementById(contentId);
+          var btn = document.getElementById(btnId);
+
+          // Toggle the accordion content
+          content.classList.toggle("show");
       }
   </script>
 
@@ -99,46 +155,14 @@
         <p>Médicos</p>
     </div>
 
-    <!-- Consultation Cards -->
-    <!-- Card 1 -->
-    <div class="account-card">
-        <!-- Consultation Info -->
-        <div class="consultation-info">
-            <span><strong class="account-info-1">Nome:</strong> Pedro Ferreira</span>
-            <span><strong class="account-info-2">Especialidade:</strong> Psiquiatria</span>
-            <span><strong class="account-info-3">Email:</strong> pedro.ferr@med.sol.com</span>   
-        </div>
-
-        <div class="line"></div>
-        <!-- Action Button -->
-        <div class="consultation-booking">
-          <button class="myBtn action-btn remove-btn btn-text remove-btn-2">Eliminar</button>
-        </div> 
-      </div>
+    <div data-id="contaMedicoContainer">
     </div>
 
     <div class="title-section">
         <p>Utentes</p>
     </div>
 
-    <div class="account-card">
-      <!-- Consultation Info -->
-      <div class="consultation-info">
-          <span><strong class="account-info-4">Nome:</strong> Pedro Ferreira</span>
-          <span><strong class="account-info-5">Email:</strong> pedro.ferr@med.sol.com</span>   
-      </div>
-
-      <a  style="color:#4D77FF" class="more-details" id="accordionBtn1" onclick="toggleAccordion('accordionContent1', 'accordionBtn1')"><u>Mais detalhes</u></a>
-      <div class="accordion-content" id="accordionContent1">
-        <span><strong class="account-info-1">Data de nascimento:</strong> 18/02/2002</span>
-        <span><strong class="account-info-2">NIF:</strong> 276427832</span>   
-        <span><strong class="account-info-3">Telefone:</strong> 962784783</span>
-      </div>
-      <!-- Action Button -->
-      <div class="consultation-booking">
-        <div class="line"></div>
-        <button class="myBtn action-btn remove-btn btn-text remove-btn-2">Eliminar</button>
-      </div>
+    <div data-id="contaUtenteContainer">
     </div>
 
   </section>
@@ -165,40 +189,6 @@
   <div class="footer-copyright-div">
     <div class="footer-copyright-letter">© 2023 Saúde On-Line </div>
   </div> 
-
-  <div id="myModalVerification" class="modal modal-sure">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: white;">
-        <h4 style="justify-content: center; color:black">Tem a certeza?</h4>
-        <span class="close">&times;</span>
-      </div>
-      <div class="modal-body">
-        <p>Não poderá reverter o processo.</p>
-      </div>
-      <div class="modal-footer" style="background-color:white">
-        <button class="submit-btn remove-btn btn-text" onclick="submitElimination()">Sim</button>
-        <button class="submit-btn btn-text">Não</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="myModalVerification2" class="modal modal-sure">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: white;">
-        <h4 style="justify-content: center; color:black">Tem a certeza?</h4>
-        <span class="close">&times;</span>
-      </div>
-      <div class="modal-body">
-        <p>Não poderá reverter o processo.</p>
-      </div>
-      <div class="modal-footer" style="background-color:white">
-        <button class="submit-btn remove-btn btn-text verification-btn" onclick="submitElimination()">Sim</button>
-        <button class="submit-btn btn-text verification-btn">Não</button>
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>

@@ -13,5 +13,5 @@ function addMedicationCard() {
     `;
 
     // Append the new medication card div to the container
-    document.getElementById("medication-container").appendChild(newMedicationCard);
+    document.getElementById("prescription-container").appendChild(newMedicationCard);
 }

@@ -4,6 +4,8 @@ const router = express.Router();
 
 const contaService = require('../services/contaService');
 
-router.post('/contas', contaService.GetContasMedico);
-router.post('/contas', contaService.GetContasUtente);
+router.get('/GetContasMedico', contaService.GetContasMedico);
+router.get('/GetContasUtente', contaService.GetContasUtente);
+router.put('/EliminarConta', contaService.RemoveConta);
+
 module.exports = router;

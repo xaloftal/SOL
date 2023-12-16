@@ -22,16 +22,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  
-  <script>
-    function checkAccordion() {
-      var opcao1 = document.getElementsByName("opcao1")
-      if (opcao1.checked && opcao1.value == 'Sim') {
-        content.classList.toggle("show");
-  }
-}
-    
-  </script>
+
 
 <script type="text/javascript">
   window.onload = () => {
@@ -51,10 +42,32 @@
 
         let container = document.querySelector('[data-id="formularioContainer"]');
         response.forEach(form => {
-          container.innerHTML += '<div class="form-card"><div class="form-info"><span><strong class="form-info-item-1">Utente:</strong>' + form.utente + '</span><span><strong class="form-info-item-2">Data:</strong>' + form.data_formulario + '</span></div><div class="text-form"><span class="text-form-1">Descrição:</span><span>' + form.descricao_formulario + '</span></div><div class="line"></div><div class="form-validation"><a class="ignore-btn">Ignorar</a><button class="myBtn validation-btn validation-btn-txt">Validar</button></div></div></div>';
+          container.innerHTML += '<div class="form-card"><div class="form-info"><span><strong class="form-info-item-1">Utente: </strong>' + form.utente + '</span><span><strong class="form-info-item-2">Data:</strong>' + form.data_formulario + '</span></div><div class="text-form"><span class="text-form-1">Descrição:</span><span>' + form.descricao_formulario + '</span></div><div class="line"></div><div class="form-validation"><a class="ignore-btn">Ignorar</a><button class="myBtn validation-btn validation-btn-txt">Validar</button></div></div></div>';
+          updateModalBtns();
         })
+        
+      })
+      .catch((error) => {
+          console.error(error)
+      });
 
-        updateModalBtns();
+      $.ajax({
+          url: "http://localhost:3050/formulario",
+          type: "GET",
+          crossDomain: false,
+          dataType: "json",
+          headers: {
+              "accept": "application/json",
+              "Access-Control-Allow-Origin":"*"
+          },
+          'Access-Control-Allow-OSrigin': '*'
+      })
+      .then((response) => {
+
+        let containerAnswers = document.querySelector('[data-id="formularioRespondidosContainer"]');
+        response.forEach(form => {
+          containerAnswers.innerHTML += '<div class="form-card"><div class="form-info"><span><strong class="form-info-item-1">Utente:</strong> Tiago Pereira</span><span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span></div><div class="text-form"><span class="text-form-1">Descrição:</span><span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div><div class="line"></div><div class="text-form"><span class="text-form-1">Observações:</span><span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div><a  style="color:#4D77FF" class="more-details" id="accordionBtn2" onclick="toggleAccordion(\'accordionContent1\', \'accordionBtn1\')"><u>Mais detalhes</u></a><div class="accordion-content" id="accordionContent2"><p><strong class="form-info-details">Medicamento:</strong></p><p><strong class="form-info-details">Descrição:</strong> 276427832</p><div class="line"></div>   <div class="exam-div"><p><strong class="form-info-details">Exame:</strong> 962784783</p><p><strong class="form-info-details">Descrição:</strong> 962784783</p></div><div class="line"></div>   <div class="appointment-div"><p><strong class="form-info-details">Consulta solicitada.</strong></p></div></div></div>';
+        })
         
       })
       .catch((error) => {
@@ -108,45 +121,30 @@
           <textarea id="complaintAnswer" name="complaintAnswer" rows="10" cols="50" class="complaint-answer-box"></textarea>
         </div>
 
-        <div class="form-prescription-modal-card">
-          <p class="form-answer-letter">Deseja prescrever?</p>
-          <div class="form-radio-input">
-            <input type="radio" id="sim" name="opcao1" value="sim"/>
-            <label for="sim">Sim</label>
-            <input type="radio" id="nao" name="opcao1" value="nao"/>
-            <label for="nao">Não</label>
-          </div>
-        </div>
-
-        <div class="form-prescription-modal-card">
-          <p class="form-answer-letter">Medicação?</p>
-          <div class="form-radio-input">
-            <input type="radio" id="sim" name="opcao2" value="sim"/>
-            <label for="sim">Sim</label>
-            <input type="radio" id="nao"pm name="opcao2" value="nao"/>
-            <label for="nao">Não</label>
-          </div>
-        </div>
-
-        <div id="medication-container">
-          <div class="medication-card">
+       
+        <button class="accordion-btn accordion" id="accordionBtn2" onclick="toggleAccordion('accordionContent2', 'accordionBtn2')">Medicação</button>
+        <div class="accordion-content" id="accordionContent2">
+          <div class="medication-card" id="prescription-container">
             <label class="form-answer-letter">Nome</label>
             <input type="text" placeholder=""/>
             <br>
             <label class="form-answer-letter">Indicações</label>
             <input type="text" placeholder="" size="30"/>
           </div>
+          <button class="plus-btn" onclick="addMedicationCard()">+</button>
         </div>
-        <button class="plus-btn" onclick="addMedicationCard()">+</button>
+   
 
-        <div class="form-prescription-modal-card">
-          <p class="form-answer-letter">Exame?</p>
-          <div class="form-radio-input">
-            <button></button>
-            <label for="sim">Sim</label>
-            <input type="radio" id="nao" name="opcao3" value="nao"/>
-            <label for="nao">Não</label>
+        <button class="accordion-btn accordion" id="accordionBtn3" onclick="toggleAccordion('accordionContent3', 'accordionBtn3')">Exames</button>
+        <div class="accordion-content" id="accordionContent3">
+          <div class="exam-card" id="prescription-container">
+            <label class="form-answer-letter">Nome</label>
+            <input type="text" placeholder=""/>
+            <br>
+            <label class="form-answer-letter">Indicações</label>
+            <input type="text" placeholder="" size="30"/>
           </div>
+          <button class="plus-btn" onclick="addMedicationCard()">+</button>
         </div>
 
         <div class="form-prescription-modal-card">

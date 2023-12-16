@@ -17,7 +17,7 @@
             let date = document.querySelector('[data-id="date"]').value;
 
             $.ajax({
-                url: "http://localhost:3050/misc/RegistoUtente?nome=" + name + "&email=" + email + "&password=" + password + "&nif=" + nif + "&nmr_telefone" + telephone + "&data_nascimento" + date,
+                url: "http://localhost:3050/RegistoUtente?nome=" + name + "&email=" + email + "&password=" + password + "&nif=" + nif + "&nmr_telefone" + telephone + "&data_nascimento" + date,
                 type: "POST",
                 crossDomain: false,
                 dataType: "json",

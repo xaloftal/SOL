@@ -15,7 +15,7 @@
             let especialidade = document.querySelector('[data-id="especialidadeChooser"]').value;
 
             $.ajax({
-                url: "http://localhost:3050/misc/RegistoMedico?nome=" + name + "&email=" + email + "&password=" + password + "&especialidade=" + especialidade,
+                url: "http://localhost:3050/RegistoMedico?nome=" + name + "&email=" + email + "&password=" + password + "&especialidade=" + especialidade,
                 type: "POST",
                 crossDomain: false,
                 dataType: "json",
