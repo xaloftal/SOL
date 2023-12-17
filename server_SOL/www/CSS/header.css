@@ -16,7 +16,7 @@ header {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    letter-spacing: 0.72px;
+    letter-spacing: 20%;
 }
 
 .header-div {
@@ -26,9 +26,9 @@ header {
     flex-direction: column; 
     justify-content: flex-end; 
     align-items: center; 
-    gap: 26px; 
+    gap: 40%; 
     display: inline-flex;
-    margin-bottom: 10px;
+    margin-bottom: 1%;
 }
 
 .header-div-all-content {
@@ -43,7 +43,7 @@ header {
     align-items: center; 
     gap: 40px; 
     display: flex;
-    padding-left: 10%;
+    padding-left: 3%;
 }
 
 .header-div-content-select {
@@ -51,7 +51,7 @@ header {
     height: 19px;
     justify-content: center; 
     align-items: center; 
-    gap: 40px; 
+    gap: 20%; 
     display: flex;
 }
 
@@ -61,7 +61,7 @@ header {
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 20px; /* 142.857% */
+    line-height: 20px; 
     letter-spacing: 0.42px;
     word-wrap: break-word;
 }
@@ -75,9 +75,9 @@ a:hover {
 .header-button-div {
     justify-content: center; 
     align-items: center; 
-    gap: 20px; 
+    gap: 5%; 
     display: flex;
-    padding-right: 6vw;
+    padding-right: 13%;
 }
 
 .header-button-div-two {
