@@ -32,6 +32,8 @@ end; $$ Language PLPGSQL
 
 
 
+
+
 --Inserir especialidades
 create or replace procedure inserir_especialidade(_nom varchar(60))
 as $$
@@ -57,6 +59,8 @@ begin
 	end if;
 	
 end; $$ Language PLPGSQL
+
+
 
 
 
@@ -104,6 +108,8 @@ end; $$ Language PLPGSQL
 
 
 
+
+
 --Insercao de medicacao
 create or replace procedure inserir_medicamento(_nom varchar(60), _form varchar(60))
 as $$
@@ -138,6 +144,10 @@ begin
 	insert into medicamento(nome_med, id_forma_farmaceutica, estado_m ) values (_nom, form, 'Existente');
 	
 end; $$ Language PLPGSQL
+
+
+select * from utilizador
+update 
 
 
 
@@ -341,68 +351,30 @@ end; $$ Language PLPGSQL
 
 
 
---consulta por formulario (adm)
 
-create or replace procedure criar_consulta_form(_med int, _ute int, _horari timestamp, _form int, _observ varchar(300), out id_cons int)
+
+--consulta 
+create or replace procedure agendar_consulta(_med int, _ute int, _horari timestamp, _cons int)
 as $$
 declare 
 	horar int;
 begin
-
 	--verificar se existe consulta com o medico no mesmo horario
-	select count(*) into horar
-	from consulta c 
-	where c.horario = horari and mc.medico_cons = _med;	
-	
-	if (horar > 0)
+	if (_horari is not null) -- agendar
 	then
-		raise notice 'medico não disponivel no horario';
-		return;
-	end if;
-	
-	--inserir
-	insert into consulta (horario, id_medico, estado_c, id_utente) 
-	values (_horari, _med, 'Agendado', _ute)
-	returning id_consulta into id_cons;
-	
-	insert into formulario_consulta (id_formulario, id_consulta) values (_form, id_cons);	
-	
-	
-	--guardar o estado do formulario
-	update formulario 
-	set estado_f = 'Respondido' 
-	where id_formulario = id_form ;
+		select count(*) into horar
+		from consulta c 
+		where c.horario = horari and mc.medico_cons = _med;	
+
+		if (horar > 0)
+		then
+			raise notice 'medico não disponivel no horario';
+			return;
+		end if;
 		
-end; $$ Language PLPGSQL
-
-
-
-
---criar uma consulta por uma consulta
-
-create or replace procedure criar_consulta_cons (_med int, _ute int, _cons int, _hora timestamp, _obser varchar(300), out id_cons int)
-as $$
-declare ccons int;
-		cmedhor int;
-begin	
-	
-	--verificar se médico está disponivel no horário
-	select count(*) into cmedhor
-	from consulta c
-	where c.id_medico = _med and c.horario = _hora;
-	
-	if (cmedhor > 0)
-	then	
-		raise notice 'Medico ja tem consulta marcada no horario';
-	end if;
-	
-	--inserir nas tabelas	
-	--criar nova consulta
-	insert into consulta (horario, observacoes, id_medico, estado_c, id_utente) 
-	values (_horari, _observ, _med, 'Agendado', _ute)
-	returning id_consulta into id_cons;
-	
-	--criar a relacao 
-	insert into consulta_consulta (consulta_origem, id_consulta) values (_cons, id_cons);	
-	
+		update consulta
+		set horario = _horari, estado_c = 'Agendado'
+		where id_consulta = _cons;
+	end if;	
+		
 end; $$ Language PLPGSQL
