@@ -20,7 +20,7 @@ header {
 }
 
 .header-div {
-    width: 215vh; 
+    width: 215lvh; 
     padding-top: 2vh;
     padding-bottom: 1vh;
     flex-direction: column; 
@@ -63,7 +63,7 @@ header {
     font-weight: 500;
     line-height: 20px; 
     letter-spacing: 0.42px;
-    word-wrap: break-word;
+    word-wrap: normal;
 }
 
 a:hover {
