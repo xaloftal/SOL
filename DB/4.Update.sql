@@ -27,12 +27,15 @@ begin
 end; $$ Language PLPGSQL
 
 
--- pedir consulta por formulario (med)
-
-create or replace procedure pedido_consulta(_med int, _form int, _cons int, _observ varchar(300))
+-- pedir consulta (med)
+drop procedure pedido_consulta
+create or replace procedure pedido_consulta(_med int, _form int, _cons int)
 as $$
 declare form_cons int;
 		cons_cons int;
+		ute int;
+		consf int;
+		consc int;
 begin
 	-- se vier de formulario (_cons null)
 	if (_form is not null)
@@ -46,11 +49,21 @@ begin
 			raise notice 'Formulario com consulta já marcada';
 			return;
 		end if;
+
 		
-		update formulario
-		set id_medico = _med,
-			observacoes_med = _observ
-		where id_formulario = _form;
+		-- ir buscar o utente
+		select id_utente into ute
+		from formulario
+		where id_formulatio = _form;
+		
+		
+		-- criar o pedido de consulta
+		insert into consulta ( id_medico, estado_c, id_utente) 
+		values ( _med, 'Solicitado', ute)
+		returning id_consulta into consf;
+	
+		insert into formulario_consulta (id_formulario, id_consulta) values (_form, consf);
+		
 		
 	-- se vier de consulta (_form null)
 	elsif (_cons is not null)
@@ -65,39 +78,46 @@ begin
 			return;
 		end if;
 		
+		-- ir buscar o utente
+		select id_utente into ute
+		from consulta
+		where id_consulta = _cons;
 		
 		
+		-- criar o pedido de consulta
+		insert into consulta ( id_medico, estado_c, id_utente) 
+		values ( _med, 'Solicitado', ute)
+		returning id_consulta into consc;
+	
+		insert into consulta_consulta (consulta_origem, id_consulta) values (_cons, consc);		
 	
 	end if;	
-	
-	
-	
 		
 end; $$ Language PLPGSQL
 
 
-create or replace procedure pedido_consulta_cons(_med int, _cons int, _observ varchar(300))
+-- responder formulario (med)
+create or replace procedure responder_formulario(_form int, _med int, _obs varchar(500))
 as $$
-declare form_cons int;
-begin
-	--verificar se existe consulta vindo do formulario
-	if (_form is not null)
-	then
-		select count(*) into form_cons
-		from formulario_consulta fc
-		where fc.id_formulario = _form;	
-		
-		if (form_cons > 0)
-		then
-			raise notice 'Formulario com consulta já marcada';
-			return;
-		end if;
-	end if;	
-	
-	
+begin			
+	-- update ao formulario
 	update formulario
 	set id_medico = _med,
-		observacoes_med = _observ
+		observacoes_med = _obs,
+		estado_f = 'Respondido'
 	where id_formulario = _form;
-		
+	
+end; $$ Language PLPGSQL
+
+
+-- anotacoes consulta (med)
+create or replace procedure responder_consulta(_cons int,  _obs varchar(500))
+as $$
+begin			
+	-- update ao formulario
+	update consulta
+	set observacoes = _obs,
+		estado_c = 'Concluido'
+	where id_consulta= _cons;
+	
 end; $$ Language PLPGSQL

@@ -31,12 +31,12 @@ as
 		inner join utilizador ut on ut.email = mdor.email_m
 		inner join utilizador util on util.email = u.email_u
 		
-		
+select * from consulta		
 		
 		
 		
 --view prescricoes de formulario
-
+drop view prescricoes_formularios
 create or replace view prescricoes_formularios
 as
 	select p.id_prescricao, p.validade validade_prescricao, --info prescricao
@@ -44,20 +44,21 @@ as
 		e.id_exame, e.nome_exame exame, pe.descricao_pres_exame descricao_exame, -- exames
 		mdf.id_medico, mdf.nome_m nome_medico, mdf.email_m email_medico, -- info do medioco
 		u.id_utente, u.nome_u nome_utente, u.nif_u nif_utente, u.email_u email_utente, u.dat_nasc data_nascimento,  -- info utente
+		f.id_formulario, -- formulario
 		p.estado_p estado_prescricao, e.estado_e estado_exame, m.estado_m estado_medicamento, ff.estado_ff estado_forma, f.estado_f estado_formulario -- estados
 	from prescricao p
 	left join prescricao_exame pe using (id_prescricao)
-	inner join exame e using (id_exame)
+	left join exame e using (id_exame)
 	left join prescricao_medicamento pm using (id_prescricao)
-	inner join medicamento m using (id_medicamento)
-	inner join forma_farmaceutica ff using (id_forma_farmaceutica)		
+	left join medicamento m using (id_medicamento)
+	left join forma_farmaceutica ff using (id_forma_farmaceutica)		
 	left join formulario_prescricao fp using (id_prescricao)
-	inner join formulario f using (id_formulario)
-	inner join medico mdf on f.id_medico = mdf.id_medico
-	inner join utente u using (id_utente)
+	left join formulario f using (id_formulario)
+	left join medico mdf on f.id_medico = mdf.id_medico
+	left join utente u using (id_utente)
 
 
-
+select * from formulario
 
 		
 --view prescricoes de consultas
@@ -68,14 +69,15 @@ as
 		e.id_exame, e.nome_exame exame, pe.descricao_pres_exame descricao_exame, -- exames
 		mdc.id_medico, mdc.nome_m nome_medico, mdc.email_m email_medico, -- info do medioco
 		u.id_utente, u.nome_u nome_utente, u.nif_u nif_utente, u.email_u email_utente, u.dat_nasc data_nascimento,  -- info utente
-		p.estado_p estado_prescricao, e.estado_e estado_exame, m.estado_m estado_medicamento, ff.estado_ff estado_forma, c.estado_c estado_consulta -- estados
+		p.estado_p estado_prescricao, e.estado_e estado_exame, m.estado_m estado_medicamento, ff.estado_ff estado_forma, c.estado_c estado_consulta, -- estados
+		c.id_consulta -- consulta
 	from prescricao p
 		left join prescricao_exame pe using (id_prescricao)
-		inner join exame e using (id_exame)
+		left join exame e using (id_exame)
 		left join prescricao_medicamento pm using (id_prescricao)
-		inner join medicamento m using (id_medicamento)
-		inner join forma_farmaceutica ff using (id_forma_farmaceutica)
-		left join consulta_prescricao cp using (id_prescricao)
+		left join medicamento m using (id_medicamento)
+		left join forma_farmaceutica ff using (id_forma_farmaceutica)
+		inner join consulta_prescricao cp using (id_prescricao)
 		inner join consulta c using (id_consulta)
 		inner join medico mdc on c.id_medico = mdc.id_medico
 		inner join utente u using (id_utente)
@@ -94,8 +96,7 @@ as
 		inner join especialidade e using (id_especialidade)
 		left join medico m on m.id_medico = f.id_medico
 		left join formulario_consulta fc using (id_formulario) -- ver infos da consulta
-		inner join consulta c using (id_consulta)
-		
+		left join consulta c using (id_consulta)
 		
 		
 --ver reclamacoes
