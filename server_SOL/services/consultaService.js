@@ -9,5 +9,13 @@ module.exports = {
             }
             res.send(results.rows)
         });
+    },
+    Read: (req,res) => {
+        client.query("SELECT * from consultas WHERE estado_consulta = 'Solicitado'", (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.send(results.rows)
+        });
     }
 }

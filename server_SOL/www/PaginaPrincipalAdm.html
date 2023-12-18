@@ -17,6 +17,7 @@
   <script class="u-script" type="text/javascript" src="JavaScript/style.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="JavaScript/modal.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="JavaScript/notification.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/PaginaPrincipalAdm.js" defer=""></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -30,32 +31,11 @@
     }
 
   </script>
-
   <script type="text/javascript">
     window.onload = () => {
-        $.ajax({
-            url: "http://localhost:3050/reclamacao",
-            type: "GET",
-            crossDomain: false,
-            dataType: "json",
-            headers: {
-                "accept": "application/json",
-                "Access-Control-Allow-Origin":"*"
-            },
-            'Access-Control-Allow-OSrigin': '*'
-        })
-        .then((response) => {
-          
-          let container = document.querySelector('[data-id="reclamacaoContainer"]');
-          response.forEach(reclamacao => {
-            console.log(reclamacao);
-            container.innerHTML += '<div class="complaint-info"><span><strong class="complaint-info-item-1">Utente: </strong>' + reclamacao.id_utente + '</span><span><strong class="complaint-info-item-2">Data: </strong>' + reclamacao.data_recl_format + '</span></div><div class="text-complaint"><span class="text-complaint-1">Descrição: </span><span>' + reclamacao.descricao_rec + '</span></div><div class="line"></div><div class="consultation-booking"><button class="myBtn action-btn btn-text">Responder</button></div></div>';
-          })
-        })
-        .catch((error) => {
-            console.error(error)
-        });
-      }
+      GetReclamacao();
+      GetPedidoConsulta();
+    }
   </script>
 
 </head>
@@ -95,26 +75,7 @@
         <p>Consultas solicitadas</p>
     </div>
 
-    <!-- Consultation Cards -->
-    <!-- Card 1 -->
-    <div class="consultation-card">
-        <!-- Consultation Info -->
-        <div class="consultation-info">
-            <span><strong class="info-item-1">Especialidade:</strong> Psiquiatria</span>
-            <span><strong class="info-item-2">Médico:</strong> Pedro Ferreira</span>
-            <span><strong class="info-item-3">Utente:</strong> Tiago Pereira</span>
-            <span><strong class="info-item-4">Data:</strong> 12/03/2024</span>   
-        </div>
-        <div class="text-appointment">
-          <span class="text-appointment-1">Descrição:</span>
-          <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
-        </div>
-        <div class="line"></div>
-        <!-- Action Button -->
-        <div class="consultation-booking">
-          <button class="myBtn action-btn btn-text">Validar</button>
-        </div>
-      </div>
+    <div data-id="consultaSolicitadaContainer">
     </div>
   </section>
 
@@ -156,8 +117,7 @@
     <div class="footer-copyright-letter">© 2023 Saúde On-Line </div>
   </div> 
 
-  <div id="myModalAppointment" class="modal">
-    <!-- Modal content -->
+  <!--<div id="myModalAppointment" class="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Marcar consulta</h3>
@@ -175,25 +135,8 @@
         <button class="submit-btn btn-text" onclick="submitAppointment()">Marcar</button>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div id="myModalComplaint" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Responder a reclamação</h3>
-        <span class="close">&times;</span>
-      </div>
-      <div class="modal-body">
-        <div class="consultation-answer-modal-card">
-          <p class="complaint-letter">Escreva aqui a sua resposta:</p>
-          <textarea id="complaintAnswer" name="complaintAnswer" rows="10" cols="50" class="complaint-answer-box"></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="submit-btn btn-text" onclick="submitComplaint()">Submeter</button>
-      </div>
-    </div>
-  </div>
+  
 </body>
 </html>
