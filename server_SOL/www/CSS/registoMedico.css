@@ -139,3 +139,7 @@
     color: #4D77FF;
     text-decoration: underline;
 }
+
+body {
+    font-family:Ubuntu;
+}

@@ -5,6 +5,8 @@
     <title>Registo - Saúde On-Line</title>
     <link rel="stylesheet" href="CSS/registoUtente.css">
     <script class="u-script" type="text/javascript" src="JavaScript/jquery.js" defer=""></script>
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
     <script type="text/javascript">
         doRegister = () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -41,7 +43,7 @@
 <body>
 
     <div class="container">
-        <img src="C:\Users\Utilizador\Desktop\Trabalho\imagens\1.jpg" class="main-img" />
+        <img src="imagens/imagem_login.jpeg" class="main-img" />
         
         <div class="logo">
             <div style="width: 20%; height: 100%; position: relative">
@@ -51,48 +53,48 @@
 <div style="width: 11.44px; height: 32.22px; left: 32.22px; top: 9.15px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; background: white; border-radius: 0.78px"></div>
 </div>
 </div>
-            <span class="logo-text">Saúde&nbsp;</span><span class="logo-text accent-color">On-Line</span>
+            <span class="logo-text" style="font-family: Ubuntu;">Saúde&nbsp;</span><span class="logo-text accent-color" style="font-family: Ubuntu;">On-Line</span>
         </div>
         
-        <div class="register-text">Registo</div>
+        <div class="register-text" style="font-family: Ubuntu;">Registo</div>
         
         <div class="vertical-line"></div>
         
         <div class="create-account">
-            <button class="create-account-text" onclick="doRegister()">Criar conta</button>
+            <a class="create-account-text" onclick="doRegister()" style="font-family: Ubuntu;">Criar conta</a>
         </div>
 
         <div class="campos-entrada">
         
         
-            <label class="input-label">Nome</label>
+            <label class="input-label" style="font-family: Ubuntu;">Nome</label>
             <br>
             <input class="input-campo" type="text" size="43px" placeholder="" data-id="name"/>
         
         <br><br>
 
-        <label class="input-label">Data de Nascimento</label>
+        <label class="input-label" style="font-family: Ubuntu;">Data de Nascimento</label>
         <br>
         <input class="input-campo" type="date" size="43px" placeholder="" data-id="date"/>
 
         <br><br>
 
-        <label class="input-label">NIF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <label class="input-label" style="font-family: Ubuntu;">NIF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         
-        <label class="input-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone</label>
+        <label class="input-label" style="font-family: Ubuntu;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone</label>
         <br>
             <input class="input-campo" type="text" size="17px" placeholder="" data-id="nif"/>
             <input class="input-campo" type="text" size="17px" placeholder="" data-id="telephone"/>
     
     <br><br>
-            <label class="input-label">Palavra-Passe</label>
+            <label class="input-label" style="font-family: Ubuntu;">Palavra-Passe</label>
             <br>
             <input class="input-campo" type="password" size="43px" placeholder="" data-id="password"/>
         </div>
         
         
         <div class="have-account">
-            <span>Já tem conta? </span><span class="accent-color">Entre aqui</span>
+            <span style="font-family: Ubuntu;">Já tem conta? </span><a class="accent-color" style="font-family: Ubuntu;">Entre aqui</a>
         </div>
     </div>
 

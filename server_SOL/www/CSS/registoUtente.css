@@ -6,8 +6,8 @@
 }
 
 .main-img {
-    width: 756px;
-    height: 701px;
+    width: 55%;
+    height: 694px;
     position: absolute;
     left: 684px;
     top: 0;
@@ -49,7 +49,7 @@
 }
 
 .vertical-line {
-    width: 699px;
+    width: 687px;
     height: 0px;
     left: 684px;
     top: 0;
@@ -103,8 +103,6 @@
     padding: 10px;
 }
 
-
-
 .campos-entrada{
     width: 376px;
     height: 43px;
@@ -139,3 +137,14 @@
     color: #4D77FF;
     text-decoration: underline;
 }
+
+body {
+    font-family:Ubuntu;
+}
+
+select {
+    border-radius: 5px;
+    width: 55%;
+    border-color:gray;
+}
+
