@@ -252,6 +252,290 @@
   border: 1px #A3A3A3 solid;
 }
 
+.container {
+  width: 1440px;
+  height: 800px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+}
+
+.header {
+  width: 1240px;
+  height: 100px;
+  left: 104px;
+  top: 30px;
+  position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  display: inline-flex;
+}
+
+.logo-text .bold {
+  color: #121212;
+  font-size: 24px;
+  font-family: Manrope;
+  font-weight: 700;
+  letter-spacing: 0.72px;
+  word-wrap: break-word;
+}
+
+.logo-text .blue {
+  color: #4D77FF;
+}
+
+.navigation {
+  width: 146px;
+  height: 17px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  display: flex;
+}
+
+.nav-item {
+  width: 83px;
+  color: #121212;
+  font-size: 14px;
+  font-family: Manrope;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.42px;
+  word-wrap: break-word;
+}
+
+.logout a {
+  padding: 12px 22px;
+  background: #4D77FF;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-family: Manrope;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.42px;
+  word-wrap: break-word;
+  text-decoration: none;
+}
+
+.divider {
+  width: 1444px;
+  height: 0px;
+  left: 0px;
+  top: 101px;
+  position: absolute;
+  border: 4px #4D77FF solid;
+}
+
+.content {
+  width: 1443px;
+  height: 700px;
+  left: -3px;
+  top: -14px;
+  position: absolute;
+}
+
+
+.container {
+  width: 1440px;
+  height: 172px;
+  left: 0px;
+  top: 3981px;
+  position: absolute;
+  background: rgba(217, 217, 217, 0.60);
+}
+
+.contact-info {
+  width: 1440px;
+  height: 172px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+}
+
+.contact-details {
+  width: 323px;
+  height: 15px;
+  left: 582px;
+  top: 79px;
+  position: absolute;
+}
+
+.phone,
+.email {
+  color: black;
+  font-size: 12px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.phone img,
+.email img {
+  position: absolute;
+}
+
+.description {
+  width: 515px;
+  height: 39px;
+  left: 462px;
+  top: 18px;
+  position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  display: inline-flex;
+  text-align: justify;
+  color: black;
+  font-size: 13px;
+  font-family: Inter;
+  font-weight: 500;
+  word-wrap: break-word;
+}
+
+.address {
+  left: 582px;
+  top: 52px;
+  position: absolute;
+  color: black;
+  font-size: 12px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.logo {
+  left: 623px;
+  top: 103px;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  display: inline-flex;
+}
+
+.bold {
+  color: #121212;
+  font-size: 20px;
+  font-family: Manrope;
+  font-weight: 700;
+  letter-spacing: 0.60px;
+  word-wrap: break-word;
+}
+
+.blue {
+  color: #4D77FF;
+}
+
+.logo-icon {
+  width: 193.43px;
+  height: 33.81px;
+  position: relative;
+}
+
+.icon-bg {
+  width: 37px;
+  height: 33.81px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: linear-gradient(96deg, #3A8EF6 0%, #6F3AFA 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12) inset;
+  border-radius: 9999px;
+}
+
+.icon {
+  width: 20.91px;
+  height: 19.11px;
+  left: 8.04px;
+  top: 7.35px;
+  position: absolute;
+}
+
+.lines {
+  width: 8.04px;
+  height: 19.11px;
+  left: 6.43px;
+  top: -0px;
+  position: absolute;
+  background: white;
+  border-radius: 0.78px;
+}
+
+.line {
+  width: 7.35px;
+  height: 20.91px;
+  left: 20.91px;
+  top: 5.88px;
+  position: absolute;
+  transform: rotate(90deg);
+  transform-origin: 0 0;
+  background: white;
+  border-radius: 0.78px;
+}
+
+.footer {
+  width: 1440px;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  padding-left: 6px;
+  padding-right: 1290px;
+  left: 0px;
+  top: 144px;
+  position: absolute;
+  background: #484848;
+  justify-content: flex-start;
+  align-items: center;
+  display: inline-flex;
+}
+
+.copyright {
+  text-align: justify;
+  color: black;
+  font-size: 13px;
+  font-family: Inter;
+  font-weight: 500;
+  word-wrap: break-word;
+}
+.status-section {
+  position: relative;
+}
+
+.status-box {
+  width: 555px;
+  height: 51px;
+  left: 51px;
+  position: absolute;
+  color: black;
+  font-size: 36px;
+  font-family: Manrope;
+  font-weight: 800;
+  letter-spacing: 1.08px;
+  word-wrap: break-word;
+}
+.medical-details {
+  width: 1191.71px;
+  height: 464.65px;
+  left: 53px;
+  top: 1711.43px;
+  position: absolute;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px #A3A3A3 solid;
+}
+
+.detail-box {
+  width: 1142px;
+  position: absolute;
+  color: black;
+  font-size: 14px;
+  font-family: Manrope;
+  line-height: 20px;
+  letter-spacing: 0.42px;
+  word-wrap: break-word;
+}
+
+
 .specialty {
   width: 241px;
   left: 31.98px;

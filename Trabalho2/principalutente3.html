@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <title>Página do Médico - Saúde On-Line</title>
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
+  <link rel="stylesheet" href="CSS/adm_modal.css" media="screen">
+  <link rel="stylesheet" href="CSS/footer.css" media="screen">
+  <link rel="stylesheet" href="CSS/bootstrap.min.css" media="screen">
+  <link rel="stylesheet" href="CSS/header.css" media="screen">
+  <link rel="stylesheet" href="CSS/accordion.css" media="screen">
+  <link rel="stylesheet" href="CSS/principalutente3.css" media="screen">
+  <script class="u-script" type="text/javascript" src="JavaScript/jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/style.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/modal.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/notification.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/addMedication.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/accordion.js" defer=""></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+    GetFormularios = function () {
+      $.ajax({
+          url: "http://localhost:3050/formulario",
+          type: "GET",
+          crossDomain: false,
+          dataType: "json",
+          headers: {
+              "accept": "application/json",
+              "Access-Control-Allow-Origin":"*"
+          },
+          'Access-Control-Allow-OSrigin': '*'
+      })
+      .then((response) => {
+
+        let container = document.querySelector('[data-id="formularioContainer"]');
+        response.forEach(form => {
+          container.innerHTML += '<div class="form-card"><div class="form-info"><span><strong class="form-info-item-1">Utente: </strong>' + form.utente + '</span><span><strong class="form-info-item-2">Data:</strong>' + form.data_formulario + '</span></div><div class="text-form"><span class="text-form-1">Descrição:</span><span>' + form.descricao_formulario + '</span></div><div class="line"></div><div class="form-validation"><a class="ignore-btn" onclick="ignoreForm('+ form.id_formulario +')">Ignorar</a><button class="myBtn validation-btn validation-btn-txt">Validar</button></div></div></div>';
+          updateModalBtns();
+        })
+        
+      })
+      .catch((error) => {
+          console.error(error)
+      });
+    }
+
+    $.ajax({
+        url: "http://localhost:3050/formulario",
+        type: "GET",
+        crossDomain: false,
+        dataType: "json",
+        headers: {
+            "accept": "application/json",
+            "Access-Control-Allow-Origin":"*"
+        },
+        'Access-Control-Allow-OSrigin': '*'
+    })
+    .then((response) => {
+
+      let containerAnswers = document.querySelector('[data-id="formularioRespondidosContainer"]');
+      response.forEach(formAnswer => {
+        containerAnswers.innerHTML += '<div class="form-card"><div class="form-info"><span><strong class="form-info-item-1">Utente: </strong></span><span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span></div><div class="text-form"><span class="text-form-1">Descrição:</span><span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div><div class="line"></div><div class="text-form"><span class="text-form-1">Observações:</span><span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div><a  style="color:#4D77FF" class="more-details" id="accordionBtn2" onclick="toggleAccordion(\'accordionContent1\', \'accordionBtn1\')"><u>Mais detalhes</u></a><div class="accordion-content" id="accordionContent2"><p><strong class="form-info-details">Medicamento:</strong></p><p><strong class="form-info-details">Descrição:</strong> 276427832</p><div class="line"></div>   <div class="exam-div"><p><strong class="form-info-details">Exame:</strong> 962784783</p><p><strong class="form-info-details">Descrição:</strong> 962784783</p></div><div class="line"></div>   <div class="appointment-div"><p><strong class="form-info-details">Consulta solicitada.</strong></p></div></div></div>';
+      })
+      
+    })
+    .catch((error) => {
+        console.error(error)
+    });
+ 
+
+  document.addEventListener("DOMContentLoaded", GetFormularios);
+
+  answerForm = (id_formulario) => {
+
+      $.ajax({
+          url: "http://localhost:3050/formulario?id_form=" + id_formulario ,
+          type: "POST",
+          crossDomain: false,
+          dataType: "json",
+          headers: { 
+              "accept": "application/json",
+              "Access-Control-Allow-Origin":"*"
+          },
+          'Access-Control-Allow-OSrigin': '*'
+      })
+      .then((response) => {
+          alert
+      })
+      .catch((error) => {
+          alert('Erro ao registar')
+      });
+
+  }
+
+  ignoreForm = (id_formulario) => {
+    let userSession = JSON.parse(localStorage.getItem('userSession'));
+    $.ajax({
+        url: "http://localhost:3050/formulario?id_form=" + id_formulario + "&id_med=" + encodeURI(userSession.id_med),
+        type: "PUT",
+        crossDomain: false,
+        dataType: "json",
+        headers: { 
+            "accept": "application/json",
+            "Access-Control-Allow-Origin":"*"
+        },
+        'Access-Control-Allow-OSrigin': '*'
+    })
+    .then((response) => {
+      document.querySelector('[data-id="formularioContainer"]').innerHTML = ''
+      GetFormularios();
+      alert('Formulário ignorado')
+    })
+    .catch((error) => {
+      console.error(error)
+      alert('Erro ao ignorar formulário')
+    });
+
+  }
+</script>
+<body>
+
+  <header>
+    <div class="header-div">
+      <div class="header-div-all-content">
+        <div class="header-div-logo">
+          <div>
+            <img  class="img-logo" src="imagens/logotipo.png"></img>
+            <span class="saude-span">Saúde </span>
+            <span class="online-span">On-Line</span>
+          </div>
+        </div>
+        <div class="header-div-content-select">
+          <div><a href="#section-1" class="a-content-letter">Consultas</a></div>
+          <div><a href="#section-2" class="a-content-letter">Reclamações</a></div>
+          <div><a href="PaginaPrincipalAdmContas.html" class="a-content-letter">Contas</a></div>
+          <div><a href="#rodape" class="a-content-letter">Contactos</a></div>
+        </div>
+        <div class="header-button-div">
+          <div class="header-button-div-two">
+            <div class="header-button-content">Terminar sessão</div>
+          </div>
+        </div>
+      </div>
+      <div class="header-line"></div>
+    </div>
+  </header>
+
+  
+  
+
+  <section class="section-1" id="section-1" data-id="formularioContainer">
+    <img class="ima0gem" src="C:\Users\Utilizador\Desktop\R_A\SOL\Trabalho2\imagens\2.jpg"></img>
+
+  <div id="myModalFormResponse" class="modal">
+    <!-- Modal content -->
+    <div style="width: 513.60px; height: 327.70px; left: 851px; top: 149.62px; position: absolute; background: white; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 30px; overflow: hidden; border: 1px #D9D9D9 solid">
+        <div style="height: 160.01px; left: 25px; top: 96.99px; position: absolute">
+            <div style="width: 462.52px; height: 138px; left: 0px; top: 22.01px; position: absolute; background: white; border-radius: 6px; border: 1px #C4C4C4 solid">
+                <textarea id="preocupacoes" style="width: 100%; height: 100%; border: none; padding: 10px; font-size: 16px; font-family: Manrope; resize: none;" placeholder=""></textarea>
+            </div>
+            <div style="left: 1px; top: 0px; position: absolute; color: black; font-size: 16px; font-family: Manrope; font-weight: 600; letter-spacing: 0.48px; word-wrap: break-word">Escreva_aqui_as_suas_preocupações</div>
+        </div>
+    
+        <div style="width: 462.39px; height: 64.01px; left: 25px; top: 15.99px; position: absolute">
+            <div style="width: 462.39px; height: 42px; left: 0px; top: 22.01px; position: absolute; background: white; border-radius: 6px; border: 1px #C4C4C4 solid">
+                <input type="text" id="especialidade" style="width: calc(100% - 10px); height: calc(100% - 10px); border: none; padding: 5px; font-size: 16px; font-family: Manrope;" placeholder="">
+            </div>
+            <div style="width: 136px; left: 1.16px; top: 0px; position: absolute; color: black; font-size: 16px; font-family: Manrope; font-weight: 600; letter-spacing: 0.48px; word-wrap: break-word">Especialidade</div>
+        </div> 
+        
+        <div style="left: 198.68px; top: 268.62px; position: absolute; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
+            <button onclick="submitForm()" style="padding: 12px 22px; background: #4D77FF; border-radius: 10px; color: white; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word; cursor: pointer; border: none;">Submeter</button>
+        </div>
+    </div>
+  </div>
+ </section>
+ <br><br>
+  <section class="section-2" id="section2">
+    <div>
+        <h2>Formulários</h2>
+    </div>
+  </section>
+  <div class="bem-vindo-div">Formulários não respondidos</div>
+  <br><br>
+  <section class="section-3" data-id="formulariosRespondidosContainer">
+    
+    <div class="form-card">
+
+      <div class="form-info">
+          <span><strong class="form-info-item-1">Especialidade:</strong> Dermatologia</span>
+          <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+      </div>
+      <div class="text-form">
+        <span class="text-form-1"></span>
+        <span>  </span>
+      </div>
+      <div class="line"></div>
+      <div class="text-form">
+        <span class="text-form-1">Descrição: </span>
+        <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+      </div>
+      <div class="line"></div>
+      <div class="text-form">
+        <button class="botaoEliminar" style="float: right;">Eliminar</button>
+      </div>
+    </div>
+    <div class="form-card">
+
+        <div class="form-info">
+            <span><strong class="form-info-item-1">Especialidade:</strong> Cardiologia</span>
+            <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+        </div>
+        <div class="text-form">
+          <span class="text-form-1"></span>
+          <span>  </span>
+        </div>
+        <div class="line"></div>
+        <div class="text-form">
+          <span class="text-form-1">Descrição: </span>
+          <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+        </div>
+        <div class="line"></div>
+        <div class="text-form">
+          <button class="botaoEliminar" style="float: right;">Eliminar</button>
+        </div>
+      </div>
+      <div class="form-card">
+
+        <div class="form-info">
+            <span><strong class="form-info-item-1">Especialidade:</strong> Psiquiatria</span>
+            <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+        </div>
+        <div class="text-form">
+          <span class="text-form-1"></span>
+          <span>  </span>
+        </div>
+        <div class="line"></div>
+        <div class="text-form">
+          <span class="text-form-1">Descrição: </span>
+          <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+        </div>
+        <div class="line"></div>
+        <div class="text-form">
+          <button class="botaoEliminar" style="float: right;">Eliminar</button>
+        </div>
+      </div>
+
+      <div class="bem-vindo-div">Formulários respondidos</div>
+  <br><br>
+  <section class="section-3" data-id="formulariosRespondidosContainer">
+    
+    <div class="form-card">
+
+      <div class="form-info">
+          <span><strong class="form-info-item-1">Especialidade:</strong> Dermatologia</span>
+          <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+      </div>
+      <div class="text-form">
+        <span class="text-form-1"></span>
+        <span>  </span>
+      </div>
+      <div class="line"></div>
+      <div class="text-form">
+        <span class="text-form-1">Descrição: </span>
+        <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+      </div>
+    </div>
+    <div class="form-card">
+
+        <div class="form-info">
+            <span><strong class="form-info-item-1">Especialidade:</strong> Cardiologia</span>
+            <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+        </div>
+        <div class="text-form">
+          <span class="text-form-1"></span>
+          <span>  </span>
+        </div>
+        <div class="line"></div>
+        <div class="text-form">
+          <span class="text-form-1">Descrição: </span>
+          <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+        </div>
+      </div>
+      <div class="form-card">
+
+        <div class="form-info">
+            <span><strong class="form-info-item-1">Especialidade:</strong> Psiquiatria</span>
+            <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+        </div>
+        <div class="text-form">
+          <span class="text-form-1"></span>
+          <span>  </span>
+        </div>
+        <div class="line"></div>
+        <div class="text-form">
+          <span class="text-form-1">Descrição: </span>
+          <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+        </div>
+    </div>
+    
+  </section>
+  <br><br>
+
+  <section class="section-4" id="section4">
+    <div>
+        <h2>Consultas</h2>
+    </div>
+  </section>
+
+  <div class="title-section">
+    <p>Consultas não decorridas</p>
+  </div>  
+
+  <div class="form-card">
+
+   <div class="form-info">
+            <span><strong class="form-info-item-1">Especialidade:</strong> Dermatologia</span>
+            <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+        </div>
+        </div>
+
+
+  <div class="title-section">
+    <p>Consultas decorridas</p>
+  </div>  
+
+  <div class="form-card">
+
+    <div class="form-info">
+        <span><strong class="form-info-item-1">Utente:</strong> Tiago Pereira</span>
+        <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+    </div>
+    <div class="text-form">
+      <span class="text-form-1">Descrição:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+    <div class="line"></div>
+    <div class="text-form">
+      <span class="text-form-1">Observações:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+  </div>
+  <div class="form-card">
+
+    <div class="form-info">
+        <span><strong class="form-info-item-1">Utente:</strong> Joao Silva</span>
+        <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+    </div>
+    <div class="text-form">
+      <span class="text-form-1">Descrição:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+    <div class="line"></div>
+    <div class="text-form">
+      <span class="text-form-1">Observações:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+  </div>
+  <div class="form-card">
+
+    <div class="form-info">
+        <span><strong class="form-info-item-1">Utente:</strong> Pedro Moreira</span>
+        <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+    </div>
+    <div class="text-form">
+      <span class="text-form-1">Descrição:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+    <div class="line"></div>
+    <div class="text-form">
+      <span class="text-form-1">Observações:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+  </div>
+
+  <br><br>
+
+  <section class="section-4" id="section4">
+    <div>
+        <h2>Prescrições</h2>
+    </div>
+  </section>
+
+  <br>
+
+  <div class="form-card">
+
+    <div class="form-info">
+        <span><strong class="form-info-item-1">Medico:</strong> Pedro Ferreira</span>
+        <span><strong class="form-info-item-2">Data:</strong> 12/03/2024</span>   
+    </div>
+    <div class="text-form">
+      <span class="text-form-1">Descrição:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+    <div class="line"></div>
+    <div class="text-form">
+      <span class="text-form-1">Observações:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+    <div class="line"></div>
+    <div class="text-form">
+      <span class="text-form-1">Observações:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+  </div>
+  <div style="width: 100%; height: 172px; left: 0px; top: 3981px; position: absolute; background: rgba(217, 217, 217, 0.60)">
+    <div style="width: 323px; height: 15px; left: 582px; top: 79px; position: absolute">
+        <div style="left: 0px; top: 0px; position: absolute; color: black; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">+351 253 467 451</div>
+        <img style="width: 20px; height: 18px; left: -22px; top: -2px; position: absolute" src="https://via.placeholder.com/20x18" />
+        <div style="left: 176px; top: 0px; position: absolute; color: black; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">info@saudeonline.pt</div>
+        <img style="width: 19px; height: 15px; left: 150px; top: 0px; position: absolute" src="https://via.placeholder.com/19x15" />
+    </div>
+    <div style="width: 515px; height: 39px; left: 462px; top: 18px; position: absolute; justify-content: space-between; align-items: center; display: inline-flex">
+        <div style="width: 519px; height: 30px; text-align: justify; color: black; font-size: 13px; font-family: Inter; font-weight: 500; word-wrap: break-word">A conectar utentes e médicos para cuidados de saúde personalizados desde 2020.</div>
+    </div>
+    <div style="left: 582px; top: 52px; position: absolute; color: black; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">Rua Afonso Albuquerque, Nº 9 · Barcelos · Braga</div>
+    <div style="left: 623px; top: 103px; position: absolute; justify-content: center; align-items: center; gap: 40px; display: inline-flex">
+        <div style="width: 193.43px; height: 33.81px; position: relative">
+            <div style="left: 43.43px; top: 3.41px; position: absolute"><span style="color: #121212; font-size: 20px; font-family: Manrope; font-weight: 700; letter-spacing: 0.60px; word-wrap: break-word">Saúde </span><span style="color: #4D77FF; font-size: 20px; font-family: Manrope; font-weight: 700; letter-spacing: 0.60px; word-wrap: break-word">On-Line</span></div>
+            <div style="width: 37px; height: 33.81px; left: 0px; top: 0px; position: absolute; background: linear-gradient(96deg, #3A8EF6 0%, #6F3AFA 100%); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12) inset; border-radius: 9999px"></div>
+            <div style="width: 20.91px; height: 19.11px; left: 8.04px; top: 7.35px; position: absolute">
+                <div style="width: 8.04px; height: 19.11px; left: 6.43px; top: -0px; position: absolute; background: white; border-radius: 0.78px"></div>
+                <div style="width: 7.35px; height: 20.91px; left: 20.91px; top: 5.88px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; background: white; border-radius: 0.78px"></div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 1440px; padding-top: 7px; padding-bottom: 5px; padding-left: 6px; padding-right: 1290px; left: 0px; top: 144px; position: absolute; background: #484848; justify-content: flex-start; align-items: center; display: inline-flex">
+        <div style="text-align: justify; color: black; font-size: 13px; font-family: Inter; font-weight: 500; word-wrap: break-word">© 2023 Saúde On-Line </div>
+    </div>
+</body> 
