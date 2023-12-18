@@ -1,5 +1,5 @@
 const client = require('../Database/database');
-const currentDate = new Date().toDateString();
+const currentDate = new Date();
 
 module.exports = {
     Create: (req, res) => {

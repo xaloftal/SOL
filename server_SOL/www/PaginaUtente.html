@@ -1,286 +1,325 @@
-<script>
-    window.onload = () => {
-      if(localStorage.getItem('userSession')) {
-        let userSession = JSON.parse(localStorage.getItem('userSession'));
+<!DOCTYPE html>
+<html lang="en">
 
-        $.ajax({
-            url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id_utente),
-            type: "GET",
-            crossDomain: false,
-            dataType: "json",
-            headers: {
-                "accept": "application/json",
-                "Access-Control-Allow-Origin":"*"
-            },
-            'Access-Control-Allow-OSrigin': '*'
-        })
-        .then((response) => {
-
-          let container = document.querySelector('[data-id="formularioUtenteContainer"]');
-          response.forEach(form => {
-            container.innerHTML += '';
-          })
-        })
-        .catch((error) => {
-            console.error(error)
-        });
-      } else {
-        alert('No login');
-      }
-    }
-
-    enviarFormulario = () => {
-      let especialidadeChooser = document.querySelector('[data-id="especialidadeChooser"]').value;
-      let formularioDescricao = document.querySelector('[data-id="formularioDescricao"]').value;
-
-      let userSession = JSON.parse(localStorage.getItem('userSession'));
-
-      $.ajax({
-            url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id_utente) + "&especialidade=" + encodeURI(especialidadeChooser) + "&descricao=" + encodeURI(formularioDescricao),
-            type: "POST",
-            crossDomain: false,
-            dataType: "json",
-            headers: {
-                "accept": "application/json",
-                "Access-Control-Allow-Origin":"*"
-            },
-            'Access-Control-Allow-Origin': '*'
-        })
-        .then((response) => {
-          alert('Formulário submetido')  
-          console.log(response);
-        })
-        .catch((error) => {
-            console.error(error)
-        });
-    }
-
-    enviarReclamacao = () => {
-      let reclamacaoDescricao = document.querySelector('[data-id="reclamacaoDescricao"]').value;
-      let userSession = JSON.parse(localStorage.getItem('userSession'));
-
-      $.ajax({
-            url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id_utente) + "&descricao=" + encodeURI(reclamacaoDescricao),
-            type: "POST",
-            crossDomain: false,
-            dataType: "json",
-            headers: {
-                "accept": "application/json",
-                "Access-Control-Allow-Origin":"*"
-            },
-            'Access-Control-Allow-Origin': '*'
-        })
-        .then((response) => {
-          alert('Reclamação submetida')  
-          console.log(response);
-        })
-        .catch((error) => {
-            console.error(error)
-        });
-    }
-    
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <title>Página do Utente - Saúde On-Line</title>
+  <link id="u-theme-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i">
+  <link rel="stylesheet" href="CSS/adm_modal.css" media="screen">
+  <link rel="stylesheet" href="CSS/footer.css" media="screen">
+  <link rel="stylesheet" href="CSS/bootstrap.min.css" media="screen">
+  <link rel="stylesheet" href="CSS/header.css" media="screen">
+  <link rel="stylesheet" href="CSS/accordion.css" media="screen">
+  <link rel="stylesheet" href="CSS/paginaUtente.css" media="screen">
+  <script class="u-script" type="text/javascript" src="JavaScript/jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/style.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/modal.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/notification.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/addMedication.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/accordion.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="JavaScript/paginaUtente.js" defer=""></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
   </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+  </script>
+  <script type="text/javascript">
+    /*window.onload = () => {
+      GetFormulariosNRespondidos();
+      GetFormulariosRespondidos();
+    }
+</script>
+
+  <header>
+    <div class="header-div">
+      <div class="header-div-all-content">
+        <div class="header-div-logo">
+          <div>
+            <img class="img-logo" src="imagens/logotipo.png"></img>
+            <span class="saude-span">Saúde </span>
+            <span class="online-span">On-Line</span>
+          </div>
+        </div>
+        <div class="header-div-content-select">
+          <div><a href="#section-1" class="a-content-letter">Consultas</a></div>
+          <div><a href="#section-2" class="a-content-letter">Reclamações</a></div>
+          <div><a href="PaginaPrincipalAdmContas.html" class="a-content-letter">Contas</a></div>
+          <div><a href="#rodape" class="a-content-letter">Contactos</a></div>
+        </div>
+        <div class="header-button-div">
+          <div class="header-button-div-two">
+            <div class="header-button-content">Terminar sessão</div>
+          </div>
+        </div>
+      </div>
+      <div class="header-line"></div>
+    </div>
+  </header>
 
 
-
-
-<div style="width: 100%; height: 100%; position: relative; background: white">
-    <img style="width: 1439.97px; height: 427.97px; left: 0.03px; top: 99.92px; position: absolute" src="C:\Users\Utilizador\Desktop\Trabalho\imagens\2.jpg" />
-    <div style="width: 1440px; height: 114px; left: -14px; top: 2247px; position: absolute">
-        <div style="width: 1440px; height: 114px; left: 0px; top: 0px; position: absolute; background: #4D77FF"></div>
-        <div style="left: 645px; top: 47px; position: absolute; text-align: center; color: white; font-size: 36px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 1.08px; word-wrap: break-word">Consultas</div>
-    </div>
-    <div style="width: 1440px; height: 114px; left: 0px; top: 3373px; position: absolute">
-        <div style="width: 1440px; height: 114px; left: 0px; top: 0px; position: absolute; background: #4D77FF"></div>
-        <div style="left: 633px; top: 47px; position: absolute; text-align: center; color: white; font-size: 36px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 1.08px; word-wrap: break-word">Prescrições</div>
-    </div>
-    <div style="width: 1189.77px; height: 204.52px; left: 51px; top: 760.44px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 241px; left: 31.98px; top: 19.60px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Especialidade: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Dermatologia</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1201px; height: 3px; left: 2.94px; top: 47.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1201px; height: 3px; left: 1.84px; top: 134.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="left: 1058.82px; top: 147.83px; position: absolute; background: white; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
-            <div style="padding-left: 22px; padding-right: 22px; padding-top: 12px; padding-bottom: 12px; background: #C71616; border-radius: 10px; justify-content: center; align-items: center; gap: 10px; display: flex">
-                <div style="color: white; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Eliminar</div>
-            </div>
+  <section class="section-1" id="section-1" style="background-image: url('imagens/imagem_pagina_utente.jpeg'); background-repeat: no-repeat;">
+      <div class="container">
+        <center><p style="color:gray; font-size: 1rem; font-weight:500">Especialidade</p>
+        <select id="especialidade" name="especialidade" class="speciality-container" data-id="especialidadeChooser">
+          <option value="Psiquiatria">Psiquiatria</option>
+          <option value="Cardiologia">Cardiologia</option>
+          <option value="Neurologia">Neurologia</option>
+          <option value="Ortopedia">Ortopedia</option>
+          <option value="Otorrinolaringologista">Otorrinolaringologista</option>
+          <option value="Dermatologia">Dermatologia</option>
+        </select>
+        <p style="color:gray;margin-top: 5%;; font-size: 1rem; font-weight:500">Escreve as suas preocupações</p>
+        <textarea id="preocupacoes" placeholder="" class="description-container" data-id="formularioDescricao"></textarea></center>
+        <center><div class="button-wrapper">
+            <button onclick="enviarFormulario()">Submeter</button></center>
         </div>
-        <div style="width: 153px; left: 1021.98px; top: 17.78px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/11/2023</span></div>
     </div>
-    <div style="width: 1189.77px; height: 204.52px; left: 51px; top: 1174.42px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 241px; left: 31.98px; top: 19.60px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Especialidade:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Psiquiatria</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1201px; height: 3px; left: 2.94px; top: 47.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1201px; height: 3px; left: 1.84px; top: 134.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="left: 1058.82px; top: 147.83px; position: absolute; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
-            <div style="padding-left: 22px; padding-right: 22px; padding-top: 12px; padding-bottom: 12px; background: #C71616; border-radius: 10px; justify-content: center; align-items: center; gap: 10px; display: flex">
-                <div style="color: white; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Eliminar</div>
-            </div>
-        </div>
-        <div style="width: 153px; left: 1021.98px; top: 17.80px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 17/01/2023</span></div>
-    </div>
-    <div style="width: 1189.74px; height: 222px; left: 51px; top: 1487.42px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 241px; left: 31.98px; top: 17.60px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Especialidade:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Cardiologia</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1201px; height: 3px; left: 2.94px; top: 47.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1201px; height: 3px; left: 1.84px; top: 134.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 153px; left: 526.98px; top: 17.21px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Médico:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> João Silva</span></div>
-        <div style="width: 153px; left: 1021.98px; top: 17.80px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/11/2023</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1142px; height: 56px; left: 29.82px; top: 147.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Observações:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-    </div>
-    <div style="width: 1189.74px; height: 262.55px; left: 64px; top: 3515.42px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 1142px; height: 56px; left: 31.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Medicamento:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Paracetamol 1000mg              </span><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Forma farmacêutica</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">: Comprimido<br/></span><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.<br/></span></div>
-        <div style="width: 1201px; height: 3px; left: 2.94px; top: 47.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1201px; height: 3px; left: 1.82px; top: 151.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 174px; left: 32.98px; top: 17.62px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Médico:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Pedro Ferreira</span></div>
-        <div style="width: 262px; left: 463.98px; top: 17.13px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data da prescrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/11/2023</span></div>
-        <div style="width: 1142px; height: 56px; left: 31.80px; top: 167.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Exame: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Ecografia<br/></span><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 262px; left: 997.98px; top: 16.77px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Validade:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/12/2023</span></div>
-    </div>
-    <div style="width: 1189.74px; height: 173.42px; left: 64px; top: 3780.42px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 1201px; height: 3px; left: 2.94px; top: 47.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 174px; left: 32.98px; top: 17.62px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Médico:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> João Silva</span></div>
-        <div style="width: 262px; left: 463.98px; top: 17.13px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data da prescrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/11/2023</span></div>
-        <div style="width: 1142px; height: 56px; left: 31.92px; top: 69.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Exame: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Raios-X<br/></span><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 262px; left: 997.98px; top: 16.77px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Validade:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/12/2023</span></div>
-    </div>
-    <div style="width: 1189.74px; height: 54.66px; left: 51px; top: 2464.42px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 241px; left: 31.98px; top: 17.60px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Especialidade:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Cardiologia</span></div>
-        <div style="width: 174px; left: 429.98px; top: 18.09px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Médico: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">João Silva</span></div>
-        <div style="width: 153px; left: 768.98px; top: 18.50px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/11/2023</span></div>
-        <div style="width: 153px; left: 1069.98px; top: 17.86px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Hora:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12:30</span></div>
-    </div>
-    <div style="width: 1189.77px; height: 204.52px; left: 51px; top: 967.42px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 241px; left: 31.98px; top: 19.60px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Especialidade:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Cardiologia</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1201px; height: 3px; left: 2.94px; top: 47.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1201px; height: 3px; left: 1.84px; top: 134.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="left: 1058.82px; top: 147.83px; position: absolute; background: white; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
-            <div style="padding-left: 22px; padding-right: 22px; padding-top: 12px; padding-bottom: 12px; background: #C71616; border-radius: 10px; justify-content: center; align-items: center; gap: 10px; display: flex">
-                <div style="color: white; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Eliminar</div>
-            </div>
-        </div>
-        <div style="width: 153px; left: 1021.98px; top: 17.80px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 18/11/2023</span></div>
-    </div>
-    <div style="width: 1440px; height: 114px; left: 0px; top: 528px; position: absolute">
-        <div style="width: 1440px; height: 114px; left: 0px; top: 0px; position: absolute; background: #4D77FF"></div>
-        <div style="left: 613px; top: 48px; position: absolute; text-align: center; color: white; font-size: 36px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 1.08px; word-wrap: break-word">Formulários</div>
-    </div>
-   
-    <div style="width: 513.60px; height: 327.70px; left: 851px; top: 149.62px; position: absolute; background: white; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 30px; overflow: hidden; border: 1px #D9D9D9 solid">
-        <div style="height: 160.01px; left: 25px; top: 96.99px; position: absolute">
-            <div style="width: 462.52px; height: 138px; left: 0px; top: 22.01px; position: absolute; background: white; border-radius: 6px; border: 1px #C4C4C4 solid">
-                <textarea id="preocupacoes" style="width: 100%; height: 100%; border: none; padding: 10px; font-size: 16px; font-family: Manrope; resize: none;" placeholder=""></textarea>
-            </div>
-            <div style="left: 1px; top: 0px; position: absolute; color: black; font-size: 16px; font-family: Manrope; font-weight: 600; letter-spacing: 0.48px; word-wrap: break-word">Escreva aqui as suas preocupações</div>
-        </div>
     
-        <div style="width: 462.39px; height: 64.01px; left: 25px; top: 15.99px; position: absolute">
-            <div style="width: 462.39px; height: 42px; left: 0px; top: 22.01px; position: absolute; background: white; border-radius: 6px; border: 1px #C4C4C4 solid">
-                <input type="text" id="especialidade" style="width: calc(100% - 10px); height: calc(100% - 10px); border: none; padding: 5px; font-size: 16px; font-family: Manrope;" placeholder="">
-            </div>
-            <div style="width: 136px; left: 1.16px; top: 0px; position: absolute; color: black; font-size: 16px; font-family: Manrope; font-weight: 600; letter-spacing: 0.48px; word-wrap: break-word">Especialidade</div>
-        </div> 
-        
-        <div style="left: 198.68px; top: 268.62px; position: absolute; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
-            <button onclick="submitForm()" style="padding: 12px 22px; background: #4D77FF; border-radius: 10px; color: white; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word; cursor: pointer; border: none;">Submeter</button>
-        </div>
+  </section>
+  <br><br>
+  <section class="section-2" id="section2">
+    <div>
+      <h2>Formulários</h2>
     </div>
+  </section>
+  <div class="bem-vindo-div">Formulários não respondidos</div>
+  <br><br>
+  <section class="section-3">
+    <div class="form-card">
+      <div class="consultation-info">
+        <span><strong class="form-info-1">Especialidade</strong></span>
+        <span><strong class="form-info-4">Data: </strong></span>
+      </div>
+      <div class="text-form">
+        <span class="text-form-1">Descrição:</span>
+        <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+          ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+          fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+      </div>
+      <div class="line"></div>
+      <div class="consultation-booking">
+        <button class="action-btn remove-btn btn-text remove-btn-2">Eliminar</button>
+      </div>
+    </div>
+  </section>
 
-    
+  <div class="bem-vindo-div">Formulários respondidos</div>
+  <br><br>
+  <section class="section-3" data-id="formulariosRespondidosContainer">
+
+    <div class="form-card">
+      <div class="consultation-info">
+        <span><strong class="form-info-1">Especialidade</strong></span>
+        <span><strong class="form-info-2">Data: </strong></span>
+      </div>
+      <div class="text-form">
+        <span class="text-form-1">Descrição:</span>
+        <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+          ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+          fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+      </div>
+      <div class="line"></div>
+      <div class="text-form">
+        <span class="text-form-1">Observações:</span>
+        <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+          ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+          fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+      </div>
+      <div class="consultation-booking">
+        <a style="color:#4D77FF" class="more-details" id="accordionBtn3"
+          onclick="toggleAccordion('accordionContent4', 'accordionBtn4')"><u>Mais detalhes</u></a>
+        <div class="accordion-content" id="accordionContent4">
+          <p><strong class="form-info-details">Medicamento:</strong></p>
+          <p><strong class="form-info-details">Descrição:</strong> 276427832</p>
+          <div class="line"></div>
+          <div class="exam-div">
+            <p><strong class="form-info-details">Exame:</strong> 962784783</p>
+            <p><strong class="form-info-details">Descrição:</strong> 962784783</p>
+          </div>
+          <div class="line"></div>
+          <div class="appointment-div">
+            <p><strong class="form-info-details">Consulta solicitada.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br><br>
+
+  <section class="section-4" id="section4">
+    <div>
+      <h2>Consultas</h2>
+    </div>
+  </section>
+
+  <div class="title-section">
+    <p>Consultas não decorridas</p>
+  </div>
+
+  <div class="appointment-card">
+    <div class="consultation-info">
+      <span><strong class="form-info-1">Especialidade</strong></span>
+      <span><strong class="form-info-3">Médico:</strong></span>
+      <span><strong class="form-info-2">Data: </strong></span>
+    </div>
+  </div>
 
 
-    <div style="width: 1440px; height: 100px; left: 0px; top: 0px; position: absolute">
-        <div style="width: 1240px; left: 104px; top: 30px; position: absolute; justify-content: space-between; align-items: center; display: inline-flex">
-            <div style="justify-content: center; align-items: center; gap: 40px; display: flex">
-                <div><span style="color: #121212; font-size: 24px; font-family: Manrope; font-weight: 700; letter-spacing: 0.72px; word-wrap: break-word">Saúde </span><span style="color: #4D77FF; font-size: 24px; font-family: Manrope; font-weight: 700; letter-spacing: 0.72px; word-wrap: break-word">On-Line</span></div>
-            </div>
-            <div style="width: 146px; height: 17px; justify-content: center; align-items: flex-start; gap: 40px; display: flex">
-                <div style="width: 84px; color: #121212; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Formulários</div>
-                <div style="width: 80px; color: #121212; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Consultas</div>
-                <div style="width: 83px; height: 20px; color: #121212; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Prescrições<br/></div>
-                <div style="width: 81px; color: #121212; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Contactos</div>
-            </div>
-            <div style="justify-content: center; align-items: center; gap: 20px; display: flex">
-                <div style="padding-left: 22px; padding-right: 22px; padding-top: 12px; padding-bottom: 12px; background: #4D77FF; border-radius: 10px; justify-content: center; align-items: center; gap: 10px; display: flex">
-                    <div style="color: white; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"><a href="file:///C:/Users/Utilizador/Desktop/Trabalho/utentepagina.html">Terminar sessão</div>
-                    
-                </div>
-            </div>
-        </div>
-        <div style="width: 1444px; height: 0px; left: 0px; top: 101px; position: absolute; border: 4px #4D77FF solid"></div>
-        <div style="width: 1443px; height: 700px; left: -3px; top: -14px; position: absolute"></div>
+  <div class="title-section">
+    <p>Consultas decorridas</p>
+  </div>
+
+  <div class="appointment-card">
+    <div class="consultation-info">
+      <span><strong class="form-info-1">Especialidade</strong></span>
+      <span><strong class="form-info-3">Medico:</strong></span>
+      <span><strong class="form-info-2">Data: </strong></span>
+
     </div>
-    <div style="width: 1440px; height: 172px; left: 0px; top: 3981px; position: absolute; background: rgba(217, 217, 217, 0.60)">
-        <div style="width: 323px; height: 15px; left: 582px; top: 79px; position: absolute">
-            <div style="left: 0px; top: 0px; position: absolute; color: black; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">+351 253 467 451</div>
-            <img style="width: 20px; height: 18px; left: -22px; top: -2px; position: absolute" src="https://via.placeholder.com/20x18" />
-            <div style="left: 176px; top: 0px; position: absolute; color: black; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">info@saudeonline.pt</div>
-            <img style="width: 19px; height: 15px; left: 150px; top: 0px; position: absolute" src="https://via.placeholder.com/19x15" />
-        </div>
-        <div style="width: 515px; height: 39px; left: 462px; top: 18px; position: absolute; justify-content: space-between; align-items: center; display: inline-flex">
-            <div style="width: 519px; height: 30px; text-align: justify; color: black; font-size: 13px; font-family: Inter; font-weight: 500; word-wrap: break-word">A conectar utentes e médicos para cuidados de saúde personalizados desde 2020.</div>
-        </div>
-        <div style="left: 582px; top: 52px; position: absolute; color: black; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">Rua Afonso Albuquerque, Nº 9 · Barcelos · Braga</div>
-        <div style="left: 623px; top: 103px; position: absolute; justify-content: center; align-items: center; gap: 40px; display: inline-flex">
-            <div style="width: 193.43px; height: 33.81px; position: relative">
-                <div style="left: 43.43px; top: 3.41px; position: absolute"><span style="color: #121212; font-size: 20px; font-family: Manrope; font-weight: 700; letter-spacing: 0.60px; word-wrap: break-word">Saúde </span><span style="color: #4D77FF; font-size: 20px; font-family: Manrope; font-weight: 700; letter-spacing: 0.60px; word-wrap: break-word">On-Line</span></div>
-                <div style="width: 37px; height: 33.81px; left: 0px; top: 0px; position: absolute; background: linear-gradient(96deg, #3A8EF6 0%, #6F3AFA 100%); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12) inset; border-radius: 9999px"></div>
-                <div style="width: 20.91px; height: 19.11px; left: 8.04px; top: 7.35px; position: absolute">
-                    <div style="width: 8.04px; height: 19.11px; left: 6.43px; top: -0px; position: absolute; background: white; border-radius: 0.78px"></div>
-                    <div style="width: 7.35px; height: 20.91px; left: 20.91px; top: 5.88px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; background: white; border-radius: 0.78px"></div>
-                </div>
-            </div>
-        </div>
-        <div style="width: 1440px; padding-top: 7px; padding-bottom: 5px; padding-left: 6px; padding-right: 1290px; left: 0px; top: 144px; position: absolute; background: #484848; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="text-align: justify; color: black; font-size: 13px; font-family: Inter; font-weight: 500; word-wrap: break-word">© 2023 Saúde On-Line </div>
-        </div>
+    <div class="text-form">
+      <span class="text-form-1">Descrição:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+        fringilla vel, aliquet nec, vulputate eget, arcu.</span>
     </div>
-    <div style="width: 555px; height: 51px; left: 51px; top: 684px; position: absolute; color: black; font-size: 36px; font-family: Manrope; font-weight: 800; letter-spacing: 1.08px; word-wrap: break-word">Formulários não respondidos</div>
-    <div style="width: 586px; height: 51px; left: 54px; top: 1409px; position: absolute; color: black; font-size: 36px; font-family: Manrope; font-weight: 800; letter-spacing: 1.08px; word-wrap: break-word">Formulários respondidos</div>
-    <div style="width: 555px; height: 51px; left: 51px; top: 2396px; position: absolute; color: black; font-size: 36px; font-family: Manrope; font-weight: 800; letter-spacing: 1.08px; word-wrap: break-word">Consultas não decorridas</div>
-    <div style="width: 555px; height: 51px; left: 51px; top: 2542px; position: absolute; color: black; font-size: 36px; font-family: Manrope; font-weight: 800; letter-spacing: 1.08px; word-wrap: break-word">Consultas decorridas</div>
-    <div style="width: 1191.71px; height: 464.65px; left: 53px; top: 1711.43px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 241px; left: 31.98px; top: 17.60px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Especialidade:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Psiquiatria</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1201px; height: 3px; left: 2.94px; top: 47.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1201px; height: 3px; left: 1.84px; top: 134.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 174px; left: 526.98px; top: 17.21px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Médico:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Pedro Ferreira</span></div>
-        <div style="width: 153px; left: 1021.98px; top: 17.80px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/11/2023</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1142px; height: 56px; left: 29.82px; top: 147.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Observações:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="left: 29.74px; top: 214.61px; position: absolute; color: #4D77FF; font-size: 14px; font-family: Inter; font-weight: 600; text-decoration: underline; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Mais detalhes</div>
-        <div style="width: 1201px; height: 3px; left: 1.58px; top: 353.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1142px; height: 56px; left: 29.56px; top: 365.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Exame: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Ecografia<br/></span><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1142px; height: 56px; left: 29.69px; top: 262.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Medicamento:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Paracetamol 1000mg   <br/></span><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.<br/></span></div>
+    <div class="line"></div>
+    <div class="text-form">
+      <span class="text-form-1">Observações:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+        fringilla vel, aliquet nec, vulputate eget, arcu.</span>
     </div>
-    <div style="width: 1191.71px; height: 498.83px; left: 51px; top: 2613.43px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 241px; left: 31.98px; top: 17.60px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Especialidade:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Psiquiatria</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1201px; height: 3px; left: 2.94px; top: 47.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1201px; height: 3px; left: 1.84px; top: 134.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 174px; left: 434.98px; top: 17.10px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Médico:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Pedro Ferreira</span></div>
-        <div style="width: 153px; left: 774.98px; top: 17.50px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/03/2023</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1142px; height: 56px; left: 29.82px; top: 147.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Observações:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="left: 29.74px; top: 214.61px; position: absolute; color: #4D77FF; font-size: 14px; font-family: Inter; font-weight: 600; text-decoration: underline; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Mais detalhes</div>
-        <div style="width: 1201px; height: 3px; left: 1.58px; top: 353.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1142px; height: 56px; left: 29.56px; top: 365.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Exame: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Ecografia<br/></span><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1142px; height: 56px; left: 29.69px; top: 262.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Medicamento:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Paracetamol 1000mg   <br/></span><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição: </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.<br/></span></div>
-        <div style="width: 1201px; height: 3px; left: 1.46px; top: 454.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1142px; height: 19px; left: 32.44px; top: 468.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Consulta marcada para:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">12/05/2024   </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">   </span><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Hora:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">12:30</span></div>
-        <div style="width: 153px; left: 1069.98px; top: 17.86px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Hora:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12:30</span></div>
+    <div class="consultation-booking">
+      <a style="color:#4D77FF" class="more-details" id="accordionBtn3"
+        onclick="toggleAccordion('accordionContent5', 'accordionBtn5')"><u>Mais detalhes</u></a>
+      <div class="accordion-content" id="accordionContent5">
+        <p><strong class="form-info-details">Medicamento:</strong></p>
+        <p><strong class="form-info-details">Descrição:</strong> 276427832</p>
+        <div class="line"></div>
+        <div class="exam-div">
+          <p><strong class="form-info-details">Exame:</strong> 962784783</p>
+          <p><strong class="form-info-details">Descrição:</strong> 962784783</p>
+        </div>
+        <div class="line"></div>
+        <div class="appointment-div">
+          <p><strong class="form-info-details">Consulta:</strong></p>
+        </div>
+      </div>
     </div>
-    <div style="width: 1191.71px; height: 223.29px; left: 53px; top: 3114.43px; position: absolute; background: white; border-radius: 10px; overflow: hidden; border: 1px #A3A3A3 solid">
-        <div style="width: 241px; left: 31.98px; top: 17.60px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Especialidade:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Psiquiatria</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1201px; height: 3px; left: 2.94px; top: 47.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 1201px; height: 3px; left: 1.84px; top: 134.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 174px; left: 434.98px; top: 17.10px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Médico:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> Joana  Lisboa</span></div>
-        <div style="width: 153px; left: 774.98px; top: 17.50px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Data:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 12/02/2023</span></div>
-        <div style="width: 1142px; height: 56px; left: 32.93px; top: 61.60px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Descrição:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1142px; height: 56px; left: 29.82px; top: 147.61px; position: absolute; text-align: justify"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Observações:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> </span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 500; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span></div>
-        <div style="width: 1201px; height: 3px; left: 1.46px; top: 454.56px; position: absolute; border: 2px #D9D9D9 solid"></div>
-        <div style="width: 153px; left: 1069.98px; top: 17.86px; position: absolute"><span style="color: #A3A3A3; font-size: 14px; font-family: Manrope; font-weight: 800; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word">Hora:</span><span style="color: black; font-size: 14px; font-family: Manrope; font-weight: 700; line-height: 20px; letter-spacing: 0.42px; word-wrap: break-word"> 16:20</span></div>
+  </div>
+
+  <br><br>
+
+  <section class="section-4" id="section4">
+    <div>
+      <h2>Prescrições</h2>
     </div>
-</div>
+  </section>
+
+  <br>
+
+  <div class="prescription-card">
+
+    <div class="form-info">
+      <span><strong class="prescription-info-item-1">Médico:</strong> Pedro Ferreira</span>
+      <span><strong class="prescription-info-item-2">Validade:</strong> 12/03/2024</span>
+      <span><strong class="prescription-info-item-3">Data de prescrição:</strong> 12/03/2024</span>
+    </div>
+    <div class="text-form">
+      <div class="medication-text">
+        <p><strong class="medication-info-details">Medicamento:</strong><strong class="medication-info-details-2">Forma farmacêutica:</strong></p>
+      </div>
+      <span class="text-prescription">Descrição:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+        fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+    <div class="line"></div>
+    <div class="text-form">
+      <div class="medication-text">
+        <p><strong class="medication-info-details">Exame:</strong></p>
+      </div>
+      <span class="text-prescription">Descrição:</span>
+      <span>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+        fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+    </div>
+  </div>
+
+  <section class="section-5" id="section5">
+    <div>
+      <h2>Reclamações</h2>
+    </div>
+  </section>
+
+  <div class="complaint-title">
+    <center>
+      <p>Quer fazer uma reclamação?</p>
+    </center>
+  </div>
+
+  <center>
+    <div class="consultation-answer-modal-card">
+      <p class="complaint-letter">Escreva aqui a sua reclamação</p>
+      <textarea id="complaintAnswer" name="complaintAnswer" rows="10" cols="50" class="complaint-answer-box" data-id="reclamacaoDescricao"></textarea>
+    </div>
+    <center><div class="button-wrapper" style="margin-bottom:5px">
+      <button onclick="enviarReclamacao()">Submeter</button></center>
+  </div>
+  </center>
+
+  </div>
+
+  <div id="myModalComplaint" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Responder a reclamação</h3><span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer"><button class="submit-btn btn-text">Submeter</button></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="footer" id="rodape">
+    <p class="footer-intro">A conectar utentes e médicos para cuidados de saúde personalizados desde 2020.</p>
+    <p>Rua Afonso Albuquerque, Nº 9 · Barcelos · Braga</p>
+    <div class="footer-phone-info-div">
+      <img src="imagens/icons8-phone-50 1.png" />
+      <div class="footer-info-letter">+351 253 467 451</div>
+    </div>
+    <div class="footer-email-info-div">
+      <img src="imagens/icons8-email-50 1.png" />
+      <div class="footer-info-letter">info@saudeonline.pt</div>
+    </div>
+    <div class="footer-logo">
+      <img style="width: 40px" src="imagens/logotipo.png" />
+      <span>Saúde </span>
+      <span class="footer-online">On-Line</span>
+    </div>
+  </div>
+  <div class="footer-copyright-div">
+    <div class="footer-copyright-letter">© 2023 Saúde On-Line </div>
+  </div>
+
+
+
+  </body>

@@ -35,23 +35,32 @@ module.exports = {
         });
     },
     GetFormulariosNaoRespondidos: (req, res) => {
-        client.query("SELECT f.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f WHERE f.estado_formulario = 'Submetido'", (error, results) => {
-            if (error) {
-                throw error
-            }
-            res.send(results.rows)
-        });
+        if (req.query.id_utente) {
+            client.query("SELECT f.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f WHERE f.estado_formulario = 'Submetido' AND f.id_utente = $1", [req.query.id_utente], (error, results) => {
+                if (error) {
+                    throw error
+                }
+                res.send(results.rows)
+            })
+        } else {
+            client.query("SELECT f.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f WHERE f.estado_formulario = 'Submetido'", (error, results) => {
+                if (error) {
+                    throw error
+                }
+                res.send(results.rows)
+            })
+        }
     },
     GetFormulariosRespondidos: (req, res) => {
-        if(req.query.id_med) {
-            client.query("SELECT f.*, fp.* FROM formularios f INNER JOIN prescricoes_formulario pf ON f.id_utente = pf.id_utente AND estado_formulario = 'Respondido' AND pf.id_medico = $1", [req.query.id_med], (error, results) => {
+        if (req.query.id_med) {
+            client.query("SELECT f.*, fp.* FROM formularios f INNER JOIN prescricoes_formularios pf ON f.id_utente = pf.id_utente AND estado_formulario = 'Respondido' AND pf.id_medico = $1", [req.query.id_med], (error, results) => {
                 if (error) {
                     throw error
                 }
                 res.send(results.rows)
             });
-        } else if (req.query.id_utente){ 
-            client.query("SELECT f.*, fp.* FROM formularios f INNER JOIN prescricoes_formulario pf ON f.id_utente = pf.id_utente AND estado_formulario = 'Respondido' AND pf.id_utente = $1", [req.query.id_utente], (error, results) => {
+        } else if (req.query.id_utente) {
+            client.query("SELECT f.*, pf.* FROM formularios f INNER JOIN prescricoes_formularios pf ON f.id_utente = pf.id_utente AND estado_formulario = 'Respondido' AND pf.id_utente = $1", [req.query.id_utente], (error, results) => {
                 if (error) {
                     throw error
                 }
@@ -60,7 +69,7 @@ module.exports = {
         }
     },
     IgnorarFormulario: (req, res) => {
-      client.query('call ignorar_formulario($1, $2)', [req.query.id_form, req.query.id_med], (error, results) => {
+        client.query('call ignorar_formulario($1, $2)', [req.query.id_form, req.query.id_med], (error, results) => {
             if (error) {
                 throw error
             }
