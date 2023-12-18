@@ -110,6 +110,9 @@ begin
 end; $$ Language PLPGSQL
 
 
+
+select * from medico
+
 -- anotacoes consulta (med)
 create or replace procedure responder_consulta(_cons int,  _obs varchar(500))
 as $$
