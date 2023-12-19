@@ -32,8 +32,6 @@ as
 		left join utilizador util on util.email = u.email_u
 		
 		
-		
-		
 --view prescricoes de formulario
 drop view prescricoes_formularios
 create or replace view prescricoes_formularios
