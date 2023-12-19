@@ -31,9 +31,6 @@ as
 		left join utilizador ut on ut.email = mdor.email_m
 		left join utilizador util on util.email = u.email_u
 		
-select * from consulta		
-		
-		
 		
 --view prescricoes de formulario
 drop view prescricoes_formularios
@@ -58,7 +55,7 @@ as
 	left join utente u using (id_utente)
 
 
-select * from formulario
+select * from consultas
 
 		
 --view prescricoes de consultas
