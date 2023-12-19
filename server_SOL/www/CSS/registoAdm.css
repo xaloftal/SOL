@@ -73,7 +73,7 @@
 .create-account-text {
     background: #4D77FF;
     color: white;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: Ubuntu;
     font-weight: 700;
     letter-spacing: 0.48px;
@@ -153,9 +153,9 @@
     transition: color 0.3s ease;
 }
 
-    .accent-color:hover{
-        color: #3258c8;
-    }
+.accent-color:hover{
+    color: #3258c8;
+}
 
 body {
     font-family:Ubuntu;
