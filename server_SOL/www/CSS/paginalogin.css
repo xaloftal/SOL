@@ -148,4 +148,9 @@
 .accent-color {
     color: #4D77FF;
     text-decoration: underline;
+    transition: color 0.3s ease;
 }
+
+    .accent-color:hover{
+        color: #3258c8;
+    }

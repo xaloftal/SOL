@@ -12,6 +12,15 @@ begin
 	where id_formulario = _form;		
 end; $$ Language PLPGSQL
 
+-- eliminar form (ute)
+create or replace procedure eliminar_formulario(_form int)
+as $$
+begin
+	update formulario
+	set estado_f = 'Cancelado'
+	where if_formulario = _form;
+end; $$ Language PLPGSQL
+
 
 --eliminar conta
 create or replace procedure eliminar_conta (_email varchar(60))
