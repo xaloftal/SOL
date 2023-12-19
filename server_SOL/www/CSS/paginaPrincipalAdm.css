@@ -9,7 +9,7 @@
     padding-left: 5vh;
 }
  
-/* Consultation Card Styles */
+
 .consultation-card {
     width: 70vw;
     height: fit-content;
@@ -66,6 +66,22 @@
     border: none;
     cursor: pointer;
     margin-left: 62vw;
+    margin-bottom: 1%;
+}
+
+.action-btn-2 {
+    width: 6vw; 
+    height: 7vh; 
+    background: #4D77FF; 
+    border-radius: 10px; 
+    justify-content: center; 
+    align-items: center; 
+    display: inline-flex;
+    margin-top: 1%;
+    border-color: #4D77FF;
+    border: none;
+    cursor: pointer;
+    margin-left: 53vw;
     margin-bottom: 1%;
 }
 
@@ -203,8 +219,7 @@ button:focus{
     line-height: 20px; 
     letter-spacing: 0.42px; 
     word-wrap: break-word;
-    padding-left: 1.7%;
-    padding-right: 2%;
+    padding-right:85%;
 }
 
 .text-complaint-1,
