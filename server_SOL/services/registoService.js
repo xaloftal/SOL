@@ -2,7 +2,7 @@ const client = require('../Database/database');
 
 module.exports = {
     RegistoUtente: (req, res) => {
-        client.query('call signup_utente($1,$2,$3,$4,$5,$6,$7,$8)', [req.query.nome, req.query.email, req.query.password, req.query.nif, req.query.nmr_telefone,req.query.data_nascimento], (error, results) => {
+        client.query('call signup_utente($1,$2,$3,$4,$5,$6)', [req.query.nome, req.query.email, req.query.password, req.query.nif, req.query.nmr_telefone,req.query.data_nascimento], (error, results) => {
 
             if (error) {
                 throw error

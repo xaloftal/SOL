@@ -111,6 +111,12 @@
     display: block;
 }
 
+.accordion-content-1 {
+    font-size: 0.9rem;
+    color:black;
+    padding: 10px 20px 10px 20px;
+}
+
 .appointment-letter,
 .complaint-letter {   
     color:gray;
