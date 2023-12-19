@@ -26,7 +26,7 @@ const GetReclamacao = () => {
     });
 }
 
-/*const GetPedidoConsulta = () => {
+const GetPedidoConsulta = () => {
   $.ajax({
         url: "http://localhost:3050/consulta",
         type: "GET",
@@ -50,7 +50,7 @@ const GetReclamacao = () => {
     .catch((error) => {
         console.error(error)
     });
-}*/
+}
 
 const responderReclamacao = (id_reclamacao) => {
     let userSession = JSON.parse(localStorage.getItem('userSession'));
