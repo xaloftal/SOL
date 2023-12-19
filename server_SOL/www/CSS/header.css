@@ -66,11 +66,11 @@ header {
     word-wrap: normal;
 }
 
-a:hover {
-    color: var(--Black, #121212);
-    text-decoration:none; 
-    cursor:pointer
-}
+    .a-content-letter:hover {
+        color: var(--Black, #121212);
+        text-decoration:underline; 
+        cursor:pointer
+    }
 
 .header-button-div {
     justify-content: center; 
@@ -80,7 +80,7 @@ a:hover {
     padding-right: 13%;
 }
 
-.header-button-div-two {
+/* .header-button-div-two {
     padding: 12px 22px;
     background: #4D77FF; 
     border-radius: 10px; 
@@ -88,7 +88,7 @@ a:hover {
     align-items: center; 
     gap: 10px; 
     display: flex;
-}
+} */
 
 .header-button-content {
     color: white; 
@@ -98,7 +98,21 @@ a:hover {
     line-height: 20px; 
     letter-spacing: 0.42px; 
     word-wrap: break-word;
+    padding: 12px 22px;
+    background: #4D77FF; 
+    border-radius: 10px; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px; 
+    display: flex;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+    .header-button-content:hover{
+        background-color: #3258c8;
+    }
+
 
 .header-line-pagina-principal {
     width: 100%; 
@@ -124,7 +138,7 @@ html {
     height: 20%;
 }
 
-/*small screens*/
+
 @media only screen and (max-width: 767px) {
 
     .header-div {
@@ -149,27 +163,27 @@ html {
         margin-left: 5px;
     }
 
-    /* Adjust the font size for smaller screens */
+    
     .online-span,
     .saude-span,
     .a-content-letter,
     .header-button-content {
-        font-size: 0.7rem; /* Adjust the font size as needed */
+        font-size: 0.7rem; 
     }
 
-    /* Adjust the border thickness for smaller screens */
+   
     .header-line {
         border: 0.1em #4D77FF solid;
     }
 }
 
-/* Medium screens (768px to 991px) */
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .online-span,
     .saude-span,
     .a-content-letter,
     .header-button-content {
-        font-size: 0.8rem; /* Adjust the font size as needed */
+        font-size: 0.8rem; 
     }
 
     .header-button-div-two {
