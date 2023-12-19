@@ -191,7 +191,7 @@ begin
 	--ir buscar o id da especialidade
 	select id_especialidade into esp
 	from especialidade e
-	where upper(e.nome_esp) like upper(_esp) and e.estado_e = 'Existente';
+	where upper(e.nome_esp) like upper(_esp) ;
 	
 	if (esp is null)
 	then 
@@ -207,9 +207,6 @@ begin
 	insert into medico (nome_m, email_m, id_especialidade) values (_nom, _email, esp);	
 	
 end; $$ Language PLPGSQL
-
-
-
 
 
 --Sign up de utente
