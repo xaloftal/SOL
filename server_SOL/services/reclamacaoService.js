@@ -3,7 +3,7 @@ const currentDate = new Date();
 
 module.exports = {
     Create: (req, res) => {
-        client.query('call criar_reclamacao($1, $2, $3)', [req.query.id_utente, req.query.descricao, currentDate], (error, results) => {
+        client.query('call criar_reclamacao($1, $2, $3)', [req.query.id_utente, req.query.descricao, req.query.data_recl], (error, results) => {
             if (error) {
                 throw error
             }

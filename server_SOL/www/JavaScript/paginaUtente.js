@@ -1,9 +1,11 @@
-GetFormulariosNRespondidos = () => {
+const currentDate = new Date(); 
+
+GetFormulariosNRespondidosUtente = () => {
     if (localStorage.getItem('userSession')) {
         let userSession = JSON.parse(localStorage.getItem('userSession'));
 
         $.ajax({
-                url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id),
+                url: "http://localhost:3050/formularioutente?id_utente=" + encodeURI(userSession.id),
                 type: "GET",
                 crossDomain: false,
                 dataType: "json",
@@ -17,7 +19,7 @@ GetFormulariosNRespondidos = () => {
 
                 let container = document.querySelector('[data-id="formularioUtenteContainer"]');
                 response.forEach(formUtente => {
-                    container.innerHTML += '<div class="form-card"><div class="consultation-info"><span><strong class="form-info-1">Especialidade</strong>' + formUtente.especialidade + '</span><span><strong class="form-info-4">Data: </strong>' + formUtente.data_form_format + '</span></div><div class="text-form"><span class="text-form-1">Descrição: </span><span>' + formUtente.descricao_formulario + '</span></div><div class="line"></div><div class="consultation-booking"><button class="action-btn remove-btn btn-text remove-btn-2" onclick="">Eliminar</button></div></div>';
+                    container.innerHTML += '<div class="form-card"><div class="consultation-info"><span><strong class="form-info-1">Especialidade</strong>' + formUtente.especialidade + '</span><span><strong class="form-info-4">Data: </strong>' + formUtente.data_form_format + '</span></div><div class="text-form"><span class="text-form-1">Descrição: </span><span>' + formUtente.descricao_formulario + '</span></div><div class="line"></div><div class="consultation-booking"><button class="action-btn remove-btn btn-text remove-btn-2" onclick="eliminarFormulario('+ formUtente.id_formulario +')">Eliminar</button></div></div>';
                 })
             })
             .catch((error) => {
@@ -28,12 +30,12 @@ GetFormulariosNRespondidos = () => {
     }
 }
 
-GetFormulariosRespondidos = () => {
+GetFormulariosRespondidosUtente = () => {
     if (localStorage.getItem('userSession')) {
         let userSession = JSON.parse(localStorage.getItem('userSession'));
 
         $.ajax({
-                url: "http://localhost:3050/formulariorespondidos?id_utente=" + encodeURI(userSession.id),
+                url: "http://localhost:3050/formulariorespondidosutente?id_utente=" + encodeURI(userSession.id),
                 type: "GET",
                 crossDomain: false,
                 dataType: "json",
@@ -65,7 +67,7 @@ enviarFormulario = () => {
     let userSession = JSON.parse(localStorage.getItem('userSession'));
 
     $.ajax({
-            url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id) + "&especialidade=" + encodeURI(especialidadeChooser) + "&descricao=" + encodeURI(formularioDescricao),
+            url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id) + "&especialidade=" + encodeURI(especialidadeChooser) + "&descricao=" + encodeURI(formularioDescricao) + '&data_form=' +  currentDate,
             type: "POST",
             crossDomain: false,
             dataType: "json",
@@ -78,6 +80,7 @@ enviarFormulario = () => {
         .then((response) => {
             alert('Formulário submetido')
             console.log(response);
+            GetFormulariosNRespondidos();
         })
         .catch((error) => {
             console.error(error)
@@ -88,8 +91,9 @@ enviarReclamacao = () => {
     let reclamacaoDescricao = document.querySelector('[data-id="reclamacaoDescricao"]').value;
     let userSession = JSON.parse(localStorage.getItem('userSession'));
     
+
     $.ajax({
-            url: "http://localhost:3050/reclamacao?id_utente=" + (userSession.id) + "&descricao=" + reclamacaoDescricao,
+            url: "http://localhost:3050/reclamacao?id_utente=" + encodeURI(userSession.id) + "&descricao=" + encodeURI(reclamacaoDescricao) + "&data_recl" + encodeURI(currentDate),
             type: "POST",
             crossDomain: false,
             dataType: "json",
@@ -108,12 +112,9 @@ enviarReclamacao = () => {
         });
 }
 
-eliminarFormulario = () => {
-    let reclamacaoDescricao = document.querySelector('[data-id="reclamacaoDescricao"]').value;
-    let userSession = JSON.parse(localStorage.getItem('userSession'));
-    
+eliminarFormulario = (id_formulario) => {
     $.ajax({
-            url: "http://localhost:3050/reclamacao?id_utente=" + (userSession.id) + "&descricao=" + reclamacaoDescricao,
+            url: "http://localhost:3050/eliminarformulario?id_formulario=" + id_formulario,
             type: "POST",
             crossDomain: false,
             dataType: "json",
@@ -124,10 +125,15 @@ eliminarFormulario = () => {
             'Access-Control-Allow-Origin': '*'
         })
         .then((response) => {
-            alert('Reclamação submetida')
+            alert('Formulário eliminado')
             console.log(response);
         })
         .catch((error) => {
             console.error(error)
         });
+}
+
+window.onload = () => {
+    GetFormulariosNRespondidosUtente();
+    GetFormulariosRespondidosUtente();
 }

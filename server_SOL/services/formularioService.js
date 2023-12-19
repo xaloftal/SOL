@@ -3,7 +3,7 @@ const currentDate = new Date().toDateString(); // Use toISOString to get a strin
 
 module.exports = {
     Create: (req, res) => {
-        client.query('call criar_formulario($1, $2, $3, $4, $5)', [req.query.id_utente, req.query.descricao, currentDate, req.query.esp, res.id_form], (error, results) => {
+        client.query('call criar_formulario($1, $2, $3, $4, null)', [req.query.id_utente, req.query.descricao, req.query.data_form, req.query.esp], (error, results) => {
             if (error) {
                 throw error
             }
@@ -57,38 +57,36 @@ module.exports = {
         });
     },
     GetFormulariosNaoRespondidos: (req, res) => {
-        if (req.query.id_utente) {
-            client.query("SELECT f.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f WHERE f.estado_formulario = 'Submetido' AND f.id_utente = $1", [req.query.id_utente], (error, results) => {
-                if (error) {
-                    throw error
-                }
-                res.send(results.rows)
-            })
-        } else {
-            client.query("SELECT f.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f WHERE f.estado_formulario = 'Submetido'", (error, results) => {
-                if (error) {
-                    throw error
-                }
-                res.send(results.rows)
-            })
-        }
+        client.query("SELECT f.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f WHERE f.estado_formulario = 'Submetido'", (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.send(results.rows)
+        })
+    },
+    GetFormulariosNaoRespondidosUtente: (req,res) => {
+        client.query("SELECT f.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f WHERE f.estado_formulario = 'Submetido' AND f.id_utente = $1", [req.query.id_utente], (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.send(results.rows)
+        })
     },
     GetFormulariosRespondidos: (req, res) => {
-        if (req.query.id_med) {
-            client.query("SELECT f.*, fp.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f INNER JOIN prescricoes_formularios pf ON f.id_utente = pf.id_utente AND estado_formulario = 'Respondido' AND pf.id_medico = $1", [req.query.id_med], (error, results) => {
-                if (error) {
-                    throw error
-                }
-                res.send(results.rows)
-            });
-        } else if (req.query.id_utente) {
-            client.query("SELECT f.*, pf.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f INNER JOIN prescricoes_formularios pf ON f.id_utente = pf.id_utente AND estado_formulario = 'Respondido' AND pf.id_utente = $1", [req.query.id_utente], (error, results) => {
-                if (error) {
-                    throw error
-                }
-                res.send(results.rows)
-            });
-        }
+        client.query("SELECT f.*, fp.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f INNER JOIN prescricoes_formularios pf ON f.id_utente = pf.id_utente AND f.estado_formulario = 'Respondido' AND pf.id_medico = $1", [req.query.id_med], (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.send(results.rows)
+        });
+    },
+    GetFormulariosRespondidosUtente: (req,res) => {
+        client.query("SELECT f.*, fp.*, to_char(f.data_formulario, \'dd/mm/yyyy HH24:MI:SS\') data_form_format FROM formularios f INNER JOIN prescricoes_formularios pf ON f.id_utente = pf.id_utente AND f.estado_formulario = 'Respondido' AND pf.utente = $1", [req.query.id_utente], (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.send(results.rows)
+        });
     },
     IgnorarFormulario: (req, res) => {
         client.query('call ignorar_formulario($1, $2)', [req.query.id_form, req.query.id_med], (error, results) => {
@@ -99,7 +97,7 @@ module.exports = {
         });
     },
     EliminarFormulario: (req, res) => {
-        client.query('call ignorar_formulario($1, $2)', [req.query.id_form, req.query.id_med], (error, results) => {
+        client.query('call eliminar_formulario($1)', [req.query.id_form], (error, results) => {
             if (error) {
                 throw error
             }
