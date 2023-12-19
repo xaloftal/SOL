@@ -57,7 +57,7 @@ const responderReclamacao = (id_reclamacao) => {
     let reclamacaoResposta = document.querySelector('[data-id="reclamacaoResposta"]').value;
 
   $.ajax({
-        url: "http://localhost:3050/responderreclamacao?id_recl="  + id_reclamacao + "&id_adm=" + encodeURI(userSession.id_adm) + "&resp=" + reclamacaoResposta,
+        url: "http://localhost:3050/responderreclamacao?id_recl="  + id_reclamacao + "&id_adm=" + encodeURI(userSession.id) + "&resp=" + reclamacaoResposta,
         type: "PUT",
         crossDomain: false,
         dataType: "json",

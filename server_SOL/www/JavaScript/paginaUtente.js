@@ -3,7 +3,7 @@ GetFormulariosNRespondidos = () => {
         let userSession = JSON.parse(localStorage.getItem('userSession'));
 
         $.ajax({
-                url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id_utente),
+                url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id),
                 type: "GET",
                 crossDomain: false,
                 dataType: "json",
@@ -33,7 +33,7 @@ GetFormulariosRespondidos = () => {
         let userSession = JSON.parse(localStorage.getItem('userSession'));
 
         $.ajax({
-                url: "http://localhost:3050/formulariorespondidos?id_utente=" + encodeURI(userSession.id_utente),
+                url: "http://localhost:3050/formulariorespondidos?id_utente=" + encodeURI(userSession.id),
                 type: "GET",
                 crossDomain: false,
                 dataType: "json",
@@ -65,7 +65,7 @@ enviarFormulario = () => {
     let userSession = JSON.parse(localStorage.getItem('userSession'));
 
     $.ajax({
-            url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id_utente) + "&especialidade=" + encodeURI(especialidadeChooser) + "&descricao=" + encodeURI(formularioDescricao),
+            url: "http://localhost:3050/formulario?id_utente=" + encodeURI(userSession.id) + "&especialidade=" + encodeURI(especialidadeChooser) + "&descricao=" + encodeURI(formularioDescricao),
             type: "POST",
             crossDomain: false,
             dataType: "json",

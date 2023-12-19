@@ -6,10 +6,11 @@ require('./Database/database');
 
 const app = express();
 
-app.use(morgan(':method :url | Status :status | Size :res[content-length] | Time :response-time ms'));
+//app.use(morgan(':method :url | Status :status | Size :res[content-length] | Time :response-time ms'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(morgan('short'));
 
 app.use(require('./routes/reclamacaoRoute'));
 app.use(require('./routes/loginRoute'));

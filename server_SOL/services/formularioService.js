@@ -19,15 +19,37 @@ module.exports = {
         });
     },
     PrescreverForm: (req, res) => {
-        client.query('call inserir_prescricao_form($1, $2)', [req.query.id_form, req.query.id_med, req.query.obsv], (error, results) => {
+        client.query('call inserir_prescricao($1, null, null, null)', [req.query.id_form], (error, results) => {
+            if (error) {
+                throw error
+            }
+
+            client.query('select max(p.id_prescricao) id_prescricao from prescricao p', [], (error, results) => {
+                if (error) {
+                    throw error
+                }
+                res.send(results.rows)
+            });
+        });
+    },
+    PrescreverConsulta: (req, res) => {
+        client.query('call pedido_consulta($1, $2, null)', [req.query.id_medico, req.query.id_formulario], (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.send(results.rows);
+        });
+    },
+    PrescreverExameForm: (req, res) => {
+        client.query('call inserir_exame_prescricao($1, $2, $3)', [req.query.descricao, req.query.id_exame, req.query.id_prescricao], (error, results) => {
             if (error) {
                 throw error
             }
             res.send(results.rows)
         });
     },
-    PrescreverExameForm: (req, res) => {
-        client.query('call responder_formulario($1, $2, $3)', [req.query.id_form, req.query.id_med, req.query.obsv], (error, results) => {
+    PrescreverMedicamentoForm: (req, res) => {
+        client.query('call inserir_medicamento_prescricao($1, $2, $3)', [req.query.descricao, req.query.id_medicamento, req.query.id_prescricao], (error, results) => {
             if (error) {
                 throw error
             }
