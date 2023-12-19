@@ -60,27 +60,40 @@
     border: 4px #4D77FF solid;
 }
 
+
 .create-account {
-    width: 376px;
-    height: 43px;
-    left: 176px;
+    width: 345px;
+    height: 45px;
+    left: 195px;
     top: 562px;
     position: absolute;
-    background: #4D77FF;
-    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .create-account-text {
+    background: #4D77FF;
     color: white;
     font-size: 16px;
     font-family: Ubuntu;
     font-weight: 700;
     letter-spacing: 0.48px;
-    
+    border: none; 
+    border-radius: 10px;
+    cursor: pointer; 
+    outline: none;
+    transition: background-color 0.3s ease;
+    padding: 2px;
+    padding-left: 150px;
+    padding-right: 150px;
+    margin: 18px;
 }
+
+    .create-account-text:hover
+    {
+        background-color: #3258c8;
+    }
 
 .input-container {
     height: 64px;
