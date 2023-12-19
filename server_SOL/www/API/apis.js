@@ -6,7 +6,7 @@ window.onload = () => {
 GetUtentesFormConsultasMedicosCount = () => {
     
     $.ajax({
-        url: "http://localhost:3050/misc/GetUtentesFormConsultasMedicosCount",
+        url: "http://localhost:3050/GetUtentesFormConsultasMedicosCount",
         type: "GET",
         crossDomain: false,
         dataType: "json",
@@ -30,7 +30,7 @@ GetUtentesFormConsultasMedicosCount = () => {
 
 GetMedicosByEspecialidade = () => {
     $.ajax({
-        url: "http://localhost:3050/misc/GetMedicosByEspecialidade",
+        url: "http://localhost:3050/GetMedicosByEspecialidade",
         type: "GET",
         crossDomain: false,
         dataType: "json",

@@ -10,7 +10,7 @@ module.exports = {
         });
     },
     GetMedicosByEspecialidade: (req, res) => {
-        client.query('SELECT m.*,e.* FROM medico m INNER JOIN especialidade e ON m.id_especialidade = e.id_especialidade where m.nome_esp = $1;', [req.query.nome_esp], (error, results) => {
+        client.query('SELECT m.*,e.* FROM medico m INNER JOIN especialidade e ON m.id_especialidade = e.id_especialidade where m.id_especialidade = $1;', [req.query.id_especialidade], (error, results) => {
             if (error) {
                 throw error
             }
