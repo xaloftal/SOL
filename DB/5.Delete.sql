@@ -22,6 +22,7 @@ begin
 end; $$ Language PLPGSQL
 
 
+
 --eliminar conta
 create or replace procedure eliminar_conta (_email varchar(60))
 as $$
