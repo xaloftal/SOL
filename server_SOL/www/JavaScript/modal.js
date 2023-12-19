@@ -5,7 +5,6 @@ const updateModalBtns = () => {
     var btns = document.getElementsByClassName("myBtn");
     var modals = document.getElementsByClassName('modal');
 
-    // Open modal when the user clicks a button
     for (var i = 0; i < btns.length; i++) {
         btns[i].onclick = function(index) {
             return function() {
@@ -13,8 +12,6 @@ const updateModalBtns = () => {
             };
         }(i);
     }
-    
-    // Close modal when the user clicks a span
 
     for (var i = 0; i < spans.length; i++) {
         spans[i].onclick = function(index) {
@@ -24,7 +21,6 @@ const updateModalBtns = () => {
         }(i);
     }
 
-    // Close modal if the user clicks anywhere outside of it
     window.onclick = function(event) {
         for (var i = 0; i < modals.length; i++) {
             if (event.target === modals[i]) {

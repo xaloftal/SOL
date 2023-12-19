@@ -43,7 +43,7 @@ const GetPedidoConsulta = () => {
       let container = document.querySelector('[data-id="consultaSolicitadaContainer"]');
       response.forEach(consulta => {
         console.log(consulta);
-        container.innerHTML += '<div class="consultation-card"><div class="consultation-info"><span><strong class="info-item-1">Especialidade:</strong>' + consulta.especialidade + '</span><span><strong class="info-item-2">Médico:</strong>' + consulta.medico + '</span><span><strong class="info-item-3">Utente: </strong>' + consulta.utente + '</span><span><strong class="info-item-4"></div><div class="text-appointment"><span class="text-appointment-1">Descrição: </span><span>' + consulta.descricao_formulario + '</span></div><div class="line"></div><div class="consultation-booking"><button class="myBtn action-btn-2 btn-text">Validar</button></div></div></div><div id="myModalAppointment" class="modal"><div class="modal-content"><div class="modal-header"><h3>Marcar consulta</h3><span class="close">&times;</span></div><div class="modal-body"><div class="consultation-card-date"><label for="appointmentDateTime" class="appointment-letter">Data:</label><input type="date" id="appointmentDateTime" name="appointmentDateTime" class="appointment-date-box"><label for="appointmentDateTime" class="appointment-letter" style="padding-left: 15vh;">Hora:</label><input type="time" id="appointmentDateTime" name="appointmentDateTime" class="appointment-time-box"></div></div><div class="modal-footer"><button class="submit-btn btn-text" onclick="submitAppointment()">Marcar</button></div></div></div>';
+        container.innerHTML += '<div class="consultation-card"><div class="consultation-info"><span><strong class="info-item-1">Especialidade:</strong>' + consulta.especialidade + '</span><span><strong class="info-item-2">Médico:</strong>' + consulta.medico + '</span><span><strong class="info-item-3">Utente: </strong>' + consulta.utente + '</span><span><strong class="info-item-4"></div><div class="text-appointment"><span class="text-appointment-1">Descrição: </span><span>' + consulta.descricao_formulario + '</span></div><div class="line"></div><div class="consultation-booking"><button class="myBtn action-btn-2 btn-text">Validar</button></div></div></div><div id="myModalAppointment" class="modal"><div class="modal-content"><div class="modal-header"><h3>Marcar consulta</h3><span class="close">&times;</span></div><div class="modal-body"><div class="consultation-card-date"><label for="appointmentDateTime" class="appointment-letter">Data:</label><input type="date" id="appointmentDateTime" name="appointmentDateTime" class="appointment-date-box" data-id="dateContainer"><label for="appointmentDateTime" class="appointment-letter" style="padding-left: 15vh;">Hora:</label><input type="time" id="appointmentDateTime" name="appointmentDateTime" class="appointment-time-box" data-id="hourContainer"></div></div><div class="modal-footer"><button class="submit-btn btn-text" onclick="marcarConsulta( '+ consulta.id_medico +', '+ consulta.id_consulta +' ,'+ consulta.id_utente +')">Marcar</button></div></div></div>';
         updateModalBtns();  
         })
     })
@@ -69,6 +69,33 @@ const responderReclamacao = (id_reclamacao) => {
     })
     .then((response) => {
       alert('Reclamação respondida')  
+      console.log(response);
+    })
+    .catch((error) => {
+        console.error(error)
+    });
+}
+
+const marcarConsulta = (id_medico, id_consulta, id_utente) => {
+    let date = document.querySelector('[data-id="dateContainer"]').value;
+    let hour = document.querySelector('[data-id="hourContainer"]').value;
+    let dateTimeString = `${date} ${hour}`;
+    const datetime = moment(dateTimeString, 'YYYY-MM-DD HH:mm');
+    const postgresTimestamp = datetime.format('YYYY-MM-DD HH:mm:ss');
+
+    $.ajax({
+        url: "http://localhost:3050/consulta?id_med="  + id_medico + "&id_utente=" + id_utente + "&id_cons=" + id_consulta + "&data_c=" + postgresTimestamp,
+        type: "PUT",
+        crossDomain: false,
+        dataType: "json",
+        headers: {
+            "accept": "application/json",
+            "Access-Control-Allow-Origin":"*"
+        },
+        'Access-Control-Allow-OSrigin': '*'
+    })
+    .then((response) => {
+      alert("Consulta agendada");
       console.log(response);
     })
     .catch((error) => {

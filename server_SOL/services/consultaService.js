@@ -8,5 +8,13 @@ module.exports = {
             }
             res.send(results.rows)
         });
+    },
+    MarcarConsulta: (req,res) => {
+        client.query("call agendar_consulta($1,$2,$3,$4)",[req.query.id_med, req.query.id_utente, req.query.data_c, req.query.id_cons], (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.send(results.rows)
+        });
     }
 }
