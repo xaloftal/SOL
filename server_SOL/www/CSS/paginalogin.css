@@ -70,6 +70,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .create-account-text {
@@ -87,7 +88,9 @@
     padding: 2px;
     padding-left: 150px;
     padding-right: 150px;
-    margin: 18px;
+    margin: 18px;    
+    padding-top: 4%;
+    padding-bottom: 4%;
 }
 
     .create-account-text:hover
