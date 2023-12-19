@@ -21,7 +21,7 @@ GetUtentesFormConsultasMedicosCount = () => {
         document.querySelector('[data-id="medicosCount"]').textContent = response[0].medicos;
         document.querySelector('[data-id="consultasCount"]').textContent = response[0].consultas;
         document.querySelector('[data-id="formulariosCount"]').textContent = response[0].formularios;
-        document.querySelector('[data-id="pacientesCount"]').textContent = response[0].doentes;
+        document.querySelector('[data-id="utentesCount"]').textContent = response[0].utentes;
     })
     .catch((error) => {
         console.error(error)

@@ -18,7 +18,7 @@
             let password = document.querySelector('[data-id="password"]').value;
 
             $.ajax({
-                url: "http://localhost:3050/RegistoAdm?nome=" + name + "&email=" + email + "&password=" + password,
+                url: "http://localhost:3050/RegistoAdm?nome=" + encodeURI(name) + "&email=" + encodeURI(email) + "&password=" + encodeURI(password),
                 type: "POST",
                 crossDomain: false,
                 dataType: "json",
