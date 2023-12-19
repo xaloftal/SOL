@@ -324,7 +324,6 @@ begin
 end; $$ Language PLPGSQL
 
 
-
 --
 -- procedimentos de ligacao
 --
@@ -345,7 +344,7 @@ end; $$ Language PLPGSQL
 create or replace procedure inserir_exame_prescricao(_desc varchar(500), _exa int, _pres int)
 as $$
 begin
-	insert into prescricao_exame(id_exame, id_prescricao, descricao_pres_exa) values (_exa, _pres, _desc);
+	insert into prescricao_exame(id_exame, id_prescricao, descricao_pres_exame) values (_exa, _pres, _desc);
 end; $$ Language PLPGSQL
 
 

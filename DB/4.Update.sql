@@ -20,7 +20,7 @@ begin
 	end if;
 	
 	update reclamacao
-	set id_adm = _adm, resposta_recl = _resp
+	set id_adm = _adm, resposta_recl = _resp, estado_r = 'Respondido'
 	where id_reclamacao = _recl;
 		
 
@@ -54,12 +54,12 @@ begin
 		-- ir buscar o utente
 		select id_utente into ute
 		from formulario
-		where id_formulatio = _form;
+		where id_formulario = _form;
 		
 		
 		-- criar o pedido de consulta
 		insert into consulta ( id_medico, estado_c, id_utente) 
-		values ( _med, 'Solicitado', ute)
+		values ( _med, 'Submetido', ute)
 		returning id_consulta into consf;
 	
 		insert into formulario_consulta (id_formulario, id_consulta) values (_form, consf);
@@ -86,7 +86,7 @@ begin
 		
 		-- criar o pedido de consulta
 		insert into consulta ( id_medico, estado_c, id_utente) 
-		values ( _med, 'Solicitado', ute)
+		values ( _med, 'Submetido', ute)
 		returning id_consulta into consc;
 	
 		insert into consulta_consulta (consulta_origem, id_consulta) values (_cons, consc);		
