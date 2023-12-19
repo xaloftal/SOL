@@ -19,17 +19,17 @@ as
 		inner join medico md using (id_medico)
 		inner join especialidade esp using (id_especialidade)
 		left join formulario_consulta fc using (id_consulta) -- pode não ser de formulario
-		inner join formulario f using (id_formulario)		
+		left join formulario f using (id_formulario)		
 		left join consulta_prescricao cp on c.id_consulta = cp.id_consulta
-		inner join prescricao p using (id_prescricao)
+		left join prescricao p using (id_prescricao)
 		left join consulta_consulta cc on c.id_consulta = cc.id_consulta -- ver se esta consulta teve origem noutra
-		inner join consulta cor on cor.id_consulta = cc.consulta_origem -- infos da consulta origem
-		inner join medico mdor on cor.id_medico = mdor.id_medico
-		inner join especialidade espor on espor.id_especialidade = mdor.id_especialidade
+		left join consulta cor on cor.id_consulta = cc.consulta_origem -- infos da consulta origem
+		left join medico mdor on cor.id_medico = mdor.id_medico
+		left join especialidade espor on espor.id_especialidade = mdor.id_especialidade
 		-- estados das contas
-		inner join utilizador uti on uti.email = md.email_m
-		inner join utilizador ut on ut.email = mdor.email_m
-		inner join utilizador util on util.email = u.email_u
+		left join utilizador uti on uti.email = md.email_m
+		left join utilizador ut on ut.email = mdor.email_m
+		left join utilizador util on util.email = u.email_u
 		
 select * from consulta		
 		
