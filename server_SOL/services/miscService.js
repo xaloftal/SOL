@@ -2,7 +2,7 @@ const client = require('../Database/database');
 
 module.exports = {
     GetUtentesFormConsultasMedicosCount: (req, res) => {
-        client.query('select (select count(*) from utente) utentes, (select count(*) from formulario) formularios, (select count(*) from consulta) consultas, (select count(*) from medico) medicos;', (error, results) => {
+        client.query("select (select count(*) from utente) utentes, (select count(*) from formulario) formularios, (select count(*) from consulta where estado_c = 'Agendada') consultas, (select count(*) from medico) medicos;", (error, results) => {
             if (error) {
                 throw error
             }
